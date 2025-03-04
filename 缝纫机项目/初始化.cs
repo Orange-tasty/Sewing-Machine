@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Net.Sockets;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace 缝纫机项目
 {
+
     internal class 初始化
     {
+        bool tcpok;
 
         public static bool _初始化完成 = false;
         public static void F初始化()
@@ -18,6 +16,7 @@ namespace 缝纫机项目
             {
                 F控制卡初始化();
                 F设置初始化();
+
                 _初始化完成 = true;
                 ThreadPool.SetMinThreads(200, 200);
 
@@ -149,6 +148,25 @@ namespace 缝纫机项目
             //th0_6.Start();
 
 
+        }
+
+        private static void TCP初始化()
+        {
+            //客户端类 tcpk = new 客户端类();
+            string ip = "127.0.0.1";
+            string port = "8888";
+            Socket socketk;
+            客户端类 客户端 = new 客户端类();
+            socketk = 客户端.连接(ip, port);
+            //if (socketk != null)
+            //{
+            //    tcpok = true;//表示连接状态
+            //    Thread readk = new Thread(客户端接收);//创建客户端接收线程
+            //    readk.IsBackground = true;//设置为后台线程
+            //    readk.Start(socketk);//启动线程
+            //    time();//启动定时器
+            //    button8.Text = "关闭";//切换按钮功能
+            //}
         }
     }
 }
