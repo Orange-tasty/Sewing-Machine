@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Threading;
 using System.IO;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
+using System.Net.Sockets;
 
 namespace 缝纫机项目
 {
@@ -23,6 +24,10 @@ namespace 缝纫机项目
         public static Form用户 form用户 = new Form用户();
         public static Form生产记录 form生产记录 = new Form生产记录();
 
+        Socket socketk;//客户端连接主机socket
+        客户端类 客户端 = new 客户端类();
+        delegate void 委托打印客户端接收数据(string str);//创建委托
+        委托打印客户端接收数据 readkhd;//创建委托字段
 
 
         public Form主界面()
@@ -235,6 +240,9 @@ namespace 缝纫机项目
        
         private void Form主界面_Load(object sender, EventArgs e)
         {
+            readkhd = KHDread;//委托绑定执行方法
+            //addip = ipadd;
+
             初始化.F初始化();
 
             Form参数.LS初始化(ref Form参数.系统参数列表);
@@ -598,6 +606,48 @@ namespace 缝纫机项目
             //{
             //    gg1 = true; gg2 = true; gg3 = false;
             //}
+        }
+
+        private void Send_Click(object sender, EventArgs e)
+        {
+            客户端.发送(socketk, "abc");
+        }
+
+        public void 客户端接收(object socketk)
+        {
+            while (true)
+            {
+
+                Socket socket = socketk as Socket;//转换类型
+
+                string str = 客户端.接收(socket);//接收服务器数据
+                客户端.m_x = str;
+                if (str != null)//判断接收内容是否为空
+                {
+                    Invoke(readkhd, str);//执行委托
+                }
+
+            }
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+
+        private void KHDread(string str)//客户端接收委托关联方法
+        {
+            textBox1.AppendText(str + "\r\n");//添加数据并换行
+        }
+
+        public static void Delay(int milliSecond)
+        {
+            int start = Environment.TickCount;
+            while (Math.Abs(Environment.TickCount - start) < milliSecond)
+            {
+                Application.DoEvents();
+            }
         }
     }
 

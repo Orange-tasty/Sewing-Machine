@@ -10,8 +10,10 @@ using System.Windows.Forms;
 
 namespace 缝纫机项目
 {
+
     internal class 客户端类
     {
+        public static bool tcpok;
         public string m_x;
         Socket socket;
         IPEndPoint iPEndPoint;
@@ -94,6 +96,23 @@ namespace 缝纫机项目
             {
                 socket.Send(Encoding.UTF8.GetBytes(str));
             }
+        }
+        public static bool TCP初始化()
+        {
+            string ip = "127.0.0.1";
+            string port = "8888";
+            Socket socketk;
+            客户端类 客户端 = new 客户端类();
+            Form主界面 主界面 = new Form主界面();
+            socketk = 客户端.连接(ip, port);
+            if (socketk != null)
+            {
+                tcpok = true;//表示连接状态
+                Thread readk = new Thread(主界面.客户端接收);//创建客户端接收线程
+                readk.IsBackground = true;//设置为后台线程
+                readk.Start(socketk);//启动线程
+            }
+            return tcpok;
         }
     }
 
@@ -294,5 +313,7 @@ namespace 缝纫机项目
             }
             return str;
         }
+
+        
     }
 }
