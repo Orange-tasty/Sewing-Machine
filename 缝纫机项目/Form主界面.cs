@@ -24,7 +24,8 @@ namespace 缝纫机项目
         public static Form用户 form用户 = new Form用户();
         public static Form生产记录 form生产记录 = new Form生产记录();
 
-        Socket socketk;//客户端连接主机socket
+        //bool tcpok;
+        //Socket socketk;//客户端连接主机socket
         客户端类 客户端 = new 客户端类();
         delegate void 委托打印客户端接收数据(string str);//创建委托
         委托打印客户端接收数据 readkhd;//创建委托字段
@@ -241,9 +242,8 @@ namespace 缝纫机项目
         private void Form主界面_Load(object sender, EventArgs e)
         {
             readkhd = KHDread;//委托绑定执行方法
-            //addip = ipadd;
 
-            初始化.F初始化();
+            初始化.F初始化();    
 
             Form参数.LS初始化(ref Form参数.系统参数列表);
             F默认参数载入(0, GLV._默认地址_系统参数, "参数");
@@ -610,7 +610,25 @@ namespace 缝纫机项目
 
         private void Send_Click(object sender, EventArgs e)
         {
-            客户端.发送(socketk, "abc");
+           
+                if (初始化.socketk.Connected == true)
+
+                {
+                    if (true)
+                    {
+                        客户端.发送(初始化.socketk, "abc");//向服务器发送信息
+                    }
+                    else
+                    {
+                        MessageBox.Show("发送内容不能为空", "提示");
+                    }
+
+                }
+                else
+                {
+                    MessageBox.Show("连接异常", "发送失败");
+                }
+            
         }
 
         public void 客户端接收(object socketk)

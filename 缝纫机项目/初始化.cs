@@ -1,4 +1,5 @@
-﻿using System.Net.Sockets;
+﻿using System;
+using System.Net.Sockets;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -7,9 +8,9 @@ namespace 缝纫机项目
 
     internal class 初始化
     {
-
-
+        public static bool tcpok;
         public static bool _初始化完成 = false;
+        public static Socket socketk;
         public static void F初始化()
         {
             try
@@ -150,13 +151,32 @@ namespace 缝纫机项目
 
         }
 
+        public static bool TCP初始化()
+        {
+            string ip = "127.0.0.1";
+            string port = "8888";
+            //Socket socketk;
+            客户端类 客户端 = new 客户端类();
+            Form主界面 主界面 = (Form主界面)Application.OpenForms["Form主界面"];
+            socketk = 客户端.连接(ip, port);
+            if (socketk != null)
+            {
+                tcpok = true;//表示连接状态
+                Thread readk = new Thread(主界面.客户端接收);//创建客户端接收线程
+                readk.IsBackground = true;//设置为后台线程
+                readk.Start(socketk);//启动线程
+            }
+            return tcpok;
+        }
+
         private static void FTCP初始化()
         {
-            bool bnum = 客户端类.TCP初始化();
+            bool bnum = TCP初始化();
+          
             if (!bnum)
             {
                 Task任务.系统输出("VM连接失败,请检查！！！", "Connection failed,check please!!!");
-            }
+            } 
             else
             {
                 Task任务.系统输出("VM连接正常", "Connection successful!");
