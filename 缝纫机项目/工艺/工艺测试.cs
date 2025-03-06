@@ -145,7 +145,7 @@ namespace 缝纫机项目
         public static 配方参数P 配方_下剪口差修正比例 = new 配方参数P("配方_下剪口差修正比例", 1);
         public static 配方参数P 配方_下剪口差基本值 = new 配方参数P("配方_下剪口差基本值", 1);
 
-        public static 配方参数P 配方_总针数 = new 配方参数P("配方_总针数", 0);
+        public static 配方参数P 配方_总针数 = new 配方参数P("配方_总针数", 2);
         public static 配方参数P 配方_尾针数 = new 配方参数P("配方_尾针数", 0);
 
         public static List<配方参数P> 配方_尾针表 = new List<配方参数P>();
@@ -268,6 +268,15 @@ namespace 缝纫机项目
             结束
         }
 
+        //public static void Delay(int milliSecond)
+        //{
+        //    int start = Environment.TickCount;
+        //    while (Math.Abs(Environment.TickCount - start) < milliSecond)
+        //    {
+        //        Application.DoEvents();
+        //    }
+        //}
+
         public void 工艺流程()
         {
             while (true)
@@ -359,6 +368,7 @@ namespace 缝纫机项目
                                 
                                 Task任务.信息输出("缝纫机工作");
                                 已执行针数++;
+                                
 
                                 目标针数 = (int)配方_总针数.Value;
 
@@ -368,10 +378,12 @@ namespace 缝纫机项目
                                 vel1 = 剪口电机速度.速度计算(配方_上剪口电机基础速度.Value, 配方_上剪口缝纫机修正比例.Value, 缝纫机.当前转速(), 0, 配方_上剪口差修正比例.Value, 配方_上剪口差基本值.Value, _上剪口电机速度上限.Value, _上剪口电机速度下限.Value);
                                 vel2 = 剪口电机速度.速度计算(配方_下剪口电机基础速度.Value, 配方_下剪口缝纫机修正比例.Value, 缝纫机.当前转速(), 0, 配方_下剪口差修正比例.Value, 配方_下剪口差基本值.Value, _下剪口电机速度上限.Value, _下剪口电机速度下限.Value);
                                 //vel2 = 配方_下剪口电机速度.Value;
+
                                 单轴速度控制(GLV._上剪口电机, vel1);
                                 单轴速度控制(GLV._下剪口电机, vel2);
 
                                 数据采集.清零();//20240201
+
 
                                 step = (ushort)STEP.缝纫机工作;
 
@@ -1055,9 +1067,8 @@ namespace 缝纫机项目
             }
 
 
-            
-
         }
+        
     }
 
 

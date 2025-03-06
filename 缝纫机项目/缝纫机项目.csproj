@@ -187,6 +187,7 @@
     <Compile Include="工艺\工艺测试.cs" />
     <Compile Include="工艺\缝纫工艺.cs" />
     <Compile Include="工艺\缝纫机转速标定.cs" />
+    <Compile Include="VM通讯.cs" />
     <Compile Include="控制卡.cs" />
     <Compile Include="Form配方.cs">
       <SubType>Form</SubType>

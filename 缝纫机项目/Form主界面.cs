@@ -11,6 +11,12 @@ using System.Threading;
 using System.IO;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
 using System.Net.Sockets;
+using Leadshine;
+using System.Timers;
+using System.Windows.Forms.DataVisualization.Charting;
+using NPOI.OpenXmlFormats.Spreadsheet;
+using NPOI.SS.Formula.Functions;
+using System.Drawing.Imaging;
 
 namespace 缝纫机项目
 {
@@ -24,11 +30,25 @@ namespace 缝纫机项目
         public static Form用户 form用户 = new Form用户();
         public static Form生产记录 form生产记录 = new Form生产记录();
 
-        //bool tcpok;
-        //Socket socketk;//客户端连接主机socket
+
         客户端类 客户端 = new 客户端类();
         delegate void 委托打印客户端接收数据(string str);//创建委托
         委托打印客户端接收数据 readkhd;//创建委托字段
+        System.Windows.Forms.Timer myTimer = new System.Windows.Forms.Timer();
+        int lastSentCircle = -1;
+        short ret = 0;
+        short res = 0;
+        ushort CardNo = 0;
+        ushort axis = 0;
+        ushort mode = 1;
+        double Encoder_value = 0;
+        double start_speed = 0;
+        double speed = 1000;
+        double stop_speed = 0;
+        double tacc = 0.1;  //加速时间
+        double tdec = 0.1;  //减速时间  
+        double s_pare = 0.05;
+        double dist = 1000;
 
 
         public Form主界面()
@@ -36,7 +56,49 @@ namespace 缝纫机项目
             InitializeComponent();
         }
 
+        //private void Callback(object sender, EventArgs e)
+        //{
 
+        //    ret = LTSMC.smc_set_counter_inmode(CardNo, axis, mode);
+        //    res = LTSMC.smc_get_encoder_unit(CardNo, axis, ref Encoder_value);
+
+        //    LTSMC.smc_set_profile_unit(CardNo, axis, start_speed, speed, tacc, tdec, stop_speed);
+        //    LTSMC.smc_set_s_profile(CardNo, axis, 0, s_pare);
+        //    double temp = Encoder_value / 2000;
+        //    int circle = (int)temp;
+        //    textBox1.Text = (circle).ToString();
+        //    if (circle != lastSentCircle)
+        //    {
+        //        if (circle != 0 && circle % 1 == 0)
+        //        {
+
+        //            lastSentCircle = circle;
+        //            客户端.发送(初始化.socketk, "abc");
+        //            if (客户端.m_x != null)
+        //            {
+        //                char[] delimiterChars = { ';' };
+        //                string[] cmd1 = 客户端.m_x.Split(delimiterChars);
+        //                double angle = Convert.ToDouble(cmd1[0]);
+        //                int num = Convert.ToInt16(cmd1[1]);
+
+        //                if (angle <= 88 || angle >= 92)
+        //                {
+        //                    LTSMC.smc_pmove_unit(CardNo, axis, dist, 0);
+        //                    //Delay(2000);              
+        //                    //LTSMC.smc_stop(CardNo,axis, mode);
+        //                }
+
+        //                if (num >= 1)
+        //                {
+
+        //                    LTSMC.smc_pmove_unit(CardNo, axis, 3 * dist, 0);
+        //                }
+
+        //                //MessageBox.Show(tcpk.m_x);
+        //            }
+        //        }
+        //    }
+        //}
 
 
         private bool _是否清空richtextbox1 = false;
@@ -167,7 +229,7 @@ namespace 缝纫机项目
             当前针数 = 工艺测试.已执行针数;
 
 
-            
+
 
             #region 剪口显示
 
@@ -184,9 +246,9 @@ namespace 缝纫机项目
             //    }
             //    else if (step上 == 1 && !IO控制.IN(0, GLV._上剪口传感器)
             //    {
-                    
+
             //    }
-                
+
             //    chart1.Series[0].Points.DataBindXY(针数队列, 上传感器状态队列);
             //    if (IO控制.IN(0, GLV._下剪口传感器))
             //    {
@@ -610,25 +672,25 @@ namespace 缝纫机项目
 
         private void Send_Click(object sender, EventArgs e)
         {
-           
-                if (初始化.socketk.Connected == true)
 
-                {
-                    if (true)
-                    {
-                        客户端.发送(初始化.socketk, "abc");//向服务器发送信息
-                    }
-                    else
-                    {
-                        MessageBox.Show("发送内容不能为空", "提示");
-                    }
+            //客户端.发送(VM通讯.socketk, "abc");
 
-                }
-                else
-                {
-                    MessageBox.Show("连接异常", "发送失败");
-                }
-            
+            LTSMC.smc_set_encoder_unit(0, 0, 0);
+
+            //myTimer.Tick += new EventHandler(Callback); //给timer挂起事件
+
+            myTimer.Enabled = true;//使timer可用
+
+            myTimer.Interval = 100;//设置时间间隔，以毫秒为单位
+
+            if (客户端.m_x != null)
+            {
+                //double[] temp = VM通讯.接收信息拆解(客户端.m_x);
+                
+                Task任务.信息输出(测量值.距离(客户端.m_x).ToString());
+                Task任务.信息输出(测量值.剪口数(客户端.m_x).ToString());
+
+            }
         }
 
         public void 客户端接收(object socketk)
@@ -653,6 +715,10 @@ namespace 缝纫机项目
 
         }
 
+        private void richTextBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
 
         private void KHDread(string str)//客户端接收委托关联方法
         {
