@@ -673,7 +673,7 @@ namespace 缝纫机项目
         private void Send_Click(object sender, EventArgs e)
         {
 
-            //客户端.发送(VM通讯.socketk, "abc");
+            //VM通讯.发送("abc");
 
             LTSMC.smc_set_encoder_unit(0, 0, 0);
 
@@ -683,12 +683,11 @@ namespace 缝纫机项目
 
             myTimer.Interval = 100;//设置时间间隔，以毫秒为单位
 
-            if (客户端.m_x != null)
+            if (VM通讯.客户端.m_x != null)
             {
                 //double[] temp = VM通讯.接收信息拆解(客户端.m_x);
-                
-                Task任务.信息输出(测量值.距离(客户端.m_x).ToString());
-                Task任务.信息输出(测量值.剪口数(客户端.m_x).ToString());
+                Task任务.信息输出(测量值.距离(VM通讯.客户端.m_x).ToString());
+                Task任务.信息输出(测量值.剪口数(VM通讯.客户端.m_x).ToString());
 
             }
         }
@@ -701,7 +700,7 @@ namespace 缝纫机项目
                 Socket socket = socketk as Socket;//转换类型
 
                 string str = 客户端.接收(socket);//接收服务器数据
-                客户端.m_x = str;
+                VM通讯.客户端.m_x = str;
                 if (str != null)//判断接收内容是否为空
                 {
                     Invoke(readkhd, str);//执行委托
@@ -716,6 +715,11 @@ namespace 缝纫机项目
         }
 
         private void richTextBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
 
         }

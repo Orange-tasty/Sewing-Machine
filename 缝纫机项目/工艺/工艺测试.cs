@@ -18,8 +18,12 @@ using NPOI.SS.Formula.Functions;
 
 namespace 缝纫机项目
 {
+
     public class 工艺测试
     {
+        //客户端类 客户端 = new 客户端类();
+
+
         public static double[] 配方_上电机变化脉冲 = new double[8] { 100, 101, 102, 103, 104, 105, 106, 107 };
         public static double[] 配方_下电机变化脉冲 = new double[8] { 200, 201, 202, 203, 204, 205, 206, 207 };
 
@@ -268,17 +272,18 @@ namespace 缝纫机项目
             结束
         }
 
-        //public static void Delay(int milliSecond)
-        //{
-        //    int start = Environment.TickCount;
-        //    while (Math.Abs(Environment.TickCount - start) < milliSecond)
-        //    {
-        //        Application.DoEvents();
-        //    }
-        //}
+        public static void Delay(int milliSecond)
+        {
+            int start = Environment.TickCount;
+            while (Math.Abs(Environment.TickCount - start) < milliSecond)
+            {
+                Application.DoEvents();
+            }
+        }
 
         public void 工艺流程()
         {
+            Form主界面 主界面 = (Form主界面)Application.OpenForms["Form主界面"];
             while (true)
             {
                 if (可运行条件())
@@ -343,17 +348,33 @@ namespace 缝纫机项目
 
                             double 当前电压 = 模拟量.输入(0, GLV._上传感器);
                             //double pos = 电压位置计算(当前电压);
-                            
+
                             double 当前电压X = 模拟量.输入(0, GLV._下传感器);
                             //double posX = 电压位置计算X(当前电压X);
-                           
+
                             //Console.WriteLine("pos:" + pos);
                             //Console.WriteLine("posX:" + posX);
+                            double 距离 = 0;
+                            double 剪口数 = 0;
 
                             double 当前编码器位置 = 运动控制.反馈位置(0, GLV._缝纫机编码器);
 
                             if (当前编码器位置 >= _初次下针时编码器位置.Value)
                             {
+                                VM通讯.发送("abc");
+                                while (VM通讯.客户端.m_x == null)
+                                {
+                                    Delay(1);
+                                }
+                                if (VM通讯.客户端.m_x != null)
+                                {                              
+                                    距离 = 测量值.距离(VM通讯.客户端.m_x);
+                                    剪口数 = 测量值.剪口数(VM通讯.客户端.m_x);
+                                    VM通讯.客户端.m_x = null;
+                                }
+                                Task任务.信息输出(距离.ToString());
+                                Task任务.信息输出(剪口数.ToString());
+
                                 Task任务.信息输出("达到初次下针时编码器位置");
                                 运动控制.反馈位置清零(0, GLV._缝纫机编码器);
 
