@@ -18,6 +18,8 @@ using NPOI.OpenXmlFormats.Spreadsheet;
 using NPOI.SS.Formula.Functions;
 using System.Drawing.Imaging;
 
+using System.Diagnostics;
+
 namespace 缝纫机项目
 {
     public partial class Form主界面 : Form
@@ -56,49 +58,82 @@ namespace 缝纫机项目
             InitializeComponent();
         }
 
-        //private void Callback(object sender, EventArgs e)
-        //{
+        private void Callback(object sender, EventArgs e)
+        {
 
-        //    ret = LTSMC.smc_set_counter_inmode(CardNo, axis, mode);
-        //    res = LTSMC.smc_get_encoder_unit(CardNo, axis, ref Encoder_value);
+            if (sendCount < maxSendCount)
+            {
+                VM通讯.发送("abc");
+                sendCount++; // 每发送一次，计数+1
+            }
+            else
+            {
+                myTimer.Stop(); // 发送 10 次后停止定时器
+                myTimer.Tick -= new EventHandler(Callback); // 解绑事件，防止重复绑定
+                sendCount = 0;
+            }
 
-        //    LTSMC.smc_set_profile_unit(CardNo, axis, start_speed, speed, tacc, tdec, stop_speed);
-        //    LTSMC.smc_set_s_profile(CardNo, axis, 0, s_pare);
-        //    double temp = Encoder_value / 2000;
-        //    int circle = (int)temp;
-        //    textBox1.Text = (circle).ToString();
-        //    if (circle != lastSentCircle)
-        //    {
-        //        if (circle != 0 && circle % 1 == 0)
-        //        {
+            while (VM通讯.客户端.m_x == null)
+            {
+                Delay(1);
+            }
+            if (VM通讯.客户端.m_x != null)
+            {
+                //double[] temp = VM通讯.接收信息拆解(客户端.m_x);
+                //Task任务.信息输出(测量值.距离(VM通讯.客户端.m_x).ToString());
+                //Task任务.信息输出(测量值.剪口数(VM通讯.客户端.m_x).ToString());
 
-        //            lastSentCircle = circle;
-        //            客户端.发送(初始化.socketk, "abc");
-        //            if (客户端.m_x != null)
-        //            {
-        //                char[] delimiterChars = { ';' };
-        //                string[] cmd1 = 客户端.m_x.Split(delimiterChars);
-        //                double angle = Convert.ToDouble(cmd1[0]);
-        //                int num = Convert.ToInt16(cmd1[1]);
+                VM通讯.客户端.m_x = null;
 
-        //                if (angle <= 88 || angle >= 92)
-        //                {
-        //                    LTSMC.smc_pmove_unit(CardNo, axis, dist, 0);
-        //                    //Delay(2000);              
-        //                    //LTSMC.smc_stop(CardNo,axis, mode);
-        //                }
+            }
+            endTime = DateTime.UtcNow;
+            //stopwatch.Stop();
+            //double elapsedMs = stopwatch.ElapsedMilliseconds;
 
-        //                if (num >= 1)
-        //                {
+            double elapsedMs = (endTime - startTime).TotalMilliseconds;
+            //MessageBox.Show($"耗时: {elapsedMs:F3} ms");
+            Invoke(new Action(() => { richTextBox1.AppendText($"总耗时: {elapsedMs:F3} ms\r\n"); }));
 
-        //                    LTSMC.smc_pmove_unit(CardNo, axis, 3 * dist, 0);
-        //                }
+            //ret = LTSMC.smc_set_counter_inmode(CardNo, axis, mode);
+            //res = LTSMC.smc_get_encoder_unit(CardNo, axis, ref Encoder_value);
 
-        //                //MessageBox.Show(tcpk.m_x);
-        //            }
-        //        }
-        //    }
-        //}
+            //LTSMC.smc_set_profile_unit(CardNo, axis, start_speed, speed, tacc, tdec, stop_speed);
+            //LTSMC.smc_set_s_profile(CardNo, axis, 0, s_pare);
+            //double temp = Encoder_value / 2000;
+            //int circle = (int)temp;
+            //textBox1.Text = (circle).ToString();
+            //if (circle != lastSentCircle)
+            //{
+            //    if (circle != 0 && circle % 1 == 0)
+            //    {
+
+            //        lastSentCircle = circle;
+            //        客户端.发送(初始化.socketk, "abc");
+            //        if (客户端.m_x != null)
+            //        {
+            //            char[] delimiterChars = { ';' };
+            //            string[] cmd1 = 客户端.m_x.Split(delimiterChars);
+            //            double angle = Convert.ToDouble(cmd1[0]);
+            //            int num = Convert.ToInt16(cmd1[1]);
+
+            //            if (angle <= 88 || angle >= 92)
+            //            {
+            //                LTSMC.smc_pmove_unit(CardNo, axis, dist, 0);
+            //                //Delay(2000);              
+            //                //LTSMC.smc_stop(CardNo,axis, mode);
+            //            }
+
+            //            if (num >= 1)
+            //            {
+
+            //                LTSMC.smc_pmove_unit(CardNo, axis, 3 * dist, 0);
+            //            }
+
+            //            //MessageBox.Show(tcpk.m_x);
+            //        }
+            //    }
+            //}
+        }
 
 
         private bool _是否清空richtextbox1 = false;
@@ -670,27 +705,81 @@ namespace 缝纫机项目
             //}
         }
 
+
+        public DateTime startTime;
+        public DateTime endTime;
+        double elapsedMs;
+
+        private int sendCount = 0; // 记录已经发送的次数
+        private const int maxSendCount = 10; // 设定最多发送10次
+
+        //private Stopwatch stopwatch = new Stopwatch();
+
+
         private void Send_Click(object sender, EventArgs e)
         {
-
-            //VM通讯.发送("abc");
-
             LTSMC.smc_set_encoder_unit(0, 0, 0);
 
-            //myTimer.Tick += new EventHandler(Callback); //给timer挂起事件
-
+            //myTimer.Tick += new EventHandler(SendMessage); //给timer挂起事件
+            myTimer.Tick += new EventHandler(SendMessage); //给timer挂起事件
             myTimer.Enabled = true;//使timer可用
+            myTimer.Interval = 50;//设置时间间隔，以毫秒为单位
 
-            myTimer.Interval = 100;//设置时间间隔，以毫秒为单位
+            startTime = DateTime.UtcNow;
+            //stopwatch.Restart();
+            //VM通讯.发送("abc");
 
+            //if (VM通讯.客户端.m_x != null)
+            //{
+            //    //double[] temp = VM通讯.接收信息拆解(客户端.m_x);
+            //    Task任务.信息输出(测量值.距离(VM通讯.客户端.m_x).ToString());
+            //    Task任务.信息输出(测量值.剪口数(VM通讯.客户端.m_x).ToString());
+            //}
+        }
+
+        private void SendMessage(object sender, EventArgs e)
+        {
+            endTime = DateTime.UtcNow;
+            elapsedMs = (endTime - startTime).TotalMilliseconds;
+            Invoke(new Action(() => { richTextBox1.AppendText($"进入Send函数时间戳: {elapsedMs:F3} ms\r\n"); }));
+
+            if (sendCount < maxSendCount)
+            {
+                VM通讯.发送("abc");
+                sendCount++; // 每发送一次，计数+1
+            }
+            else
+            {
+                myTimer.Stop(); // 发送 10 次后停止定时器
+                myTimer.Tick -= new EventHandler(SendMessage); // 解绑事件，防止重复绑定
+                sendCount = 0;
+            }
+
+            while (VM通讯.客户端.m_x == null)
+            {
+                Delay(1);
+                //endTime = DateTime.UtcNow;
+                //elapsedMs = (endTime - startTime).TotalMilliseconds;
+                //Invoke(new Action(() => { richTextBox1.AppendText($"进入while的时间戳: {elapsedMs:F3} ms\r\n"); }));
+            }
             if (VM通讯.客户端.m_x != null)
             {
                 //double[] temp = VM通讯.接收信息拆解(客户端.m_x);
-                Task任务.信息输出(测量值.距离(VM通讯.客户端.m_x).ToString());
-                Task任务.信息输出(测量值.剪口数(VM通讯.客户端.m_x).ToString());
+                //Task任务.信息输出(测量值.距离(VM通讯.客户端.m_x).ToString());
+                //Task任务.信息输出(测量值.剪口数(VM通讯.客户端.m_x).ToString());
+
+                VM通讯.客户端.m_x = null;
 
             }
+            endTime = DateTime.UtcNow;
+            //stopwatch.Stop();
+            //double elapsedMs = stopwatch.ElapsedMilliseconds;
+
+            elapsedMs = (endTime - startTime).TotalMilliseconds;
+            //MessageBox.Show($"耗时: {elapsedMs:F3} ms");
+            Invoke(new Action(() => { richTextBox1.AppendText($"总耗时: {elapsedMs:F3} ms\r\n");}));
         }
+
 
         public void 客户端接收(object socketk)
         {
