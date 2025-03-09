@@ -62,7 +62,7 @@ namespace 缝纫机项目
         public const ushort _下电机 = 1;
         public const ushort _上剪口电机 = 2;
         public const ushort _下剪口电机 = 3;
-        public const ushort _缝纫机编码器 = 2;
+        public const ushort _缝纫机编码器 = 0;
 
         #endregion
 
@@ -843,7 +843,7 @@ namespace 缝纫机项目
                 return false;
             }
 
-            double enc = 运动控制.反馈位置(0, 剪口检测编码器编号);
+            double enc = 运动控制.反馈位置(0, 剪口检测编码器编号); 
             
             if (!IO控制.IN(0, 剪口传感器编号) && !剪口有信号)
             {

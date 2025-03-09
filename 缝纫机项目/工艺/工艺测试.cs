@@ -110,13 +110,14 @@ namespace 缝纫机项目
         //public static double 配方_下V = 0;
 
         //pid20240201_配方方案修改
-        public static 配方参数P 配方_上A = new 配方参数P("配方_上A", "配方_上A", 0);
-        public static 配方参数P 配方_上B = new 配方参数P("配方_上B", "配方_上B", 0);
-        public static 配方参数P 配方_上C = new 配方参数P("配方_上C", "配方_上C", 0);
-        public static 配方参数P 配方_上P = new 配方参数P("配方_上P", "配方_上P", 0);
-        public static 配方参数P 配方_上I = new 配方参数P("配方_上I", "配方_上I", 0);
-        public static 配方参数P 配方_上D = new 配方参数P("配方_上D", "配方_上D", 0);
+        public static 配方参数P 配方_上A = new 配方参数P("配方_上A", "配方_上A", 1);
+        public static 配方参数P 配方_上B = new 配方参数P("配方_上B", "配方_上B", 0.01);
+        public static 配方参数P 配方_上C = new 配方参数P("配方_上C", "配方_上C", 1);
+        public static 配方参数P 配方_上P = new 配方参数P("配方_上P", "配方_上P", 100);
+        public static 配方参数P 配方_上I = new 配方参数P("配方_上I", "配方_上I", 0.01);
+        public static 配方参数P 配方_上D = new 配方参数P("配方_上D", "配方_上D", 0.1);
         public static 配方参数P 配方_上V = new 配方参数P("配方_上V", "配方_上V", 0);
+        public static 配方参数P 配方_上Dis = new 配方参数P("配方_上Dis", "配方_上Dis", 500);
 
         public static 配方参数P 配方_下A = new 配方参数P("配方_下A", 0);
         public static 配方参数P 配方_下B = new 配方参数P("配方_下B", 0);
@@ -125,6 +126,7 @@ namespace 缝纫机项目
         public static 配方参数P 配方_下I = new 配方参数P("配方_下I", 0);
         public static 配方参数P 配方_下D = new 配方参数P("配方_下D", 0);
         public static 配方参数P 配方_下V = new 配方参数P("配方_下V", 0);
+        public static 配方参数P 配方_下Dis = new 配方参数P("配方_下Dis", 0);
 
         //剪口20240108//20240201_配方方案修改
         public static 配方参数P 配方_上剪口数量 = new 配方参数P("配方_上剪口数量", 10);
@@ -149,7 +151,7 @@ namespace 缝纫机项目
         public static 配方参数P 配方_下剪口差修正比例 = new 配方参数P("配方_下剪口差修正比例", 1);
         public static 配方参数P 配方_下剪口差基本值 = new 配方参数P("配方_下剪口差基本值", 1);
 
-        public static 配方参数P 配方_总针数 = new 配方参数P("配方_总针数", 2);
+        public static 配方参数P 配方_总针数 = new 配方参数P("配方_总针数", 3);
         public static 配方参数P 配方_尾针数 = new 配方参数P("配方_尾针数", 0);
 
         public static List<配方参数P> 配方_尾针表 = new List<配方参数P>();
@@ -188,7 +190,7 @@ namespace 缝纫机项目
         public static List<double> 上传感器记录 = new List<double>();
         public static List<double> 下传感器记录 = new List<double>();
 
-
+        public static double 上剪口_剪口计数 = 0;
 
         public static 剪口 上剪口 = new 剪口("上剪口", 10, GLV._上剪口传感器, GLV._缝纫机编码器);
         public static 剪口 下剪口 = new 剪口("下剪口", 10, GLV._下剪口传感器, GLV._缝纫机编码器);
@@ -204,8 +206,8 @@ namespace 缝纫机项目
 
         public static S系统参数 _初次下针时编码器位置 = new S系统参数("初次下针时编码器位置", "NULL", 100, "脉冲", "pulse", GLV._参数类型_系统参数, (ushort)用户.权限选择.中级权限);
 
-        public static S系统参数 _上电机速度上限 = new S系统参数("上电机速度上限", "NULL", 20000, "脉冲/秒", "pul/s", GLV._参数类型_系统参数, (ushort)用户.权限选择.中级权限);
-        public static S系统参数 _上电机速度下限 = new S系统参数("上电机速度下限", "NULL", 20000, "脉冲/秒", "pul/s", GLV._参数类型_系统参数, (ushort)用户.权限选择.中级权限);
+        public static S系统参数 _上电机速度上限 = new S系统参数("上电机速度上限", "NULL", 10000, "脉冲/秒", "pul/s", GLV._参数类型_系统参数, (ushort)用户.权限选择.中级权限);
+        public static S系统参数 _上电机速度下限 = new S系统参数("上电机速度下限", "NULL", 0, "脉冲/秒", "pul/s", GLV._参数类型_系统参数, (ushort)用户.权限选择.中级权限);
         public static S系统参数 _下电机速度上限 = new S系统参数("下电机速度上限", "NULL", 20000, "脉冲/秒", "pul/s", GLV._参数类型_系统参数, (ushort)用户.权限选择.中级权限);
         public static S系统参数 _下电机速度下限 = new S系统参数("下电机速度下限", "NULL", 20000, "脉冲/秒", "pul/s", GLV._参数类型_系统参数, (ushort)用户.权限选择.中级权限);
 
@@ -227,6 +229,8 @@ namespace 缝纫机项目
         public static S系统参数 _缝纫机编码器细分 = new S系统参数("缝纫机编码器细分", "NULL", 1440, "脉冲/圈", "pul/r", GLV._参数类型_系统参数, GLV._高权限);//不显示到参数界面
 
         public static S系统参数 _对剪口功能使能 = new S系统参数("对剪口功能使能", "NULL", 1, "选择", "choose", GLV._参数类型_系统参数, (ushort)用户.权限选择.中级权限,"0:关闭/1:开启","NULL");
+
+        public static S系统参数 _发送功能使能 = new S系统参数("发送功能使能", "NULL", 1, "选择", "choose", GLV._参数类型_系统参数, (ushort)用户.权限选择.中级权限, "0:关闭/1:开启", "NULL");
 
         public static S系统参数 _PID的KI累计 = new S系统参数("PID的KI累计", "NULL", 20, "个数", "num", GLV._参数类型_系统参数, (ushort)用户.权限选择.高级权限);
 
@@ -346,8 +350,8 @@ namespace 缝纫机项目
 
                         case (ushort)STEP.缝纫机启动:
 
-                            double 当前电压 = 模拟量.输入(0, GLV._上传感器);
-                            //double pos = 电压位置计算(当前电压);
+                            //double 当前电压 = 模拟量.输入(0, GLV._上传感器);
+                            ////double pos = 电压位置计算(当前电压);
 
                             double 当前电压X = 模拟量.输入(0, GLV._下传感器);
                             //double posX = 电压位置计算X(当前电压X);
@@ -361,28 +365,34 @@ namespace 缝纫机项目
 
                             if (当前编码器位置 >= _初次下针时编码器位置.Value)
                             {
-                                VM通讯.发送("abc");
+                                VM通讯.发送("snap");
                                 while (VM通讯.客户端.m_x == null)
                                 {
                                     Delay(1);
                                 }
                                 if (VM通讯.客户端.m_x != null)
-                                {                              
+                                {
+                                    上剪口_剪口计数 = 0;
                                     距离 = 测量值.距离(VM通讯.客户端.m_x);
                                     剪口数 = 测量值.剪口数(VM通讯.客户端.m_x);
+                                    上剪口_剪口计数 += 剪口数;
                                     VM通讯.客户端.m_x = null;
                                 }
-                                Task任务.信息输出(距离.ToString());
-                                Task任务.信息输出(剪口数.ToString());
-
+                                //Task任务.信息输出(距离.ToString());
+                                //Task任务.信息输出(剪口数.ToString());
+                                Task任务.信息输出("剪口计数为"+ 上剪口_剪口计数.ToString());
                                 Task任务.信息输出("达到初次下针时编码器位置");
                                 运动控制.反馈位置清零(0, GLV._缝纫机编码器);
 
                                 double tim = 花费时间();
                                 //Console.WriteLine(tim);
-                                double pos = 上电机PID.Func(配方_上A.Value, 配方_上B.Value, 配方_上C.Value, 配方_上P.Value, 配方_上I.Value, 配方_上D.Value, 当前电压 - 配方_上V.Value, _上电机速度上限.Value, _上电机速度下限.Value);
+
+                                double pos = 上电机PID.Func(配方_上A.Value, 配方_上B.Value, 配方_上C.Value, 配方_上P.Value, 配方_上I.Value, 配方_上D.Value, 距离 - 配方_上Dis.Value, _上电机速度上限.Value, _上电机速度下限.Value);
+                                //double posX = 下电机PID.Func(配方_下A.Value, 配方_下B.Value, 配方_下C.Value, 配方_下P.Value, 配方_下I.Value, 配方_下D.Value, 距离X - 配方_下Dis.Value, _下电机速度上限.Value, _下电机速度下限.Value);
+                                //double pos = 上电机PID.Func(配方_上A.Value, 配方_上B.Value, 配方_上C.Value, 配方_上P.Value, 配方_上I.Value, 配方_上D.Value, 当前电压 - 配方_上V.Value, _上电机速度上限.Value, _上电机速度下限.Value);
                                 double posX = 下电机PID.Func(配方_下A.Value, 配方_下B.Value, 配方_下C.Value, 配方_下P.Value, 配方_下I.Value, 配方_下D.Value, 当前电压X - 配方_下V.Value, _下电机速度上限.Value, _下电机速度下限.Value);
 
+                                Task任务.信息输出(pos.ToString());
                                 单轴速度控制(GLV._上电机, pos);
                                 单轴速度控制(GLV._下电机, posX);
 
@@ -414,27 +424,56 @@ namespace 缝纫机项目
                             break;
 
                         case (ushort)STEP.缝纫机工作:
-                            当前电压 = 模拟量.输入(0, GLV._上传感器);
-                            //pos = PIDtest.Func(配方_上A.Value, 配方_上B.Value, 配方_上C.Value, 配方_上P.Value, 配方_上I.Value, 配方_上D.Value, 当前电压 - 配方_上V.Value, _上电机速度上限.Value, _上电机速度下限.Value);
+                            //当前电压 = 模拟量.输入(0, GLV._上传感器);
+                            ////pos = PIDtest.Func(配方_上A.Value, 配方_上B.Value, 配方_上C.Value, 配方_上P.Value, 配方_上I.Value, 配方_上D.Value, 当前电压 - 配方_上V.Value, _上电机速度上限.Value, _上电机速度下限.Value);
 
                             当前电压X = 模拟量.输入(0, GLV._下传感器);
                             //posX = PIDtest.Func(配方_下A.Value, 配方_下B.Value, 配方_下C.Value, 配方_下P.Value, 配方_下I.Value, 配方_下D.Value, 当前电压X - 配方_下V.Value, _下电机速度上限.Value, _下电机速度下限.Value);
-
+                            距离 = 0;
+                            剪口数 = 0;
 
                             if (已执行针数 < (目标针数 - 配方_尾针数.Value))
                             {
-                                ///////////////////20240108/////////////////////////////
-                                if (_对剪口功能使能.Value == 1)//对剪口功能是否启用//20240108
+                                if (_发送功能使能.Value == 1)
                                 {
-                                    bool re1 = 上剪口.ACT剪口检测((uint)配方_上剪口数量.Value);
+                                    VM通讯.发送("snap");
+                                    while (VM通讯.客户端.m_x == null)
+                                    {
+                                        Delay(1);
+                                    }
+                                    if (VM通讯.客户端.m_x != null)
+                                    {
+                                        距离 = 测量值.距离(VM通讯.客户端.m_x);
+                                        剪口数 = 测量值.剪口数(VM通讯.客户端.m_x);
+                                        上剪口_剪口计数 += 剪口数;
+                                        VM通讯.客户端.m_x = null;
+                                        Task任务.信息输出("剪口计数为"+上剪口_剪口计数.ToString());
+                                    }
+                                _发送功能使能.Value = 0;
+                            }
+                            ///////////////////20240108/////////////////////////////
+                            if (_对剪口功能使能.Value == 1)//对剪口功能是否启用//20240108
+                                {
+                                    bool re1 = (剪口数 > 0);
+                                    //bool re1 = 上剪口.ACT剪口检测((uint)配方_上剪口数量.Value);
                                     bool re2 = 下剪口.ACT剪口检测((uint)配方_下剪口数量.Value);
-                                    if ((!re1 || !re2) && !修改目前针数)
+
+                                    //if ((!re1 || !re2) && !修改目前针数)
+                                    //{
+                                    //    目标针数 = (int)(已执行针数 + 配方_上最后剪口后针数.Value + 配方_尾针数.Value);
+                                    //    Task任务.信息输出("目标针数从总针数" + 配方_总针数 + "针改为" + 目标针数 + "针");
+                                    //    修改目前针数 = true;
+                                    //}
+                                    if (re1 && !修改目前针数)
                                     {
                                         目标针数 = (int)(已执行针数 + 配方_上最后剪口后针数.Value + 配方_尾针数.Value);
                                         Task任务.信息输出("目标针数从总针数" + 配方_总针数 + "针改为" + 目标针数 + "针");
                                         修改目前针数 = true;
+                                        
                                     }
-                                    if (上剪口.剪口计数 == 下剪口.剪口计数 && 上剪口.剪口计数 > 0)
+                                    //if (上剪口.剪口计数 == 下剪口.剪口计数 && 上剪口.剪口计数 > 0)
+                                    if (上剪口_剪口计数 == 下剪口.剪口计数 && 上剪口_剪口计数 > 0)
+                                    //if (上剪口_剪口计数 > 0)
                                     {
                                         if (!对剪口运行)
                                         {
@@ -468,16 +507,19 @@ namespace 缝纫机项目
                                             //}
                                             //vel1 = 剪口电机速度.速度计算(配方_上剪口电机基础速度.Value, 配方_上剪口缝纫机修正比例.Value, 缝纫机.当前转速(), 0, 配方_上剪口差修正比例.Value, 配方_上剪口差基本值.Value, _上剪口电机速度.Value);
                                             //vel2 = 剪口电机速度.速度计算(配方_下剪口电机基础速度.Value, 配方_下剪口缝纫机修正比例.Value, 缝纫机.当前转速(), 0, 配方_下剪口差修正比例.Value, 配方_下剪口差基本值.Value, _下剪口电机速度.Value);
-                                            double pos = 上电机PID.Func(配方_上A.Value, 配方_上B.Value, 配方_上C.Value, 配方_上P.Value, 配方_上I.Value, 配方_上D.Value, 当前电压 - 配方_上V.Value, _上电机速度上限.Value, _上电机速度下限.Value);
+
+                                            double pos = 上电机PID.Func(配方_上A.Value, 配方_上B.Value, 配方_上C.Value, 配方_上P.Value, 配方_上I.Value, 配方_上D.Value, 距离 - 配方_上Dis.Value, _上电机速度上限.Value, _上电机速度下限.Value);
+                                            //double posX = 下电机PID.Func(配方_下A.Value, 配方_下B.Value, 配方_下C.Value, 配方_下P.Value, 配方_下I.Value, 配方_下D.Value, 距离X - 配方_下Dis.Value, _下电机速度上限.Value, _下电机速度下限.Value);
+                                            //double pos = 上电机PID.Func(配方_上A.Value, 配方_上B.Value, 配方_上C.Value, 配方_上P.Value, 配方_上I.Value, 配方_上D.Value, 当前电压 - 配方_上V.Value, _上电机速度上限.Value, _上电机速度下限.Value);
                                             double posX = 下电机PID.Func(配方_下A.Value, 配方_下B.Value, 配方_下C.Value, 配方_下P.Value, 配方_下I.Value, 配方_下D.Value, 当前电压X - 配方_下V.Value, _下电机速度上限.Value, _下电机速度下限.Value);
 
                                             单轴速度控制(GLV._上剪口电机, vel1);
                                             单轴速度控制(GLV._下剪口电机, vel2);
-                                            Task任务.信息输出("第" + 上剪口.剪口计数 + "个剪口的上下差值:" + 差值 + "。此时上剪口电机速度改为:" + vel1 + " ,下剪口电机速度改为:" + vel2);
+                                            //Task任务.信息输出("第" + 上剪口.剪口计数 + "个剪口的上下差值:" + 差值 + "。此时上剪口电机速度改为:" + vel1 + " ,下剪口电机速度改为:" + vel2);
+                                            Task任务.信息输出("第" + 上剪口_剪口计数 + "个剪口的上下差值:" + 差值 + "。此时上剪口电机速度改为:" + vel1 + " ,下剪口电机速度改为:" + vel2);
 
 
                                         }
-
 
                                     }
                                     else
@@ -503,7 +545,9 @@ namespace 缝纫机项目
                                 当前编码器位置 = 运动控制.反馈位置(0, GLV._缝纫机编码器);
                                 if (当前编码器位置 >= _缝纫机编码器细分.Value * 已执行针数)
                                 {
-                                    double pos = 上电机PID.Func(配方_上A.Value, 配方_上B.Value, 配方_上C.Value, 配方_上P.Value, 配方_上I.Value, 配方_上D.Value, 当前电压 - 配方_上V.Value, _上电机速度上限.Value, _上电机速度下限.Value);
+                                    double pos = 上电机PID.Func(配方_上A.Value, 配方_上B.Value, 配方_上C.Value, 配方_上P.Value, 配方_上I.Value, 配方_上D.Value, 距离 - 配方_上Dis.Value, _上电机速度上限.Value, _上电机速度下限.Value);
+                                    //double posX = 下电机PID.Func(配方_下A.Value, 配方_下B.Value, 配方_下C.Value, 配方_下P.Value, 配方_下I.Value, 配方_下D.Value, 距离X - 配方_下Dis.Value, _下电机速度上限.Value, _下电机速度下限.Value);
+                                    //double pos = 上电机PID.Func(配方_上A.Value, 配方_上B.Value, 配方_上C.Value, 配方_上P.Value, 配方_上I.Value, 配方_上D.Value, 当前电压 - 配方_上V.Value, _上电机速度上限.Value, _上电机速度下限.Value);
                                     double posX = 下电机PID.Func(配方_下A.Value, 配方_下B.Value, 配方_下C.Value, 配方_下P.Value, 配方_下I.Value, 配方_下D.Value, 当前电压X - 配方_下V.Value, _下电机速度上限.Value, _下电机速度下限.Value);
 
                                     //PID控制
@@ -512,6 +556,8 @@ namespace 缝纫机项目
                                     
 
                                     已执行针数++;
+
+                                    _发送功能使能.Value = 1;
 
                                     数据采集.采集(已执行针数);//20240201
                                 }

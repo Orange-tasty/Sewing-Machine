@@ -35,12 +35,13 @@ namespace 缝纫机项目
 
         public static double[] 接收信息拆解(string message)
         {
-            double[] result = new double[2];
+            double[] result = new double[3];
             char[] delimiterChars = { ';' };
             string[] parts = message.Split(delimiterChars);
-            double distance = Convert.ToDouble(parts[0]);
-            double num = Convert.ToDouble(parts[1]);
-            result[0] = distance;
+            double distance1 = Convert.ToDouble(parts[0]);
+            double distance2 = Convert.ToDouble(parts[1]);
+            int num = Convert.ToInt16(parts[2]);
+            result[0] = (distance1+distance2)/2;
             result[1] = num;
             return result;
         }
@@ -64,5 +65,6 @@ namespace 缝纫机项目
         {
             return VM通讯.接收信息拆解(message)[1];
         }
+
     }
 }
