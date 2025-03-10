@@ -112,8 +112,10 @@ namespace 缝纫机项目
 
 
 
-            double value = reKp + reKi + reKd;
+            double value = (reKp + reKi + reKd);
+            Task任务.信息输出("value is" + value.ToString());
             value = CheckVel(value, maxvel, minvel);
+            Task任务.信息输出("value_last is" + value.ToString());
 
             速度延迟生效.Add(value);
             if (速度延迟生效.Count > 工艺测试._PID的延迟针数.Value)
@@ -129,6 +131,7 @@ namespace 缝纫机项目
             //{
             //    Task任务.信息输出("延迟缓冲区第" + i + "位" + 速度延迟生效[i].ToString());
             //}
+            //Task任务.信息输出(速度延迟生效[0].ToString());
             return 速度延迟生效[0];
 
         }

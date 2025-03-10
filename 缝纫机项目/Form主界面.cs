@@ -675,21 +675,27 @@ namespace 缝纫机项目
 
             //VM通讯.发送("abc");
 
-            LTSMC.smc_set_encoder_unit(0, 0, 0);
+            //LTSMC.smc_set_encoder_unit(0, 0, 0);
 
             //myTimer.Tick += new EventHandler(Callback); //给timer挂起事件
 
-            myTimer.Enabled = true;//使timer可用
+            //myTimer.Enabled = true;//使timer可用
 
-            myTimer.Interval = 100;//设置时间间隔，以毫秒为单位
+            //myTimer.Interval = 100;//设置时间间隔，以毫秒为单位
+            Task任务.信息输出(运动控制.反馈位置(0, GLV._缝纫机编码器).ToString());
+            //运动控制.反馈位置清零(0, GLV._缝纫机编码器);
+            缝纫机.控制(3.8);
+            //double 当前编码器位置 = 运动控制.反馈位置(0, GLV._缝纫机编码器);
+            //if (当前编码器位置 < 1440 * 10)
+            //{
+            //    缝纫机.待机();
+            //}
+            //else
+            //{
 
-            if (VM通讯.客户端.m_x != null)
-            {
-                //double[] temp = VM通讯.接收信息拆解(客户端.m_x);
-                Task任务.信息输出(测量值.距离(VM通讯.客户端.m_x).ToString());
-                Task任务.信息输出(测量值.剪口数(VM通讯.客户端.m_x).ToString());
+            //}
 
-            }
+
         }
 
         public void 客户端接收(object socketk)

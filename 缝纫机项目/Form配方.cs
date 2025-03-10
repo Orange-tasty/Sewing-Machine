@@ -369,6 +369,11 @@ namespace 缝纫机项目
         {
 
         }
+
+        private void numericUpDown总针数_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 
 
