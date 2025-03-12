@@ -257,8 +257,27 @@ namespace 缝纫机项目
 
         public bool 对剪口运行 = false;
 
+        public static async Task<bool> 等待数据接收(int 超时时间ms)
+        {
+            int 已等待时间 = 0;
+            int 检测间隔 = 1; // 每次等待 1ms
+
+            while (VM通讯.客户端.m_x == null)
+            {
+                await Task.Delay(检测间隔);
+                已等待时间 += 检测间隔;
+
+                if (已等待时间 >= 超时时间ms)
+                {
+                    return false; // 超时未收到数据
+                }
+            }
+            return true; // 成功收到数据
+        }
+
 
         private Stopwatch stopwatch = new Stopwatch();
+
 
         public enum STEP
         {
@@ -288,7 +307,7 @@ namespace 缝纫机项目
             }
         }
 
-        public void 工艺流程()
+        public async void 工艺流程()
         {
             Form主界面 主界面 = (Form主界面)Application.OpenForms["Form主界面"];
             while (true)
@@ -370,9 +389,13 @@ namespace 缝纫机项目
                                 //while (VM通讯.客户端.m_x == null)
                                 //{
                                 //    Delay(1);
-                            //}
-                                Delay(70);
-                                if (VM通讯.客户端.m_x != null)
+                                //}
+                                //Delay(70);
+
+                                bool 是否收到数据 = await 等待数据接收(70); // 最多等待 70ms
+
+                                //if (VM通讯.客户端.m_x != null)
+                                if (是否收到数据)
                                 {
                                     上剪口_剪口计数 = 0;
                                     距离 = 测量值.距离(VM通讯.客户端.m_x);
@@ -380,6 +403,10 @@ namespace 缝纫机项目
                                     上剪口_剪口计数 += 剪口数;
                                     VM通讯.客户端.m_x = null;
                                     Task任务.信息输出("此时直线中点坐标为" + 距离.ToString());
+                                }
+                                else
+                                {
+                                    Task任务.信息输出("超时70ms");
                                 }
 
 
@@ -444,8 +471,11 @@ namespace 缝纫机项目
                                     //{
                                     //    Delay(1);
                                     //}
-                                    Delay(70);
-                                    if (VM通讯.客户端.m_x != null)
+                                    //Delay(70);
+                                    bool 是否收到数据 = await 等待数据接收(70);
+
+                                    //if (VM通讯.客户端.m_x != null)
+                                    if (是否收到数据)
                                     {
                                         距离 = 测量值.距离(VM通讯.客户端.m_x);
                                         剪口数 = 测量值.剪口数(VM通讯.客户端.m_x);

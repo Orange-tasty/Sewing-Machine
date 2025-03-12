@@ -670,8 +670,32 @@ namespace 缝纫机项目
             //}
         }
 
-        private void Send_Click(object sender, EventArgs e)
+        private async void Send_ClickAsync(object sender, EventArgs e)
         {
+            VM通讯.发送("snap");
+            //while (VM通讯.客户端.m_x == null)
+            //{
+            //    Delay(1);
+            //}
+            //Delay(70);
+            bool 是否收到数据 = await 工艺测试.等待数据接收(70);
+
+            //if (VM通讯.客户端.m_x != null)
+            if (是否收到数据)
+            {
+                double 距离 = 测量值.距离(VM通讯.客户端.m_x);
+                double 剪口数 = 测量值.剪口数(VM通讯.客户端.m_x);
+
+                VM通讯.客户端.m_x = null;
+                Task任务.信息输出("此时直线中点坐标为" + 距离.ToString());
+                //Task任务.信息输出("剪口计数为"+上剪口_剪口计数.ToString());
+            }
+            else
+            {
+                Task任务.信息输出("超时");
+            }
+
+
 
             //VM通讯.发送("abc");
 
@@ -682,9 +706,9 @@ namespace 缝纫机项目
             //myTimer.Enabled = true;//使timer可用
 
             //myTimer.Interval = 100;//设置时间间隔，以毫秒为单位
-            Task任务.信息输出(运动控制.反馈位置(0, GLV._缝纫机编码器).ToString());
-            //运动控制.反馈位置清零(0, GLV._缝纫机编码器);
-            缝纫机.控制(3.8);
+            //Task任务.信息输出(运动控制.反馈位置(0, GLV._缝纫机编码器).ToString());
+            ////运动控制.反馈位置清零(0, GLV._缝纫机编码器);
+            //缝纫机.控制(3.8);
             //double 当前编码器位置 = 运动控制.反馈位置(0, GLV._缝纫机编码器);
             //if (当前编码器位置 < 1440 * 10)
             //{

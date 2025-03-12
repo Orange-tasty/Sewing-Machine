@@ -519,7 +519,7 @@
             this.Send.TabIndex = 24;
             this.Send.Text = "发送";
             this.Send.UseVisualStyleBackColor = true;
-            this.Send.Click += new System.EventHandler(this.Send_Click);
+            this.Send.Click += new System.EventHandler(this.Send_ClickAsync);
             // 
             // textBox1
             // 
