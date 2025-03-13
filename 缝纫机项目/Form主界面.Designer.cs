@@ -76,6 +76,7 @@
             this.button4 = new System.Windows.Forms.Button();
             this.Send = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
@@ -529,6 +530,10 @@
             this.textBox1.TabIndex = 25;
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
+            // timer2
+            // 
+            this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
+            // 
             // Form主界面
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -615,6 +620,7 @@
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button Send;
         private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Timer timer2;
     }
 }
 

@@ -672,22 +672,22 @@ namespace 缝纫机项目
 
         private async void Send_ClickAsync(object sender, EventArgs e)
         {
+            VM通讯.客户端.m_x = null;
             VM通讯.发送("snap");
-            //while (VM通讯.客户端.m_x == null)
-            //{
-            //    Delay(1);
-            //}
-            //Delay(70);
-            bool 是否收到数据 = await 工艺测试.等待数据接收(70);
+            bool 是否收到数据 = await 工艺测试.等待数据接收(50);
 
             //if (VM通讯.客户端.m_x != null)
             if (是否收到数据)
             {
                 double 距离 = 测量值.距离(VM通讯.客户端.m_x);
                 double 剪口数 = 测量值.剪口数(VM通讯.客户端.m_x);
-
-                VM通讯.客户端.m_x = null;
+                double 距离X = 测量值.距离X(VM通讯.客户端.m_x);
+                double 剪口数X = 测量值.剪口数X(VM通讯.客户端.m_x);
+                //VM通讯.客户端.m_x = null;
+                Task任务.信息输出(剪口数.ToString());
+                Task任务.信息输出(剪口数X.ToString());
                 Task任务.信息输出("此时直线中点坐标为" + 距离.ToString());
+                Task任务.信息输出("此时下直线中点坐标为" + 距离X.ToString());
                 //Task任务.信息输出("剪口计数为"+上剪口_剪口计数.ToString());
             }
             else
@@ -750,6 +750,11 @@ namespace 缝纫机项目
         }
 
         private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
+
+        private void timer2_Tick(object sender, EventArgs e)
         {
 
         }
