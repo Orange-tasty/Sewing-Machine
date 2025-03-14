@@ -33,30 +33,48 @@ namespace 缝纫机项目
             return tcpok;
         }
 
-        public static (double 平均距离1, int 数量1, double 平均距离2, int 数量2) 接收信息拆解(string message)
+        //public static (double 平均距离1, int 数量1, double 平均距离2, int 数量2) 接收信息拆解(string message)
+        //{
+        //    if (string.IsNullOrWhiteSpace(message))
+        //        throw new ArgumentException("输入消息不能为空", nameof(message));
+
+        //    string[] parts = message.Split(';');
+
+        //    if (parts.Length != 6)
+        //        throw new FormatException("输入格式错误，应包含六个值（d1;d2;n1;d3;d4;n2）");
+
+        //    if (!double.TryParse(parts[0], out double d1) ||
+        //        !double.TryParse(parts[1], out double d2) ||
+        //        !int.TryParse(parts[2], out int n1) ||
+        //        !double.TryParse(parts[3], out double d3) ||
+        //        !double.TryParse(parts[4], out double d4) ||
+        //        !int.TryParse(parts[5], out int n2))
+        //    {
+        //        throw new FormatException("输入数据格式错误");
+        //    }
+
+        //    double 平均距离1 = (d1 + d2) / 2;
+        //    double 平均距离2 = (d3 + d4) / 2;
+
+        //    return (平均距离1, n1, 平均距离2, n2);
+        //}
+
+        public static (double 平均距离1, int 数量1) 接收信息拆解(string message)
         {
-            if (string.IsNullOrWhiteSpace(message))
-                throw new ArgumentException("输入消息不能为空", nameof(message));
 
             string[] parts = message.Split(';');
 
-            if (parts.Length != 6)
-                throw new FormatException("输入格式错误，应包含六个值（d1;d2;n1;d3;d4;n2）");
-
-            if (!double.TryParse(parts[0], out double d1) ||
-                !double.TryParse(parts[1], out double d2) ||
-                !int.TryParse(parts[2], out int n1) ||
-                !double.TryParse(parts[3], out double d3) ||
-                !double.TryParse(parts[4], out double d4) ||
-                !int.TryParse(parts[5], out int n2))
-            {
-                throw new FormatException("输入数据格式错误");
-            }
+            double.TryParse(parts[0], out double d1);
+            double.TryParse(parts[1], out double d2);
+            int.TryParse(parts[2], out int n1);
+            //double.TryParse(parts[3], out double d3);
+            //double.TryParse(parts[4], out double d4);
+            //int.TryParse(parts[5], out int n2);
 
             double 平均距离1 = (d1 + d2) / 2;
-            double 平均距离2 = (d3 + d4) / 2;
+            //double 平均距离2 = (d3 + d4) / 2;
 
-            return (平均距离1, n1, 平均距离2, n2);
+            return (平均距离1, n1);
         }
 
         public static void 发送(string str)
@@ -79,14 +97,14 @@ namespace 缝纫机项目
             return VM通讯.接收信息拆解(message).数量1;
         }
 
-        public static double 距离X(string message)
-        {
-            return VM通讯.接收信息拆解(message).平均距离2;
-        }
+        //public static double 距离X(string message)
+        //{
+        //    return VM通讯.接收信息拆解(message).平均距离2;
+        //}
 
-        public static double 剪口数X(string message)
-        {
-            return VM通讯.接收信息拆解(message).数量2;
-        }
+        //public static double 剪口数X(string message)
+        //{
+        //    return VM通讯.接收信息拆解(message).数量2;
+        //}
     }
 }

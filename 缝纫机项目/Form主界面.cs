@@ -216,9 +216,10 @@ namespace 缝纫机项目
 
             #endregion
 
-
-            toolStripStatusLabel_上传感器电压.Text = "上传感器电压:" + 模拟量.输入(0, GLV._上传感器).ToString() + "V";
-            toolStripStatusLabel_下传感器电压.Text = "下传感器电压:" + 模拟量.输入(0, GLV._下传感器).ToString() + "V";
+            toolStripStatusLabel_上传感器电压.Text = "上布料中心x:" + ((int)工艺测试.距离).ToString();
+            toolStripStatusLabel_下传感器电压.Text = "下布料中心x:" + ((int)工艺测试.距离X).ToString();
+            //toolStripStatusLabel_上传感器电压.Text = "上布料中心x:" + 模拟量.输入(0, GLV._上传感器).ToString() + "V";
+            //toolStripStatusLabel_下传感器电压.Text = "下布料中心x:" + 模拟量.输入(0, GLV._下传感器).ToString() + "V";
             toolStripStatusLabel_缝纫机输出电压.Text = "缝纫机输出电压:" + 模拟量.输出(0, GLV._缝纫机控制).ToString() + "V";
             toolStripStatusLabel_已执行针数.Text = "已执行针数:" + 工艺测试.已执行针数;
 
@@ -674,20 +675,18 @@ namespace 缝纫机项目
         {
             VM通讯.客户端.m_x = null;
             VM通讯.发送("snap");
-            bool 是否收到数据 = await 工艺测试.等待数据接收(50);
-
-            //if (VM通讯.客户端.m_x != null)
+            bool 是否收到数据 = await 工艺测试.等待数据接收(1000);
             if (是否收到数据)
             {
-                double 距离 = 测量值.距离(VM通讯.客户端.m_x);
-                double 剪口数 = 测量值.剪口数(VM通讯.客户端.m_x);
-                double 距离X = 测量值.距离X(VM通讯.客户端.m_x);
-                double 剪口数X = 测量值.剪口数X(VM通讯.客户端.m_x);
+                工艺测试.距离 = 测量值.距离(VM通讯.客户端.m_x);
+                //double 剪口数 = 测量值.剪口数(VM通讯.客户端.m_x);
+                //工艺测试.距离X = 测量值.距离X(VM通讯.客户端.m_x);
+                //double 剪口数X = 测量值.剪口数X(VM通讯.客户端.m_x);
                 //VM通讯.客户端.m_x = null;
-                Task任务.信息输出(剪口数.ToString());
-                Task任务.信息输出(剪口数X.ToString());
-                Task任务.信息输出("此时直线中点坐标为" + 距离.ToString());
-                Task任务.信息输出("此时下直线中点坐标为" + 距离X.ToString());
+                //Task任务.信息输出(剪口数.ToString());
+                //Task任务.信息输出(剪口数X.ToString());
+                //Task任务.信息输出("此时直线中点坐标为" + 距离.ToString());
+                //Task任务.信息输出("此时下直线中点坐标为" + 距离X.ToString());
                 //Task任务.信息输出("剪口计数为"+上剪口_剪口计数.ToString());
             }
             else

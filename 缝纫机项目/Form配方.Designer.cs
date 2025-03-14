@@ -292,7 +292,7 @@
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(67, 15);
             this.label11.TabIndex = 14;
-            this.label11.Text = "标准电压";
+            this.label11.Text = "标准距离";
             // 
             // numericUpDown_上V
             // 
@@ -302,6 +302,11 @@
             this.numericUpDown_上V.Name = "numericUpDown_上V";
             this.numericUpDown_上V.Size = new System.Drawing.Size(84, 25);
             this.numericUpDown_上V.TabIndex = 13;
+            this.numericUpDown_上V.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
             // 
             // label7
             // 
@@ -521,7 +526,7 @@
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(67, 15);
             this.label16.TabIndex = 16;
-            this.label16.Text = "标准电压";
+            this.label16.Text = "标准距离";
             // 
             // numericUpDown_下V
             // 
@@ -531,6 +536,11 @@
             this.numericUpDown_下V.Name = "numericUpDown_下V";
             this.numericUpDown_下V.Size = new System.Drawing.Size(84, 25);
             this.numericUpDown_下V.TabIndex = 15;
+            this.numericUpDown_下V.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
             // 
             // label8
             // 

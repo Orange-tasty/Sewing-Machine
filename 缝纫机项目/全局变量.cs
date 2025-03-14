@@ -62,7 +62,7 @@ namespace 缝纫机项目
         public const ushort _下电机 = 1;
         public const ushort _上剪口电机 = 2;
         public const ushort _下剪口电机 = 3;
-        public const ushort _缝纫机编码器 = 0;
+        public const ushort _缝纫机编码器 = 4;
 
         #endregion
 
