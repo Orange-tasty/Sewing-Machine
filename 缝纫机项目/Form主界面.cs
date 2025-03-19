@@ -679,15 +679,7 @@ namespace 缝纫机项目
             if (是否收到数据)
             {
                 工艺测试.距离 = 测量值.距离(VM通讯.客户端.m_x);
-                //double 剪口数 = 测量值.剪口数(VM通讯.客户端.m_x);
-                //工艺测试.距离X = 测量值.距离X(VM通讯.客户端.m_x);
-                //double 剪口数X = 测量值.剪口数X(VM通讯.客户端.m_x);
-                //VM通讯.客户端.m_x = null;
-                //Task任务.信息输出(剪口数.ToString());
-                //Task任务.信息输出(剪口数X.ToString());
-                //Task任务.信息输出("此时直线中点坐标为" + 距离.ToString());
-                //Task任务.信息输出("此时下直线中点坐标为" + 距离X.ToString());
-                //Task任务.信息输出("剪口计数为"+上剪口_剪口计数.ToString());
+                工艺测试.距离X = 测量值.距离X(VM通讯.客户端.m_x);
             }
             else
             {
@@ -760,7 +752,7 @@ namespace 缝纫机项目
 
         private void KHDread(string str)//客户端接收委托关联方法
         {
-            textBox1.AppendText(str + "\r\n");//添加数据并换行
+            //textBox1.AppendText(str + "\r\n");//添加数据并换行
         }
 
         public static void Delay(int milliSecond)

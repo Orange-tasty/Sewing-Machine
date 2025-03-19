@@ -41,7 +41,7 @@ namespace 缝纫机项目
             }
             catch (Exception)
             {
-                MessageBox.Show("连接失败", "提示");
+                //MessageBox.Show("连接失败", "提示");
                 socket = null;
             }
             return socket;

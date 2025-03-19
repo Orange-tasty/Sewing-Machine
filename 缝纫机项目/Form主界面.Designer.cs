@@ -514,17 +514,17 @@
             // 
             // Send
             // 
-            this.Send.Location = new System.Drawing.Point(114, 719);
+            this.Send.Location = new System.Drawing.Point(71, 719);
             this.Send.Name = "Send";
-            this.Send.Size = new System.Drawing.Size(86, 35);
+            this.Send.Size = new System.Drawing.Size(188, 35);
             this.Send.TabIndex = 24;
-            this.Send.Text = "发送";
+            this.Send.Text = "读取布料中心位置";
             this.Send.UseVisualStyleBackColor = true;
             this.Send.Click += new System.EventHandler(this.Send_ClickAsync);
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(239, 726);
+            this.textBox1.Location = new System.Drawing.Point(1059, 729);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(140, 25);
             this.textBox1.TabIndex = 25;

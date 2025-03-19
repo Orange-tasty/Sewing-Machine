@@ -62,7 +62,7 @@ namespace 缝纫机项目
         public const ushort _下电机 = 1;
         public const ushort _上剪口电机 = 2;
         public const ushort _下剪口电机 = 3;
-        public const ushort _缝纫机编码器 = 4;
+        public const ushort _缝纫机编码器 = 0;
 
         #endregion
 
@@ -871,7 +871,7 @@ namespace 缝纫机项目
         //}
 
         private double 剪口冷却位置 = 0; // 记录上次剪口编码器位置
-        private const double 剪口冷却阈值 = 5*1440; // 设定冷却距离（根据实际情况调整）
+        private const double 剪口冷却阈值 = 5 * 1440; // 设定冷却距离（根据实际情况调整）
         public bool ACT剪口检测(uint num, double num_new)
         {
             数量 = num;
@@ -884,6 +884,8 @@ namespace 缝纫机项目
 
             if (剪口计数 == 0 && num_new > 0)
             {
+                剪口有列表.Add(enc1);
+                剪口无列表.Add(enc2);
                 剪口计数++;
                 剪口冷却位置 = 当前位置; // 第一次检测到剪口，记录位置并开始冷却
                 Task任务.信息输出($"剪口检测：第 {剪口计数} 个剪口，位置：{当前位置}");
@@ -892,6 +894,8 @@ namespace 缝纫机项目
 
             if (当前位置 - 剪口冷却位置 >= 剪口冷却阈值 && num_new > 0)
             {
+                剪口有列表.Add(enc1);
+                剪口无列表.Add(enc2);
                 剪口计数++;
                 剪口冷却位置 = 当前位置; // 记录本次剪口位置
                 Task任务.信息输出($"剪口检测：第 {剪口计数} 个剪口，位置：{当前位置}");
