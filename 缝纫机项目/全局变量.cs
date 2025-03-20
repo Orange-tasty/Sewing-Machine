@@ -62,7 +62,7 @@ namespace 缝纫机项目
         public const ushort _下电机 = 1;
         public const ushort _上剪口电机 = 2;
         public const ushort _下剪口电机 = 3;
-        public const ushort _缝纫机编码器 = 0;
+        public const ushort _缝纫机编码器 = 4;
 
         #endregion
 
@@ -812,6 +812,7 @@ namespace 缝纫机项目
 
         private List<double> 剪口有列表 = new List<double>();
         private List<double> 剪口无列表 = new List<double>();
+        private List<double> 剪口列表 = new List<double>();
         public uint 剪口计数 = 0;
         public bool 剪口有信号 = false;
 
@@ -870,8 +871,8 @@ namespace 缝纫机项目
         //    return true;
         //}
 
-        private double 剪口冷却位置 = 0; // 记录上次剪口编码器位置
-        private const double 剪口冷却阈值 = 5 * 1440; // 设定冷却距离（根据实际情况调整）
+        public double 剪口冷却位置 = 0; // 记录上次剪口编码器位置
+        private const double 剪口冷却阈值 = 10 * 1440; // 设定冷却距离（根据实际情况调整）
         public bool ACT剪口检测(uint num, double num_new)
         {
             数量 = num;
@@ -884,55 +885,83 @@ namespace 缝纫机项目
 
             if (剪口计数 == 0 && num_new > 0)
             {
-                剪口有列表.Add(enc1);
-                剪口无列表.Add(enc2);
+                //剪口有列表.Add(enc1);
+                //剪口无列表.Add(enc2);
+                剪口列表.Add(当前位置);
                 剪口计数++;
                 剪口冷却位置 = 当前位置; // 第一次检测到剪口，记录位置并开始冷却
-                Task任务.信息输出($"剪口检测：第 {剪口计数} 个剪口，位置：{当前位置}");
+                Task任务.信息输出(名称 + $"剪口检测：第 {剪口计数} 个剪口，位置：{剪口冷却位置}");
+                //Task任务.信息输出(名称 + "的第" + 剪口计数 + "个剪口剪口位置:" + enc1 + "和" + enc2);
                 return true;
             }
 
-            if (当前位置 - 剪口冷却位置 >= 剪口冷却阈值 && num_new > 0)
+            if (当前位置 - 剪口冷却位置 > 剪口冷却阈值 && num_new > 0)
             {
-                剪口有列表.Add(enc1);
-                剪口无列表.Add(enc2);
+                //剪口有列表.Add(enc1);
+                //剪口无列表.Add(enc2);
+                剪口列表.Add(当前位置);
                 剪口计数++;
                 剪口冷却位置 = 当前位置; // 记录本次剪口位置
-                Task任务.信息输出($"剪口检测：第 {剪口计数} 个剪口，位置：{当前位置}");
+                Task任务.信息输出(名称 + $"剪口检测：第 {剪口计数} 个剪口，位置：{剪口冷却位置}");
+                //Task任务.信息输出(名称 + "的第" + 剪口计数 + "个剪口剪口位置:" + enc1 + "和" + enc2);
             }
 
             return true;                      
         }
 
-        /// <summary>
-        /// 返回计算后的剪口所对应的编码器位置
-        /// 正数：OK
-        /// 负数：NG
-        /// </summary>
-        /// <param name="num">第几个剪口</param>
-        /// <returns></returns>
-        public double ACT剪口位置计算(uint num)
+        public double ACT剪口位置获取(uint num)
         {
             if (num < 1)
             {
                 return -1;
             }
             int numm = (int)num - 1;
-            try 
+            try
             {
-                double x1 = 剪口有列表[numm];
-                double x2 = 剪口无列表[numm];
-                double re = (x1 + x2) / 2;
+                double x1 = 剪口列表[numm];
+                double re = x1;
 
                 return re;
             }
             catch
             {
-                Console.WriteLine("ACT剪口位置计算-error!!!");
+                Console.WriteLine("ACT剪口位置获取-error!!!");
                 return -1;
             }
-            
+
         }
+
+    
+
+    /// <summary>
+    /// 返回计算后的剪口所对应的编码器位置
+    /// 正数：OK
+    /// 负数：NG
+    /// </summary>
+    /// <param name="num">第几个剪口</param>
+    /// <returns></returns>
+    public double ACT剪口位置计算(uint num)
+    {
+        if (num < 1)
+        {
+            return -1;
+        }
+        int numm = (int)num - 1;
+        try 
+        {
+            double x1 = 剪口有列表[numm];
+            double x2 = 剪口无列表[numm];
+            double re = (x1 + x2) / 2;
+
+            return re;
+        }
+        catch
+        {
+            Console.WriteLine("ACT剪口位置计算-error!!!");
+            return -1;
+        }
+            
+    }
 
     }
 }

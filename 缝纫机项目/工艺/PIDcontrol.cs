@@ -168,7 +168,7 @@ namespace 缝纫机项目
         public static double 速度计算(double 剪口电机基础速度, double 缝纫机修正比例, double 缝纫机速度, double 上下差值, double 剪口差修正比例, double 剪口差基本值,double 速度上限,double 速度下限)
         {
 
-            double re = (剪口电机基础速度 + 缝纫机修正比例 * 缝纫机速度) * (上下差值 * 剪口差修正比例 + 剪口差基本值);
+            double re = (剪口电机基础速度 + 缝纫机修正比例 * 缝纫机速度) + (上下差值 * 剪口差修正比例 + 剪口差基本值);
             if (re > 速度上限 &&  re>=0)
             {
                 re = 速度上限;
