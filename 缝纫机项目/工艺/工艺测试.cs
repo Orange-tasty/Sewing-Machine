@@ -388,7 +388,7 @@ namespace 缝纫机项目
                             {
                                 VM通讯.客户端.m_x = null;
                                 VM通讯.发送("snap");
-                                bool 是否收到数据 = await 等待数据接收(90); 
+                                bool 是否收到数据 = await 等待数据接收(105); 
                                 if (是否收到数据)
                                 {
                                     距离 = 测量值.距离(VM通讯.客户端.m_x);
@@ -412,13 +412,13 @@ namespace 缝纫机项目
                                 //Console.WriteLine(tim);
 
                                 double pos = 上电机PID.Func(配方_上A.Value, 配方_上B.Value, 配方_上C.Value, 配方_上P.Value, 配方_上I.Value, 配方_上D.Value, 配方_上V.Value - 距离, _上电机速度上限.Value, _上电机速度下限.Value);
-                                double posX = 下电机PID.Func(配方_下A.Value, 配方_下B.Value, 配方_下C.Value, 配方_下P.Value, 配方_下I.Value, 配方_下D.Value, 配方_下V.Value - 距离X, _下电机速度上限.Value, _下电机速度下限.Value);
+                                double posX = 下电机PID.Func(配方_下A.Value, 配方_下B.Value, 配方_下C.Value, 配方_下P.Value, 配方_下I.Value, 配方_下D.Value, 距离X - 配方_下V.Value, _下电机速度上限.Value, _下电机速度下限.Value);
                                 //double pos = 上电机PID.Func(配方_上A.Value, 配方_上B.Value, 配方_上C.Value, 配方_上P.Value, 配方_上I.Value, 配方_上D.Value, 当前电压 - 配方_上V.Value, _上电机速度上限.Value, _上电机速度下限.Value);
                                 //double posX = 下电机PID.Func(配方_下A.Value, 配方_下B.Value, 配方_下C.Value, 配方_下P.Value, 配方_下I.Value, 配方_下D.Value, 当前电压X - 配方_下V.Value, _下电机速度上限.Value, _下电机速度下限.Value);
 
                                 //Task任务.信息输出("当前上电机速度为" + pos.ToString());
-                                //单轴速度控制(GLV._上电机, pos);
-                                //单轴速度控制(GLV._下电机, posX);
+                                单轴速度控制(GLV._上电机, pos);
+                                单轴速度控制(GLV._下电机, posX);
 
 
                                 Task任务.信息输出("缝纫机工作");
@@ -460,7 +460,7 @@ namespace 缝纫机项目
                                 {
                                     VM通讯.客户端.m_x = null;
                                     VM通讯.发送("snap");
-                                    bool 是否收到数据 = await 等待数据接收(90);
+                                    bool 是否收到数据 = await 等待数据接收(105);
                                     if (是否收到数据)
                                     {
                                         距离 = 测量值.距离(VM通讯.客户端.m_x);
@@ -508,7 +508,8 @@ namespace 缝纫机项目
                                                 //vel1 = 剪口电机速度.速度计算(配方_上剪口电机基础速度.Value, 配方_上剪口缝纫机修正比例.Value, 缝纫机.当前转速(), 差值, 配方_上剪口差修正比例.Value, 配方_上剪口差基本值.Value, _上剪口电机速度上限.Value, _上剪口电机速度下限.Value);
                                                 //vel2 = 剪口电机速度.速度计算(配方_下剪口电机基础速度.Value, 配方_下剪口缝纫机修正比例.Value, 缝纫机.当前转速(), 0, 配方_下剪口差修正比例.Value, 配方_下剪口差基本值.Value, _下剪口电机速度上限.Value, _下剪口电机速度下限.Value);
                                                 vel1 = 剪口电机速度.速度计算(配方_上剪口电机基础速度.Value, 配方_上剪口缝纫机修正比例.Value, 缝纫机.当前转速(), 0, 配方_上剪口差修正比例.Value, 配方_上剪口差基本值.Value, _上剪口电机速度上限.Value, _上剪口电机速度下限.Value);
-                                                vel2 = 剪口电机速度.速度计算(配方_下剪口电机基础速度.Value, 配方_下剪口缝纫机修正比例.Value, 缝纫机.当前转速(), -差值, 配方_下剪口差修正比例.Value, 配方_下剪口差基本值.Value, _下剪口电机速度上限.Value, _下剪口电机速度下限.Value);
+                                                //vel2 = 剪口电机速度.速度计算(配方_下剪口电机基础速度.Value, 配方_下剪口缝纫机修正比例.Value, 缝纫机.当前转速(), -差值, 配方_下剪口差修正比例.Value, 配方_下剪口差基本值.Value, _下剪口电机速度上限.Value, _下剪口电机速度下限.Value);
+                                                vel2 = -600;
                                             }
                                             else
                                             {
@@ -529,7 +530,7 @@ namespace 缝纫机项目
                                             //vel2 = 剪口电机速度.速度计算(配方_下剪口电机基础速度.Value, 配方_下剪口缝纫机修正比例.Value, 缝纫机.当前转速(), 0, 配方_下剪口差修正比例.Value, 配方_下剪口差基本值.Value, _下剪口电机速度.Value);
 
                                             double pos = 上电机PID.Func(配方_上A.Value, 配方_上B.Value, 配方_上C.Value, 配方_上P.Value, 配方_上I.Value, 配方_上D.Value, 距离 - 配方_上Dis, _上电机速度上限.Value, _上电机速度下限.Value);
-                                            double posX = 下电机PID.Func(配方_下A.Value, 配方_下B.Value, 配方_下C.Value, 配方_下P.Value, 配方_下I.Value, 配方_下D.Value, 距离X - 配方_下Dis, _下电机速度上限.Value, _下电机速度下限.Value);
+                                            double posX = 下电机PID.Func(配方_下A.Value, 配方_下B.Value, 配方_下C.Value, 配方_下P.Value, 配方_下I.Value, 配方_下D.Value, 距离X - 配方_下V.Value, _下电机速度上限.Value, _下电机速度下限.Value);
                                             //double pos = 上电机PID.Func(配方_上A.Value, 配方_上B.Value, 配方_上C.Value, 配方_上P.Value, 配方_上I.Value, 配方_上D.Value, 当前电压 - 配方_上V.Value, _上电机速度上限.Value, _上电机速度下限.Value);
                                             //double posX = 下电机PID.Func(配方_下A.Value, 配方_下B.Value, 配方_下C.Value, 配方_下P.Value, 配方_下I.Value, 配方_下D.Value, 当前电压X - 配方_下V.Value, _下电机速度上限.Value, _下电机速度下限.Value);
 
@@ -562,16 +563,16 @@ namespace 缝纫机项目
                                 当前编码器位置 = 运动控制.反馈位置(0, GLV._缝纫机编码器);
                                 if (当前编码器位置 >= _缝纫机编码器细分.Value * 已执行针数)
                                 {
-                                    double pos = 上电机PID.Func(配方_上A.Value, 配方_上B.Value, 配方_上C.Value, 配方_上P.Value, 配方_上I.Value, 配方_上D.Value, 配方_上V.Value - 距离, _上电机速度上限.Value, _上电机速度下限.Value);
-                                    double posX = 下电机PID.Func(配方_下A.Value, 配方_下B.Value, 配方_下C.Value, 配方_下P.Value, 配方_下I.Value, 配方_下D.Value, 配方_下V.Value - 距离X, _下电机速度上限.Value, _下电机速度下限.Value);
+                                    double pos = 800 + 上电机PID.Func(配方_上A.Value, 配方_上B.Value, 配方_上C.Value, 配方_上P.Value, 配方_上I.Value, 配方_上D.Value, 配方_上V.Value - 距离, _上电机速度上限.Value, _上电机速度下限.Value);
+                                    double posX = 下电机PID.Func(配方_下A.Value, 配方_下B.Value, 配方_下C.Value, 配方_下P.Value, 配方_下I.Value, 配方_下D.Value, 距离X - 配方_下V.Value, _下电机速度上限.Value, _下电机速度下限.Value);
                                     //double pos = 上电机PID.Func(配方_上A.Value, 配方_上B.Value, 配方_上C.Value, 配方_上P.Value, 配方_上I.Value, 配方_上D.Value, 当前电压 - 配方_上V.Value, _上电机速度上限.Value, _上电机速度下限.Value);
                                     //double posX = 下电机PID.Func(配方_下A.Value, 配方_下B.Value, 配方_下C.Value, 配方_下P.Value, 配方_下I.Value, 配方_下D.Value, 当前电压X - 配方_下V.Value, _下电机速度上限.Value, _下电机速度下限.Value);
-                                    //Task任务.信息输出("距离为" + 距离.ToString());
-                                    //Task任务.信息输出("当前上电机速度为" + pos.ToString());
+                                    //Task任务.信息输出("距离为" + 距离X.ToString());
+                                    //Task任务.信息输出("当前电机速度为" + posX.ToString());
 
                                     //PID控制
-                                    //单轴速度控制(GLV._上电机, pos);
-                                    //单轴速度控制(GLV._下电机, posX);
+                                    单轴速度控制(GLV._上电机, pos);
+                                    单轴速度控制(GLV._下电机, posX);
 
                                     已执行针数++;
 
@@ -579,14 +580,10 @@ namespace 缝纫机项目
 
                                     数据采集.采集(已执行针数);//20240201
                                 }
-
-
                                 //20240201曲线记录
-
                             }
                             else
                             {
-
                                 Task任务.信息输出("进入尾针阶段");
                                 step = (ushort)STEP.缝纫机进入尾针;
 
@@ -610,8 +607,8 @@ namespace 缝纫机项目
                                     double pos = 配方_尾针表[(int)(配方_尾针数.Value - (目标针数 - 已执行针数))].Value;
                                     double posX = 配方_尾针表[(int)(配方_尾针数.Value - (目标针数 - 已执行针数))].Value;
 
-                                    //单轴速度控制(GLV._上电机, pos);
-                                    //单轴速度控制(GLV._下电机, posX);
+                                    单轴速度控制(GLV._上电机, pos);
+                                    单轴速度控制(GLV._下电机, posX);
 
                                     已执行针数++; 
                                     数据采集.采集(已执行针数);//20240201
@@ -713,7 +710,7 @@ namespace 缝纫机项目
                                 }
                                 else
                                 {
-                                    Task任务.信息输出("检测到回针编码器停下计数"+ 编码器停下后计数);
+                                    //Task任务.信息输出("检测到回针编码器停下计数"+ 编码器停下后计数);
                                     编码器停下后计数++;
                                     Thread.Sleep(50);
                                 }

@@ -827,8 +827,9 @@ namespace 缝纫机项目
             enc2 = 0;
             剪口有列表.Clear();
             剪口无列表.Clear();
+            剪口列表.Clear();
 
-            
+
         }
         /// <summary>
         /// TRUE：剪口正常
@@ -872,7 +873,7 @@ namespace 缝纫机项目
         //}
 
         public double 剪口冷却位置 = 0; // 记录上次剪口编码器位置
-        private const double 剪口冷却阈值 = 10 * 1440; // 设定冷却距离（根据实际情况调整）
+        private const double 剪口冷却阈值 = 8 * 1440; // 设定冷却距离（根据实际情况调整）
         public bool ACT剪口检测(uint num, double num_new)
         {
             数量 = num;
@@ -885,25 +886,23 @@ namespace 缝纫机项目
 
             if (剪口计数 == 0 && num_new > 0)
             {
-                //剪口有列表.Add(enc1);
-                //剪口无列表.Add(enc2);
-                剪口列表.Add(当前位置);
+              
                 剪口计数++;
                 剪口冷却位置 = 当前位置; // 第一次检测到剪口，记录位置并开始冷却
-                Task任务.信息输出(名称 + $"剪口检测：第 {剪口计数} 个剪口，位置：{剪口冷却位置}");
-                //Task任务.信息输出(名称 + "的第" + 剪口计数 + "个剪口剪口位置:" + enc1 + "和" + enc2);
+                剪口列表.Add(剪口冷却位置);
+                Task任务.信息输出(名称 + $"检测：第 {剪口计数} 个剪口，位置：{剪口冷却位置}");
+
                 return true;
             }
 
             if (当前位置 - 剪口冷却位置 > 剪口冷却阈值 && num_new > 0)
             {
-                //剪口有列表.Add(enc1);
-                //剪口无列表.Add(enc2);
-                剪口列表.Add(当前位置);
+
                 剪口计数++;
                 剪口冷却位置 = 当前位置; // 记录本次剪口位置
-                Task任务.信息输出(名称 + $"剪口检测：第 {剪口计数} 个剪口，位置：{剪口冷却位置}");
-                //Task任务.信息输出(名称 + "的第" + 剪口计数 + "个剪口剪口位置:" + enc1 + "和" + enc2);
+                剪口列表.Add(剪口冷却位置);
+                Task任务.信息输出(名称 + $"检测：第 {剪口计数} 个剪口，位置：{剪口冷却位置}");
+  
             }
 
             return true;                      
@@ -915,11 +914,10 @@ namespace 缝纫机项目
             {
                 return -1;
             }
-            int numm = (int)num - 1;
+            int numm = (int)num -1;
             try
             {
-                double x1 = 剪口列表[numm];
-                double re = x1;
+                double re = 剪口列表[numm];
 
                 return re;
             }
