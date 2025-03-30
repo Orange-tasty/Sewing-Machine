@@ -180,5 +180,18 @@ namespace 缝纫机项目
             return -re;
 
         }
+
+        public static double 时间计算(double 缝纫机速度, double 上下差值, double 修正比例)
+        {
+
+            double re = 200/缝纫机速度 * 上下差值 * 修正比例;       
+            if(re > 3000)
+            {
+                re = 3000;
+            }
+            return re;
+            
+
+        }
     }
 }

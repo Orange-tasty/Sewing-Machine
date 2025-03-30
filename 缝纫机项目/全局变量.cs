@@ -873,7 +873,7 @@ namespace 缝纫机项目
         //}
 
         public double 剪口冷却位置 = 0; // 记录上次剪口编码器位置
-        private const double 剪口冷却阈值 = 8 * 1440; // 设定冷却距离（根据实际情况调整）
+        private const double 剪口冷却阈值 = 9 * 1440; // 设定冷却距离（根据实际情况调整）
         public bool ACT剪口检测(uint num, double num_new)
         {
             数量 = num;
