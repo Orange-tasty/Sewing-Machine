@@ -410,6 +410,14 @@ namespace 缝纫机项目
 
         }
 
+        public static double 指令位置清零(ushort card, ushort axis)
+        {
+            double pos = 0;
+            short re = LTSMC.smc_set_position_unit(card, axis, pos);
+            return re;
+
+        }
+
         /// <summary>
         /// 返回轴当前反馈位置
         /// </summary>

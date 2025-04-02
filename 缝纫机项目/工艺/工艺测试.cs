@@ -265,6 +265,7 @@ namespace 缝纫机项目
 
         public bool 对剪口运行 = false;
         public bool 二次对剪口运行 = false;
+        public bool 二次剪口检测 = true;
 
         public static async Task<bool> 等待数据接收(int 超时时间ms)
         {
@@ -417,7 +418,7 @@ namespace 缝纫机项目
                                 double tim = 花费时间();
                                 //Console.WriteLine(tim);
 
-                                double pos = 1400 + 上电机PID.Func(配方_上A.Value, 配方_上B.Value, 配方_上C.Value, 配方_上P.Value, 配方_上I.Value, 配方_上D.Value, 配方_上V.Value - 距离, _上电机速度上限.Value, _上电机速度下限.Value);
+                                double pos = 0.276 * 缝纫机.当前转速() + 上电机PID.Func(配方_上A.Value, 配方_上B.Value, 配方_上C.Value, 配方_上P.Value, 配方_上I.Value, 配方_上D.Value, 距离 - 配方_上V.Value, _上电机速度上限.Value, _上电机速度下限.Value);                                
                                 double posX = 下电机PID.Func(配方_下A.Value, 配方_下B.Value, 配方_下C.Value, 配方_下P.Value, 配方_下I.Value, 配方_下D.Value, 距离X - 配方_下V.Value, _下电机速度上限.Value, _下电机速度下限.Value);
                                 //double pos = 上电机PID.Func(配方_上A.Value, 配方_上B.Value, 配方_上C.Value, 配方_上P.Value, 配方_上I.Value, 配方_上D.Value, 当前电压 - 配方_上V.Value, _上电机速度上限.Value, _上电机速度下限.Value);
                                 //double posX = 下电机PID.Func(配方_下A.Value, 配方_下B.Value, 配方_下C.Value, 配方_下P.Value, 配方_下I.Value, 配方_下D.Value, 当前电压X - 配方_下V.Value, _下电机速度上限.Value, _下电机速度下限.Value);
@@ -502,6 +503,7 @@ namespace 缝纫机项目
                                     {                                      
                                         if (!对剪口运行)
                                         {
+                                            二次剪口检测 = false;
                                             对剪口运行 = true;
 
 
@@ -524,11 +526,12 @@ namespace 缝纫机项目
                                             else
                                             {
                                                 t2 = 剪口电机速度.时间计算(缝纫机.当前转速(), -差值, 1);
+                                                单轴位置控制(GLV._下剪口电机, t2, 差值);
                                                 //vel1 = 剪口电机速度.速度计算(配方_上剪口电机基础速度.Value, 配方_上剪口缝纫机修正比例.Value, 缝纫机.当前转速(), 差值, 配方_上剪口差修正比例.Value, 配方_上剪口差基本值.Value, _上剪口电机速度上限.Value, _上剪口电机速度下限.Value);
                                                 //vel2 = 剪口电机速度.速度计算(配方_下剪口电机基础速度.Value, 配方_下剪口缝纫机修正比例.Value, 缝纫机.当前转速(), 0, 配方_下剪口差修正比例.Value, 配方_下剪口差基本值.Value, _下剪口电机速度上限.Value, _下剪口电机速度下限.Value);
                                             }
 
-                                            //单轴位置控制(GLV._下剪口电机, t2, 差值);
+                                            
 
                                             //double pos = 上电机PID.Func(配方_上A.Value, 配方_上B.Value, 配方_上C.Value, 配方_上P.Value, 配方_上I.Value, 配方_上D.Value, 距离 - 配方_上Dis, _上电机速度上限.Value, _上电机速度下限.Value);
                                             //double posX = 下电机PID.Func(配方_下A.Value, 配方_下B.Value, 配方_下C.Value, 配方_下P.Value, 配方_下I.Value, 配方_下D.Value, 距离X - 配方_下V.Value, _下电机速度上限.Value, _下电机速度下限.Value)
@@ -539,51 +542,54 @@ namespace 缝纫机项目
                                             //Task任务.信息输出("第" + 上剪口.剪口计数 + "个剪口的上下差值:" + 差值 + "。此时上剪口电机速度改为:" + vel1 + " ,下剪口电机速度改为:" + vel2);
                                             Task任务.信息输出("第" + 上剪口.剪口计数 + "个剪口的上下差值:" + 差值 + "。要压下的时间为:" + (int)t2 + " ms");
                                         }
-
-                                        bool dre1 = 二次上剪口.ACT剪口检测((uint)配方_上剪口数量.Value, 二次剪口数);
-                                        bool dre2 = 二次下剪口.ACT剪口检测((uint)配方_下剪口数量.Value, 二次剪口数X);
-                                        if (二次上剪口.剪口计数 == 二次下剪口.剪口计数 && 二次上剪口.剪口计数 > 0)
+                                        if (!二次剪口检测)
                                         {
-                                            if (!二次对剪口运行)
+                                            bool dre1 = 二次上剪口.ACT剪口检测((uint)配方_上剪口数量.Value, 二次剪口数);
+                                            bool dre2 = 二次下剪口.ACT剪口检测((uint)配方_下剪口数量.Value, 二次剪口数X);
+                                            if (二次上剪口.剪口计数 == 二次下剪口.剪口计数 && 二次上剪口.剪口计数 > 0)
                                             {
-                                                二次对剪口运行 = true;
-
-                                                double 差值 = 二次上剪口.ACT剪口位置获取(二次上剪口.剪口计数) - 二次下剪口.ACT剪口位置获取(二次下剪口.剪口计数);
-
-                                                double t1 = 0;
-                                                double t2 = 0;
-
-                                                if (差值 >= 0)
+                                                if (!二次对剪口运行)
                                                 {
+                                                    二次对剪口运行 = true;
+
+                                                    double 差值 = 二次上剪口.ACT剪口位置获取(二次上剪口.剪口计数) - 二次下剪口.ACT剪口位置获取(二次下剪口.剪口计数);
+
+                                                    double t1 = 0;
+                                                    double t2 = 0;
+
+                                                    if (差值 >= 0)
+                                                    {
+
+
+                                                    }
+                                                    else
+                                                    {
+                                                        //t2 = 剪口电机速度.时间计算(缝纫机.当前转速(), -差值, 1);          
+                                                    }
+                                                    Task任务.信息输出("修改后的差值为" + 差值.ToString());
+                                                    //Task任务.信息输出("t2=" + t2.ToString());
+                                                    //单轴位置控制(GLV._下剪口电机, t2);
 
 
                                                 }
-                                                else
-                                                {
-                                                    //t2 = 剪口电机速度.时间计算(缝纫机.当前转速(), -差值, 1);          
-                                                }
-                                                Task任务.信息输出("修改后的差值为" + 差值.ToString());
-                                                //Task任务.信息输出("t2=" + t2.ToString());
-                                                //单轴位置控制(GLV._下剪口电机, t2);
-                                                
-
+                                            }
+                                            else
+                                            {
+                                                二次对剪口运行 = false;
                                             }
                                         }
+                                            
+
+                                        }                                   
                                         else
                                         {
-                                            二次对剪口运行 = false;
+                                            double vel1 = 剪口电机速度.速度计算(配方_上剪口电机基础速度.Value, 配方_上剪口缝纫机修正比例.Value, 缝纫机.当前转速(), 0, 配方_上剪口差修正比例.Value, 配方_上剪口差基本值.Value, _上剪口电机速度上限.Value, _上剪口电机速度下限.Value);
+                                            //double vel2 = 剪口电机速度.速度计算(配方_下剪口电机基础速度.Value, 配方_下剪口缝纫机修正比例.Value, 缝纫机.当前转速(), 0, 配方_下剪口差修正比例.Value, 配方_下剪口差基本值.Value, _下剪口电机速度上限.Value, _下剪口电机速度下限.Value);
+                                            单轴速度控制(GLV._上剪口电机, vel1);
+                                            //单轴速度控制(GLV._下剪口电机, vel2);
+                                            对剪口运行 = false;
                                         }
-
-                                    }                                   
-                                    else
-                                    {
-                                        double vel1 = 剪口电机速度.速度计算(配方_上剪口电机基础速度.Value, 配方_上剪口缝纫机修正比例.Value, 缝纫机.当前转速(), 0, 配方_上剪口差修正比例.Value, 配方_上剪口差基本值.Value, _上剪口电机速度上限.Value, _上剪口电机速度下限.Value);
-                                        //double vel2 = 剪口电机速度.速度计算(配方_下剪口电机基础速度.Value, 配方_下剪口缝纫机修正比例.Value, 缝纫机.当前转速(), 0, 配方_下剪口差修正比例.Value, 配方_下剪口差基本值.Value, _下剪口电机速度上限.Value, _下剪口电机速度下限.Value);
-                                        单轴速度控制(GLV._上剪口电机, vel1);
-                                        //单轴速度控制(GLV._下剪口电机, vel2);
-                                        对剪口运行 = false;
                                     }
-                                }
                                 else    //对剪口使能始终为true,不会进
                                 {
                                     //double vel1 = 剪口电机速度.速度计算(配方_上剪口电机基础速度.Value, 配方_上剪口缝纫机修正比例.Value, 缝纫机.当前转速(), 0, 配方_上剪口差修正比例.Value, 配方_上剪口差基本值.Value, _上剪口电机速度上限.Value, _上剪口电机速度下限.Value);
@@ -596,7 +602,8 @@ namespace 缝纫机项目
                                 当前编码器位置 = 运动控制.反馈位置(0, GLV._缝纫机编码器);
                                 if (当前编码器位置 >= _缝纫机编码器细分.Value * 已执行针数)
                                 {
-                                    double pos = 1400 + 上电机PID.Func(配方_上A.Value, 配方_上B.Value, 配方_上C.Value, 配方_上P.Value, 配方_上I.Value, 配方_上D.Value, 配方_上V.Value - 距离, _上电机速度上限.Value, _上电机速度下限.Value);
+                                    //double pos = 上电机PID.Func(配方_上A.Value, 配方_上B.Value, 配方_上C.Value, 配方_上P.Value, 配方_上I.Value, 配方_上D.Value, 配方_上V.Value - 距离, _上电机速度上限.Value, _上电机速度下限.Value);
+                                    double pos = 0.276 * 缝纫机.当前转速() + 上电机PID.Func(配方_上A.Value, 配方_上B.Value, 配方_上C.Value, 配方_上P.Value, 配方_上I.Value, 配方_上D.Value, 距离 - 配方_上V.Value, _上电机速度上限.Value, _上电机速度下限.Value);
                                     double posX = 下电机PID.Func(配方_下A.Value, 配方_下B.Value, 配方_下C.Value, 配方_下P.Value, 配方_下I.Value, 配方_下D.Value, 距离X - 配方_下V.Value, _下电机速度上限.Value, _下电机速度下限.Value);
                                     //double pos = 上电机PID.Func(配方_上A.Value, 配方_上B.Value, 配方_上C.Value, 配方_上P.Value, 配方_上I.Value, 配方_上D.Value, 当前电压 - 配方_上V.Value, _上电机速度上限.Value, _上电机速度下限.Value);
                                     //double posX = 下电机PID.Func(配方_下A.Value, 配方_下B.Value, 配方_下C.Value, 配方_下P.Value, 配方_下I.Value, 配方_下D.Value, 当前电压X - 配方_下V.Value, _下电机速度上限.Value, _下电机速度下限.Value);
@@ -621,6 +628,8 @@ namespace 缝纫机项目
                                 step = (ushort)STEP.缝纫机进入尾针;
 
                                 对剪口运行 = false;
+                                二次对剪口运行 = false;
+                                二次剪口检测 = true;
                             }
 
 
@@ -663,16 +672,13 @@ namespace 缝纫机项目
                                 数据采集.输出();//20240201
 
                                 step = (ushort)STEP.气缸动作2;
-                                
+                                  
                             }
 
 
                             //step = 4;
                             break;
                         case (ushort)STEP.气缸动作2:
-
-
-
                             /////////////////////////////////////////////////////////////信息输出
                             //string[] msg = new string[GLV._分析信息列表.Count];
                             //for (int i = 0; i < GLV._分析信息列表.Count; i++)
@@ -729,7 +735,6 @@ namespace 缝纫机项目
                             编码器停下后计数 = 0;
                             step = (ushort)STEP.缝纫机回针动作;
 
-
                             break;
 
                         case (ushort)STEP.缝纫机回针动作:
@@ -756,20 +761,13 @@ namespace 缝纫机项目
                             {
                                 编码器停下后计数 = 0;
 
-                             
-
                             }
                             
 
                             break;
                         case (ushort)STEP.缝纫机回针等待:
-
-
-                           
                             Thread.Sleep(200);
                             step = (ushort)STEP.缝纫机回针完成;
-
-                           
 
                             break;
 
@@ -780,13 +778,10 @@ namespace 缝纫机项目
 
                             Thread.Sleep((int)_直线气缸回位延时.Value);
 
-
                             step = (ushort)STEP.结束;
                             break;
 
                         case (ushort)STEP.结束:
-
-                            
                             Task任务.信息输出("缝纫机动作完成");
 
                             MainProgram._程序状态 = 6;
@@ -795,8 +790,6 @@ namespace 缝纫机项目
 
 
                         default:
-
-
                             Task任务.系统输出("缝纫机工艺跳转异常:" + step + ",请停机检查");
                             break;
                     }
@@ -1075,7 +1068,7 @@ namespace 缝纫机项目
             {
                 if(差值 > 1440 || 差值 < -1440)
                 {
-                    运动控制.点位运动(0, 轴号, 8000, 0.02, 1700, 1);
+                    运动控制.点位运动(0, 轴号, 8000, 0.02, -1000, 1);
                     await Task.Delay((int)时间);  // 异步延迟，不阻塞主线程
                     运动控制.点位运动(0, 轴号, 8000, 0.02, 0, 1);
                 }             
