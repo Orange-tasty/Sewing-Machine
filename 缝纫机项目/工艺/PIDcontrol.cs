@@ -8,6 +8,7 @@ using MathNet.Numerics;
 
 namespace 缝纫机项目
 {
+
     internal class PIDcontrol
     {
         //public static double X = 0;
@@ -48,8 +49,53 @@ namespace 缝纫机项目
 
     }
 
+    public class PIDCon
+    {
+        public double bios = 0;
+        public double last_bios = 0;
+        double value = 0;
+        public void Start()
+        {
+            bios = 0;
+            last_bios = 0;
+            value = 0;
+        }
 
-    public class PIDtest
+
+        public double PICal(double Kp, double Ki, double N, double maxvel, double minvel)
+        {
+
+            //20250408增加缝纫机转速pid
+            //kp
+            bios = N;
+            double reKp = Kp * (bios - last_bios);
+             
+            //ki
+            double reKi = Ki * bios;
+
+            last_bios = reKp;
+
+            value += 0.0015 * (reKp + reKi) + 2.2698;
+            //Task任务.信息输出("value is" + value.ToString());
+            value = CheckVel(value, maxvel, minvel);
+            //Task任务.信息输出("value_last is" + value.ToString());
+            return value;
+        }
+        private double CheckVel(double value, double maxvalue, double minvalue)
+        {
+            if (value > maxvalue)
+            {
+                return maxvalue;
+            }
+            if (value < minvalue)
+            {
+                return minvalue;
+            }
+            return value;
+        }
+    }
+
+        public class PIDtest
     {
         //A+B*x^C
         public double K = 0;

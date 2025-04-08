@@ -250,6 +250,7 @@ namespace 缝纫机项目
         public static PIDtest 上电机PID = new PIDtest();
         public static PIDtest 下电机PID = new PIDtest();
 
+        public static PIDCon 缝纫机转速PID = new PIDCon();
         public static void GGG()
         {
             //MainProgram.TH上电机速度调节.Init(配方_V, 配方_A1, 配方_B1, 配方_C1, 配方_A2, 配方_B2, 配方_C2, 配方_A3, 配方_B3, 配方_C3);
@@ -364,8 +365,12 @@ namespace 缝纫机项目
                             已执行针数 = 0;
 
                             step = (ushort)STEP.缝纫机启动;
-                            //20240723，把缝纫机启动放到这个步骤中
-                            缝纫机.控制(缝纫机转速标定.已知转速求电压(_缝纫机初始工作转速.Value));
+
+                            double sewing_V = 缝纫机转速PID.PICal(0.7, 0.3, _缝纫机初始工作转速.Value, 5, 0);
+                            缝纫机.控制(sewing_V);
+
+                            ////20240723，把缝纫机启动放到这个步骤中
+                            //缝纫机.控制(缝纫机转速标定.已知转速求电压(_缝纫机初始工作转速.Value));
 
 
                             Task任务.信息输出("缝纫机启动,转速:"+ _缝纫机初始工作转速+",电压:"+ 缝纫机转速标定.已知转速求电压(_缝纫机初始工作转速.Value));
@@ -463,6 +468,8 @@ namespace 缝纫机项目
 
                             if (已执行针数 < (目标针数 - 配方_尾针数.Value))
                             {
+                                DateTime 上次时间 = DateTime.Now;
+                                double 上次位置 = 运动控制.反馈位置(0, GLV._缝纫机编码器);
                                 if (_发送功能使能.Value == 1)
                                 {
                                     VM通讯.客户端.m_x = null;
@@ -598,7 +605,8 @@ namespace 缝纫机项目
                                     //单轴速度控制(GLV._下剪口电机, vel2);
                                 }
                                 ///////////////20240108///////////////////
-
+                          
+                                
                                 当前编码器位置 = 运动控制.反馈位置(0, GLV._缝纫机编码器);
                                 if (当前编码器位置 >= _缝纫机编码器细分.Value * 已执行针数)
                                 {
@@ -620,7 +628,13 @@ namespace 缝纫机项目
 
                                     数据采集.采集(已执行针数);//20240201
                                 }
-                                //20240201曲线记录
+                                DateTime 当前时间 = DateTime.Now;
+                                double 当前位置 = 运动控制.反馈位置(0, GLV._缝纫机编码器);
+                                double dt = (当前时间 - 上次时间).TotalSeconds;
+                                double sewing_vel = (当前位置 - 上次位置) / dt;
+                                sewing_V = 缝纫机转速PID.PICal(0.7, 0.3, sewing_vel - _缝纫机初始工作转速.Value, 5, 0);
+                                缝纫机.控制(sewing_V);
+                                Task任务.信息输出("时间差" + dt.ToString());
                             }
                             else
                             {
@@ -631,7 +645,7 @@ namespace 缝纫机项目
                                 二次对剪口运行 = false;
                                 二次剪口检测 = true;
                             }
-
+                            
 
                             //step = 3;
 

@@ -28,6 +28,7 @@ namespace 缝纫机项目
         public double testV2 = 0;
 
         public ushort step = 0;
+
         public enum STEP
         {
             默认,
@@ -39,9 +40,22 @@ namespace 缝纫机项目
             等待二次,
             结束二次标定,
             计算二次标定结果,
-            结束
+            结束,
+
+            启动闭环,
+            闭环运行,
+            闭环结束
 
         }
+
+        //public enum STEP
+        //{
+        //    默认,
+        //    启动闭环,
+        //    闭环运行,
+        //    闭环结束
+        //}
+
         public void 工艺流程()
         {
 
@@ -54,7 +68,6 @@ namespace 缝纫机项目
                         case (ushort)STEP.默认:
 
                             break;
-
 
                         case (ushort)STEP.启动一次标定:
 
