@@ -67,32 +67,21 @@ namespace 缝纫机项目
 
             //20250408增加缝纫机转速pid
             //kp
-            bios = N;
+            bios = N / 100;
             double reKp = Kp * (bios - last_bios);
              
             //ki
             double reKi = Ki * bios;
 
-            last_bios = reKp;
+            last_bios = bios;
 
-            value += 0.0015 * (reKp + reKi) + 2.2698;
+            value += (reKp + reKi);
             //Task任务.信息输出("value is" + value.ToString());
-            value = CheckVel(value, maxvel, minvel);
+            value = Math.Max(Math.Min(value, maxvel), minvel);
             //Task任务.信息输出("value_last is" + value.ToString());
             return value;
         }
-        private double CheckVel(double value, double maxvalue, double minvalue)
-        {
-            if (value > maxvalue)
-            {
-                return maxvalue;
-            }
-            if (value < minvalue)
-            {
-                return minvalue;
-            }
-            return value;
-        }
+
     }
 
         public class PIDtest

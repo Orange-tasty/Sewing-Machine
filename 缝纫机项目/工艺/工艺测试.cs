@@ -243,6 +243,8 @@ namespace 缝纫机项目
 
         public static S系统参数 _发送功能使能 = new S系统参数("发送功能使能", "NULL", 1, "选择", "choose", GLV._参数类型_系统参数, (ushort)用户.权限选择.中级权限, "0:关闭/1:开启", "NULL");
 
+        public static S系统参数 _调速功能使能 = new S系统参数("发送功能使能", "NULL", 1, "选择", "choose", GLV._参数类型_系统参数, (ushort)用户.权限选择.中级权限, "0:关闭/1:开启", "NULL");
+
         public static S系统参数 _PID的KI累计 = new S系统参数("PID的KI累计", "NULL", 20, "个数", "num", GLV._参数类型_系统参数, (ushort)用户.权限选择.高级权限);
 
         public static S系统参数 _PID的延迟针数 = new S系统参数("PID的延迟针数", "NULL", 5, "个数", "num", GLV._参数类型_系统参数, (ushort)用户.权限选择.高级权限);
@@ -267,6 +269,36 @@ namespace 缝纫机项目
         public bool 对剪口运行 = false;
         public bool 二次对剪口运行 = false;
         public bool 二次剪口检测 = true;
+        DateTime 上次时间;
+        public double 上次位置;
+        public bool isFirst = true;
+
+        public double 更新速度(double 当前位置)
+        {
+            DateTime 当前时间 = DateTime.Now;
+
+            if (isFirst)
+            {
+                上次时间 = 当前时间;
+                上次位置 = 当前位置;
+                isFirst = false;
+                return 0; // 第一次不输出控制
+            }
+
+            double dt = (当前时间 - 上次时间).TotalSeconds;
+            if (dt < 0.001) dt = 0.001; // 防止dt过小
+
+            double sewing_vel = (当前位置 - 上次位置) / _缝纫机编码器细分.Value / dt * 60;
+            Task任务.信息输出("缝纫机启动,转速:" + sewing_vel.ToString());
+            //double 输出 = 缝纫机转速PID.PICal(0.7, 0.3, 缝纫机初始工作转速.Value - sewing_vel, 5, 0);
+            double 输出 = 缝纫机转速PID.PICal(0.7, 0.3, 200 - sewing_vel, 5, 0);
+
+            // 更新
+            上次时间 = 当前时间;
+            上次位置 = 当前位置;
+
+            return 输出;
+        }
 
         public static async Task<bool> 等待数据接收(int 超时时间ms)
         {
@@ -464,12 +496,20 @@ namespace 缝纫机项目
                             ////pos = PIDtest.Func(配方_上A.Value, 配方_上B.Value, 配方_上C.Value, 配方_上P.Value, 配方_上I.Value, 配方_上D.Value, 当前电压 - 配方_上V.Value, _上电机速度上限.Value, _上电机速度下限.Value);
 
                             //当前电压X = 模拟量.输入(0, GLV._下传感器);
-                            //posX = PIDtest.Func(配方_下A.Value, 配方_下B.Value, 配方_下C.Value, 配方_下P.Value, 配方_下I.Value, 配方_下D.Value, 当前电压X - 配方_下V.Value, _下电机速度上限.Value, _下电机速度下限.Value);
+                            //posX = PIDtest.Func(配方_下A.Value, 配方_下B.Value, 配方_下C.Value, 配方_下P.Value, 配方_下I.Value, 配方_下D.Value, 当前电压X - 配方_下V.Value, _下电机速度上限.Value, _下电机速度下限.Value);                           
+
 
                             if (已执行针数 < (目标针数 - 配方_尾针数.Value))
                             {
-                                DateTime 上次时间 = DateTime.Now;
-                                double 上次位置 = 运动控制.反馈位置(0, GLV._缝纫机编码器);
+                                if (_调速功能使能.Value == 1)
+                                {
+                                    double 当前位置 = 运动控制.反馈位置(0, GLV._缝纫机编码器);
+                                    double sv = 更新速度(当前位置);
+                                    if (sv != 0) 缝纫机.控制(sv);
+                                    Task任务.信息输出("当前电压为" + sv.ToString());
+                                    _调速功能使能.Value = 0;
+                                }
+
                                 if (_发送功能使能.Value == 1)
                                 {
                                     VM通讯.客户端.m_x = null;
@@ -625,16 +665,11 @@ namespace 缝纫机项目
                                     已执行针数++;
 
                                     _发送功能使能.Value = 1;
+                                    _调速功能使能.Value = 1;
 
                                     数据采集.采集(已执行针数);//20240201
                                 }
-                                DateTime 当前时间 = DateTime.Now;
-                                double 当前位置 = 运动控制.反馈位置(0, GLV._缝纫机编码器);
-                                double dt = (当前时间 - 上次时间).TotalSeconds;
-                                double sewing_vel = (当前位置 - 上次位置) / dt;
-                                sewing_V = 缝纫机转速PID.PICal(0.7, 0.3, sewing_vel - _缝纫机初始工作转速.Value, 5, 0);
-                                缝纫机.控制(sewing_V);
-                                Task任务.信息输出("时间差" + dt.ToString());
+
                             }
                             else
                             {
@@ -676,8 +711,8 @@ namespace 缝纫机项目
                             {
                                 工艺测试.上剪口.ACT清除();//20240108
                                 工艺测试.下剪口.ACT清除();//20240108
-                                工艺测试.二次上剪口.ACT清除();//20240108
-                                工艺测试.二次下剪口.ACT清除();//20240108
+                                工艺测试.二次上剪口.ACT清除();
+                                工艺测试.二次下剪口.ACT清除();
 
 
                                 运动控制.轴全部停止(0);//20230522
