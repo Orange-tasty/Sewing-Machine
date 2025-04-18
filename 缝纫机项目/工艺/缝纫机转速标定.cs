@@ -99,8 +99,6 @@ namespace 缝纫机项目
 
                             break;
 
-
-
                         case (ushort)STEP.启动二次标定:
 
                             运动控制.反馈位置清零(0, GLV._缝纫机编码器);

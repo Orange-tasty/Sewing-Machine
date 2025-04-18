@@ -185,9 +185,13 @@ namespace 缝纫机项目
         {
 
             double re = 200/缝纫机速度 * 上下差值 * 修正比例;       
-            if(re > 3000)
+            if(re >= 3000)
             {
                 re = 3000;
+            }
+            if(re < 1000)
+            {
+                re = 1000;
             }
             return re;
             

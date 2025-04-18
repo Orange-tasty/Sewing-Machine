@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Sockets;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -41,17 +42,24 @@ namespace 缝纫机项目
             string[] parts = message.Split(';');
 
             //if (parts.Length != 6)
+            //{
+            //    Task任务.信息输出("VM识别失败");
+            //}
+
             //    throw new FormatException("输入格式错误，应包含六个值（d1;d2;n1;d3;d4;n2）");
+            //else
+            //{
+                double.TryParse(parts[0], out double d1);
+                int.TryParse(parts[1], out int n1);
+                int.TryParse(parts[2], out int n2);
+                double.TryParse(parts[3], out double d2);
+                int.TryParse(parts[4], out int n3);
+                int.TryParse(parts[5], out int n4);
 
-            double.TryParse(parts[0], out double d1);
-            int.TryParse(parts[1], out int n1);
-            int.TryParse(parts[2], out int n2);
-            double.TryParse(parts[3], out double d2);
-            int.TryParse(parts[4], out int n3);
-            int.TryParse(parts[5], out int n4);
 
-
-            return (d1, n1, n2, d2, n3, n4);
+                return (d1, n1, n2, d2, n3, n4);
+            //}
+            
         }
 
         //public static (double 平均距离1, int 数量1) 接收信息拆解(string message)
