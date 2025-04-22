@@ -283,11 +283,11 @@ namespace 缝纫机项目
             return false;
         }
 
-
         private Stopwatch stopwatch = new Stopwatch();
+        //wwwwwww
+        private (double 平均距离1, int 数量1, int 数量2, double 平均距离2, int 数量3, int 数量4) _lastData = (0, 0, 0, 0, 0, 0);
 
-        private (double 平均距离1, int 数量1, int 数量2, double 平均距离2, int 数量3, int 数量4) _lastData
-    = (0, 0, 0, 0, 0, 0);
+
 
         public enum STEP
         {
@@ -416,7 +416,7 @@ namespace 缝纫机项目
                             当前编码器位置 = 运动控制.反馈位置(0, GLV._缝纫机编码器);
                             if (当前编码器位置 >= _初次下针时编码器位置.Value)
                             {
-                                stopwatch.Start();
+                                TimerDispos.CreateAndStartTimer();
                                 VM通讯.客户端.m_x = null;
                                 VM通讯.发送("snap");
                                 bool 是否收到数据 = await 等待数据接收(120); 
@@ -515,7 +515,7 @@ namespace 缝纫机项目
                                         剪口数X = data.数量3;
                                         二次剪口数 = data.数量2;
                                         二次剪口数X = data.数量4;
-                                        //距离 = 测量值.距离(VM通讯.客户端.m_x);
+                                        //距离 = 测量值.距离(VM通讯.客户端wwd.m_x);
                                         //剪口数 = 测量值.剪口数(VM通讯.客户端.m_x);
                                         //距离X = 测量值.距离X(VM通讯.客户端.m_x);
                                         //剪口数X = 测量值.剪口数X(VM通讯.客户端.m_x);
