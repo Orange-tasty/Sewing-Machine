@@ -43,7 +43,7 @@ namespace 缝纫机项目
 
                         case (ushort)STEP.压脚回零:
                             Task任务.信息输出("复位动作" + step);
-                            ACT压脚回零();
+                            //ACT压脚回零();
                             step = (ushort)STEP.气缸回初始位置;
                             break;
 

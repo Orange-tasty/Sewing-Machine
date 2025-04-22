@@ -62,23 +62,29 @@ namespace 缝纫机项目
             
         }
 
-        //public static (double 平均距离1, int 数量1) 接收信息拆解(string message)
-        //{
+        public static bool 接收信息拆解Try(string message,
+            out (double 平均距离1, int 数量1, int 数量2, double 平均距离2, int 数量3, int 数量4) result)
+        {
+            result = default;
+            if (string.IsNullOrWhiteSpace(message))
+                return false;
 
-        //    string[] parts = message.Split(';');
+            var parts = message.Split(';');
+            if (parts.Length != 6)
+                return false;
 
-        //    double.TryParse(parts[0], out double d1);
-        //    double.TryParse(parts[1], out double d2);
-        //    int.TryParse(parts[2], out int n1);
-        //    //double.TryParse(parts[3], out double d3);
-        //    //double.TryParse(parts[4], out double d4);
-        //    //int.TryParse(parts[5], out int n2);
-
-        //    double 平均距离1 = (d1 + d2) / 2;
-        //    //double 平均距离2 = (d3 + d4) / 2;
-
-        //    return (平均距离1, n1);
-        //}
+            if (!double.TryParse(parts[0], out double d1) ||
+                !int.TryParse(parts[1], out int n1) ||
+                !int.TryParse(parts[2], out int n2) ||
+                !double.TryParse(parts[3], out double d2) ||
+                !int.TryParse(parts[4], out int n3) ||
+                !int.TryParse(parts[5], out int n4))
+            {
+                return false;
+            }
+            result =  (d1, n1, n2, d2, n3, n4);
+            return true;
+        }
 
         public static void 发送(string str)
         {

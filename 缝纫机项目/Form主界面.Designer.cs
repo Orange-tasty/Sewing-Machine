@@ -77,6 +77,7 @@
             this.Send = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.timer2 = new System.Windows.Forms.Timer(this.components);
+            this.button5 = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
@@ -534,11 +535,22 @@
             // 
             this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
             // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(290, 719);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(89, 35);
+            this.button5.TabIndex = 26;
+            this.button5.Text = "剪线";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
             // Form主界面
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1232, 790);
+            this.Controls.Add(this.button5);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.Send);
             this.Controls.Add(this.button4);
@@ -621,6 +633,7 @@
         private System.Windows.Forms.Button Send;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Timer timer2;
+        private System.Windows.Forms.Button button5;
     }
 }
 

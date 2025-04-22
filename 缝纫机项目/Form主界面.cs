@@ -17,6 +17,7 @@ using System.Windows.Forms.DataVisualization.Charting;
 using NPOI.OpenXmlFormats.Spreadsheet;
 using NPOI.SS.Formula.Functions;
 using System.Drawing.Imaging;
+using System.Diagnostics;
 
 namespace 缝纫机项目
 {
@@ -670,24 +671,54 @@ namespace 缝纫机项目
             //    gg1 = true; gg2 = true; gg3 = false;
             //}
         }
-
+        //    private (double 平均距离1, int 数量1, int 数量2, double 平均距离2, int 数量3, int 数量4) _lastData
+        //= (0, 0, 0, 0, 0, 0);
+        private Stopwatch stopwatch = new Stopwatch();
+        public double 编码器位置 = 0;
         private async void Send_ClickAsync(object sender, EventArgs e)
         {
+            运动控制.反馈位置清零(0, GLV._下剪口电机);
+            //stopwatch.Start();
             VM通讯.客户端.m_x = null;
             VM通讯.发送("snap");
             bool 是否收到数据 = await 工艺测试.等待数据接收(80);
             if (是否收到数据)
             {
-                工艺测试.距离 = 测量值.距离(VM通讯.客户端.m_x);
-                工艺测试.距离X = 测量值.距离X(VM通讯.客户端.m_x);
+                if (VM通讯.接收信息拆解Try(VM通讯.客户端.m_x, out var data))
+                {   
+                    工艺测试.距离 = data.平均距离1;
+                    工艺测试.距离X = data.平均距离2;
+                }
+                else
+                {
+                    Task任务.信息输出("超时");
+                }
             }
-            else
-            {
-                Task任务.信息输出("超时");
-            }
-            运动控制.点位运动(0, 3, 8000, 0.02, -1000, 1);
-            Delay((int)2000);
-            运动控制.点位运动(0, 3, 8000, 0.02, 0, 1);
+            //运动控制.定速运动(0, GLV._上电机, 1000, 0.02, 1);
+            //stopwatch.Stop();
+            //long mSeconds = stopwatch.ElapsedMilliseconds;
+            //stopwatch.Reset();
+            //Task任务.信息输出("C#发送信息到电机响应约为" + mSeconds.ToString() + "ms");
+            //for (int i = 0; i < 1000; i++)
+            //{
+            //    编码器位置 = 运动控制.反馈位置(0, GLV._下剪口电机);
+            //    Task任务.信息输出(编码器位置.ToString());
+            //    //Thread.Sleep(1);
+            //    if (编码器位置 >= 1)
+            //    {
+            //        stopwatch.Stop();
+            //        运动控制.单轴停止(0, GLV._上电机);
+
+            //        long mSeconds = stopwatch.ElapsedMilliseconds;
+            //        stopwatch.Reset();
+            //        Task任务.信息输出("C#发送信息到电机响应约为" + mSeconds.ToString() + "ms");
+            //        break;
+            //    }
+            //}
+
+            //运动控制.点位运动(0, 3, 8000, 0.02, -1000, 1);
+            //Delay((int)2000);
+            //运动控制.点位运动(0, 3, 8000, 0.02, 0, 1);
 
             //VM通讯.发送("abc");
 
@@ -749,6 +780,13 @@ namespace 缝纫机项目
         private void timer2_Tick(object sender, EventArgs e)
         {
 
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            模拟量.输出(0, GLV._缝纫机控制, 1.9);
+            Thread.Sleep(500);
+            模拟量.输出(0, GLV._缝纫机控制, 0);
         }
 
         private void KHDread(string str)//客户端接收委托关联方法
