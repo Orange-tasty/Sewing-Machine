@@ -62,8 +62,7 @@ namespace 缝纫机项目
             
         }
 
-        public static bool 接收信息拆解Try(string message,
-            out (double 平均距离1, int 数量1, int 数量2, double 平均距离2, int 数量3, int 数量4) result)
+        public static bool 接收信息拆解Try(string message,out (double 平均距离1, int 数量1, int 数量2, double 平均距离2, int 数量3, int 数量4) result)
         {
             result = default;
             if (string.IsNullOrWhiteSpace(message))

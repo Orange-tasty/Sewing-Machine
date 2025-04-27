@@ -267,24 +267,24 @@ namespace 缝纫机项目
         public bool 二次对剪口运行 = false;
         public bool 二次剪口检测 = true;
 
-        public static async Task<bool> 等待数据接收(int 超时时间ms)
-        {
-            Stopwatch 计时器 = Stopwatch.StartNew();
-            int 检测间隔 = 5;
+        //public static async Task<bool> 等待数据接收(int 超时时间ms)
+        //{
+        //    Stopwatch 计时器 = Stopwatch.StartNew();
+        //    int 检测间隔 = 5;
 
-            while (计时器.Elapsed.TotalMilliseconds < 超时时间ms)
-            {
-                if (Volatile.Read(ref VM通讯.客户端.m_x) != null)
-                {
-                    return true;
-                }
-                await Task.Delay(检测间隔);
-            }
-            return false;
-        }
+        //    while (计时器.Elapsed.TotalMilliseconds < 超时时间ms)
+        //    {
+        //        if (Volatile.Read(ref VM通讯.客户端.m_x) != null)
+        //        {
+        //            return true;
+        //        }
+        //        await Task.Delay(检测间隔);
+        //    }
+        //    return false;
+        //}
 
         private Stopwatch stopwatch = new Stopwatch();
-        //wwwwwww
+        // 
         private (double 平均距离1, int 数量1, int 数量2, double 平均距离2, int 数量3, int 数量4) _lastData = (0, 0, 0, 0, 0, 0);
 
 
@@ -311,11 +311,19 @@ namespace 缝纫机项目
 
         public static void Delay(int milliSecond)
         {
-            int start = Environment.TickCount;
-            while (Math.Abs(Environment.TickCount - start) < milliSecond)
+            //int start = Environment.TickCount;
+            //while (Math.Abs(Environment.TickCount - start) < milliSecond)
+            //{
+            //    Application.DoEvents();
+            //}
+
+            var sw = System.Diagnostics.Stopwatch.StartNew();
+            while (sw.Elapsed.TotalMilliseconds < milliSecond)
             {
-                Application.DoEvents();
+                // 可选：降低CPU占用
+                Thread.SpinWait(100);
             }
+
         }
 
         public async void 工艺流程()
@@ -329,11 +337,9 @@ namespace 缝纫机项目
                     switch (step)
                     {
                         case (ushort)STEP.默认:
-
                             break;
 
                         case (ushort)STEP.编码器位置清零:
-
                             Task任务.信息输出("启动！");
 
                             运动控制.反馈位置清零(0, GLV._缝纫机编码器);
@@ -342,23 +348,19 @@ namespace 缝纫机项目
                             step = (ushort)STEP.缝纫机初始化;
                             break;
 
-
                         case (ushort)STEP.缝纫机初始化:
-
                             Task任务.信息输出("缝纫机初始化");
                             缝纫机.待机();
                             step = (ushort)STEP.开始回针动作;
                             break;
 
                         case (ushort)STEP.开始回针动作:
-
-                            
                             缝纫机.控制(缝纫机转速标定.已知转速求电压(_缝纫机初始工作转速.Value));
                             double 当前编码器位置 = 运动控制.反馈位置(0, GLV._缝纫机编码器);
                             if (当前编码器位置 >= _缝纫机编码器细分.Value * 已执行针数)
                             { 
                                 已执行针数++;
-                                //数据采集.采集(已执行针数);//20240201
+                                //数据采集.采集(已执行针数);   //20240201
                             }
                             if(已执行针数 >= 5)
                             {
@@ -370,8 +372,6 @@ namespace 缝纫机项目
                             break;
 
                         case (ushort)STEP.气缸动作1:
-
-
                             Task任务.信息输出("气缸动作");
                             IO控制.OUT(0, GLV._上拐弯电机气缸, GLV.OFF);
                             IO控制.OUT(0, GLV._下拐弯电机气缸, GLV.ON);
@@ -379,18 +379,15 @@ namespace 缝纫机项目
                             step = (ushort)STEP.等待气缸动作1;
                             break;
 
-
                         case (ushort)STEP.等待气缸动作1:
-
                             Thread.Sleep((int)_上下电机气缸动作延时.Value);
 
                             运动控制.反馈位置清零(0, GLV._缝纫机编码器);
                             已执行针数 = 0;
 
                             step = (ushort)STEP.缝纫机启动;
-                            //20240723，把缝纫机启动放到这个步骤中
+                            // 20240723，把缝纫机启动放到这个步骤中
                             缝纫机.控制(缝纫机转速标定.已知转速求电压(_缝纫机初始工作转速.Value));
-
 
                             Task任务.信息输出("缝纫机启动,转速:"+ _缝纫机初始工作转速+",电压:"+ 缝纫机转速标定.已知转速求电压(_缝纫机初始工作转速.Value));
 
@@ -398,12 +395,9 @@ namespace 缝纫机项目
                             下电机PID.Start();
                             Task任务.信息输出("PID启动");
 
-
                             break;
 
-
                         case (ushort)STEP.缝纫机启动:
-
                             //double 当前电压 = 模拟量.输入(0, GLV._上传感器);
                             ////double pos = 电压位置计算(当前电压);
 
@@ -416,10 +410,10 @@ namespace 缝纫机项目
                             当前编码器位置 = 运动控制.反馈位置(0, GLV._缝纫机编码器);
                             if (当前编码器位置 >= _初次下针时编码器位置.Value)
                             {
-                                TimerDispos.CreateAndStartTimer();
+                                //TimerDispos.CreateAndStartTimer();
                                 VM通讯.客户端.m_x = null;
                                 VM通讯.发送("snap");
-                                bool 是否收到数据 = await 等待数据接收(120); 
+                                bool 是否收到数据 = await SnapThread.等待数据接收(120); 
                                 if (是否收到数据)
                                 {
                                     if (VM通讯.接收信息拆解Try(VM通讯.客户端.m_x, out var data))
@@ -476,12 +470,8 @@ namespace 缝纫机项目
 
                                 数据采集.清零();//20240201
 
-
                                 step = (ushort)STEP.缝纫机工作;
-
                             }
-
-
                             break;
 
                         case (ushort)STEP.缝纫机工作:
@@ -497,7 +487,7 @@ namespace 缝纫机项目
                                 {
                                     VM通讯.客户端.m_x = null;
                                     VM通讯.发送("snap");
-                                    bool 是否收到数据 = await 等待数据接收(120);
+                                    bool 是否收到数据 = await SnapThread.等待数据接收(120);
                                     if (是否收到数据)
                                     {
                                         if (VM通讯.接收信息拆解Try(VM通讯.客户端.m_x, out var data))
@@ -560,7 +550,6 @@ namespace 缝纫机项目
 
                                             if (差值 >= 0)
                                             {
-                                               
                                                 //vel1 = 剪口电机速度.速度计算(配方_上剪口电机基础速度.Value, 配方_上剪口缝纫机修正比例.Value, 缝纫机.当前转速(), 0, 配方_上剪口差修正比例.Value, 配方_上剪口差基本值.Value, _上剪口电机速度上限.Value, _上剪口电机速度下限.Value);
                                                 //vel2 = 剪口电机速度.速度计算(配方_下剪口电机基础速度.Value, 配方_下剪口缝纫机修正比例.Value, 缝纫机.当前转速(), -差值, 配方_下剪口差修正比例.Value, 配方_下剪口差基本值.Value, _下剪口电机速度上限.Value, _下剪口电机速度下限.Value);
                                                 
@@ -621,18 +610,16 @@ namespace 缝纫机项目
                                                 二次对剪口运行 = false;
                                             }
                                         }
-                                            
-
-                                        }                                   
-                                        else
-                                        {
-                                            double vel1 = 剪口电机速度.速度计算(配方_上剪口电机基础速度.Value, 配方_上剪口缝纫机修正比例.Value, 缝纫机.当前转速(), 0, 配方_上剪口差修正比例.Value, 配方_上剪口差基本值.Value, _上剪口电机速度上限.Value, _上剪口电机速度下限.Value);
-                                            //double vel2 = 剪口电机速度.速度计算(配方_下剪口电机基础速度.Value, 配方_下剪口缝纫机修正比例.Value, 缝纫机.当前转速(), 0, 配方_下剪口差修正比例.Value, 配方_下剪口差基本值.Value, _下剪口电机速度上限.Value, _下剪口电机速度下限.Value);
-                                            //单轴速度控制(GLV._上剪口电机, vel1);
-                                            //单轴速度控制(GLV._下剪口电机, vel2);
-                                            对剪口运行 = false;
-                                        }
+                                    }                                   
+                                    else
+                                    {
+                                        double vel1 = 剪口电机速度.速度计算(配方_上剪口电机基础速度.Value, 配方_上剪口缝纫机修正比例.Value, 缝纫机.当前转速(), 0, 配方_上剪口差修正比例.Value, 配方_上剪口差基本值.Value, _上剪口电机速度上限.Value, _上剪口电机速度下限.Value);
+                                        //double vel2 = 剪口电机速度.速度计算(配方_下剪口电机基础速度.Value, 配方_下剪口缝纫机修正比例.Value, 缝纫机.当前转速(), 0, 配方_下剪口差修正比例.Value, 配方_下剪口差基本值.Value, _下剪口电机速度上限.Value, _下剪口电机速度下限.Value);
+                                        //单轴速度控制(GLV._上剪口电机, vel1);
+                                        //单轴速度控制(GLV._下剪口电机, vel2);
+                                        对剪口运行 = false;
                                     }
+                                }
                                 else    //对剪口使能始终为true,不会进
                                 {
                                     //double vel1 = 剪口电机速度.速度计算(配方_上剪口电机基础速度.Value, 配方_上剪口缝纫机修正比例.Value, 缝纫机.当前转速(), 0, 配方_上剪口差修正比例.Value, 配方_上剪口差基本值.Value, _上剪口电机速度上限.Value, _上剪口电机速度下限.Value);
