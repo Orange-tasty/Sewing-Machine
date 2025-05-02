@@ -167,6 +167,9 @@ namespace 缝纫机项目
 
         public static 配方参数P 配方_回针针距 = new 配方参数P("配方_回针针距", 0);
 
+        public static 配方参数P 配方_针数后识别剪口 = new 配方参数P("配方_针数后识别剪口", 0);
+        public static 配方参数P 配方_识别剪口间隔针数 = new 配方参数P("配方_识别剪口间隔针数", 0);
+        
         ////剪口20240108
         //public static double 配方_上剪口数量 = 10;
         //public static double 配方_上最后剪口后针数 = 5;
@@ -326,6 +329,8 @@ namespace 缝纫机项目
 
         }
 
+        public static SnapThread sendThread = new SnapThread();
+
         public async void 工艺流程()
         {
             Form主界面 主界面 = (Form主界面)Application.OpenForms["Form主界面"];
@@ -411,31 +416,31 @@ namespace 缝纫机项目
                             if (当前编码器位置 >= _初次下针时编码器位置.Value)
                             {
                                 //TimerDispos.CreateAndStartTimer();
-                                VM通讯.客户端.m_x = null;
-                                VM通讯.发送("snap");
-                                bool 是否收到数据 = await SnapThread.等待数据接收(120); 
-                                if (是否收到数据)
-                                {
-                                    if (VM通讯.接收信息拆解Try(VM通讯.客户端.m_x, out var data))
-                                    {
-                                        _lastData = data;
-                                    }
-                                    else
-                                    {
-                                        Task任务.信息输出("接收信息错误");
-                                        data = _lastData;
-                                    }
-                                    距离 = data.平均距离1;
-                                    剪口数 = data.数量1;
-                                    距离X = data.平均距离2;
-                                    剪口数X = data.数量3;
-                                    //距离 = 测量值.距离(VM通讯.客户端.m_x);
-                                    //剪口数 = 测量值.剪口数(VM通讯.客户端.m_x);
-                                    //距离X = 测量值.距离X(VM通讯.客户端.m_x);
-                                    //剪口数X = 测量值.剪口数X(VM通讯.客户端.m_x);
-                                    VM通讯.客户端.m_x = null;
-                                }
-
+                                //VM通讯.客户端.m_x = null;
+                                //VM通讯.发送("snap");
+                                //bool 是否收到数据 = await SnapThread.等待数据接收(120); 
+                                //if (是否收到数据)
+                                //{
+                                //    if (VM通讯.接收信息拆解Try(VM通讯.客户端.m_x, out var data))
+                                //    {
+                                //        _lastData = data;
+                                //    }
+                                //    else
+                                //    {
+                                //        Task任务.信息输出("接收信息错误");
+                                //        data = _lastData;
+                                //    }
+                                //    距离 = data.平均距离1;
+                                //    剪口数 = data.数量1;
+                                //    距离X = data.平均距离2;
+                                //    剪口数X = data.数量3;
+                                //    //距离 = 测量值.距离(VM通讯.客户端.m_x);
+                                //    //剪口数 = 测量值.剪口数(VM通讯.客户端.m_x);
+                                //    //距离X = 测量值.距离X(VM通讯.客户端.m_x);
+                                //    //剪口数X = 测量值.剪口数X(VM通讯.客户端.m_x);
+                                //    VM通讯.客户端.m_x = null;
+                                //}
+                                
 
                                 Task任务.信息输出("达到初次下针时编码器位置");
                                 运动控制.反馈位置清零(0, GLV._缝纫机编码器);
@@ -443,16 +448,18 @@ namespace 缝纫机项目
                                 double tim = 花费时间();
                                 //Console.WriteLine(tim);
 
-                                double pos = 0 * 缝纫机.当前转速() + 上电机PID.Func(配方_上A.Value, 配方_上B.Value, 配方_上C.Value, 配方_上P.Value, 配方_上I.Value, 配方_上D.Value, 距离 - 配方_上V.Value, _上电机速度上限.Value, _上电机速度下限.Value);                                
-                                double posX = 0 * 缝纫机.当前转速() + 下电机PID.Func(配方_下A.Value, 配方_下B.Value, 配方_下C.Value, 配方_下P.Value, 配方_下I.Value, 配方_下D.Value, 距离X - 配方_下V.Value, _下电机速度上限.Value, _下电机速度下限.Value);
+                                //double pos = 0 * 缝纫机.当前转速() + 上电机PID.Func(配方_上A.Value, 配方_上B.Value, 配方_上C.Value, 配方_上P.Value, 配方_上I.Value, 配方_上D.Value, 距离 - 配方_上V.Value, _上电机速度上限.Value, _上电机速度下限.Value);                                
+                                //double posX = 0 * 缝纫机.当前转速() + 下电机PID.Func(配方_下A.Value, 配方_下B.Value, 配方_下C.Value, 配方_下P.Value, 配方_下I.Value, 配方_下D.Value, 距离X - 配方_下V.Value, _下电机速度上限.Value, _下电机速度下限.Value);
                                 //double pos = 上电机PID.Func(配方_上A.Value, 配方_上B.Value, 配方_上C.Value, 配方_上P.Value, 配方_上I.Value, 配方_上D.Value, 当前电压 - 配方_上V.Value, _上电机速度上限.Value, _上电机速度下限.Value);
                                 //double posX = 下电机PID.Func(配方_下A.Value, 配方_下B.Value, 配方_下C.Value, 配方_下P.Value, 配方_下I.Value, 配方_下D.Value, 当前电压X - 配方_下V.Value, _下电机速度上限.Value, _下电机速度下限.Value);
 
-                                Task任务.信息输出("当前上电机速度为" + pos.ToString());
-                                单轴速度控制(GLV._上电机, pos);
-                                单轴速度控制(GLV._下电机, posX);
+                                //Task任务.信息输出("当前上电机速度为" + pos.ToString());
+                                //单轴速度控制(GLV._上电机, pos);
+                                //单轴速度控制(GLV._下电机, posX);
 
                                 Task任务.信息输出("缝纫机工作");
+                                ///////////////////20250428/////////////////////////////
+                                sendThread.Start();
                                 已执行针数++;
                                 
 
@@ -483,40 +490,41 @@ namespace 缝纫机项目
 
                             if (已执行针数 < (目标针数 - 配方_尾针数.Value))
                             {
-                                if (_发送功能使能.Value == 1)
-                                {
-                                    VM通讯.客户端.m_x = null;
-                                    VM通讯.发送("snap");
-                                    bool 是否收到数据 = await SnapThread.等待数据接收(120);
-                                    if (是否收到数据)
-                                    {
-                                        if (VM通讯.接收信息拆解Try(VM通讯.客户端.m_x, out var data))
-                                        {
-                                            _lastData = data;
-                                        }
-                                        else
-                                        {
-                                            Task任务.信息输出("接收信息错误");
-                                            data = _lastData;
-                                        }
-                                        距离 = data.平均距离1;
-                                        剪口数 = data.数量1;
-                                        距离X = data.平均距离2;
-                                        剪口数X = data.数量3;
-                                        二次剪口数 = data.数量2;
-                                        二次剪口数X = data.数量4;
-                                        //距离 = 测量值.距离(VM通讯.客户端wwd.m_x);
-                                        //剪口数 = 测量值.剪口数(VM通讯.客户端.m_x);
-                                        //距离X = 测量值.距离X(VM通讯.客户端.m_x);
-                                        //剪口数X = 测量值.剪口数X(VM通讯.客户端.m_x);
-                                        //二次剪口数 = 测量值.二次剪口数(VM通讯.客户端.m_x);
-                                        //二次剪口数X = 测量值.二次剪口数X(VM通讯.客户端.m_x);
-                                        VM通讯.客户端.m_x = null;
-                                    }
-                                    _发送功能使能.Value = 0;
-                                }
+                                //    if (_发送功能使能.Value == 1)
+                                //    {
+                                //        VM通讯.客户端.m_x = null;
+                                //        VM通讯.发送("snap");
+                                //        bool 是否收到数据 = await SnapThread.等待数据接收(120);
+                                //        if (是否收到数据)
+                                //        {
+                                //            if (VM通讯.接收信息拆解Try(VM通讯.客户端.m_x, out var data))
+                                //            {
+                                //                _lastData = data;
+                                //            }
+                                //            else
+                                //            {
+                                //                Task任务.信息输出("接收信息错误");
+                                //                data = _lastData;
+                                //            }
+                                //            距离 = data.平均距离1;
+                                //            剪口数 = data.数量1;
+                                //            距离X = data.平均距离2;
+                                //            剪口数X = data.数量3;
+                                //            二次剪口数 = data.数量2;
+                                //            二次剪口数X = data.数量4;
+                                //            //距离 = 测量值.距离(VM通讯.客户端wwd.m_x);
+                                //            //剪口数 = 测量值.剪口数(VM通讯.客户端.m_x);
+                                //            //距离X = 测量值.距离X(VM通讯.客户端.m_x);
+                                //            //剪口数X = 测量值.剪口数X(VM通讯.客户端.m_x);
+                                //            //二次剪口数 = 测量值.二次剪口数(VM通讯.客户端.m_x);
+                                //            //二次剪口数X = 测量值.二次剪口数X(VM通讯.客户端.m_x);
+                                //            VM通讯.客户端.m_x = null;
+                                //        }
+                                //        _发送功能使能.Value = 0;
+                                //    }
                                 ///////////////////20240108/////////////////////////////
-                                if (_对剪口功能使能.Value == 1)//对剪口功能是否启用//20240108
+                                //if (_对剪口功能使能.Value == 1 && 已执行针数 >= 配方_针数后识别剪口.Value)//对剪口功能是否启用//20240108
+                                if (_对剪口功能使能.Value == 1 && 已执行针数 >= 35)
                                 {
                                     bool re1 = 上剪口.ACT剪口检测((uint)配方_上剪口数量.Value, 剪口数);
                                     bool re2 = 下剪口.ACT剪口检测((uint)配方_下剪口数量.Value, 剪口数X);
@@ -527,7 +535,7 @@ namespace 缝纫机项目
                                     if ((!re1 || !re2) && !修改目前针数)
                                     {
                                         目标针数 = (int)(已执行针数 + 配方_上最后剪口后针数.Value + 配方_尾针数.Value);
-                                        Task任务.信息输出("目标针数从总针数" + 配方_总针数 + "针改为" + 目标针数 + "针");
+                                        Task任务.信息输出("目标针数从总针数" + 配方_总针数.Value + "针改为" + 目标针数 + "针");
                                         修改目前针数 = true;
                                     }
 
@@ -557,8 +565,8 @@ namespace 缝纫机项目
                                             else
                                             {
                                                 t2 = 剪口电机速度.时间计算(缝纫机.当前转速(), -差值, 1);
-                                                //单轴位置控制(GLV._下剪口电机, t2, 差值);
-                                                //Task任务.信息输出("第" + 上剪口.剪口计数 + "个剪口的上下差值:" + 差值 + "。要压下的时间为:" + (int)t2 + " ms");
+                                                单轴位置控制(GLV._下剪口电机, t2, 差值);
+                                                Task任务.信息输出("第" + 上剪口.剪口计数 + "个剪口的上下差值:" + 差值 + "。要压下的时间为:" + (int)t2 + " ms");
                                                 //vel1 = 剪口电机速度.速度计算(配方_上剪口电机基础速度.Value, 配方_上剪口缝纫机修正比例.Value, 缝纫机.当前转速(), 差值, 配方_上剪口差修正比例.Value, 配方_上剪口差基本值.Value, _上剪口电机速度上限.Value, _上剪口电机速度下限.Value);
                                                 //vel2 = 剪口电机速度.速度计算(配方_下剪口电机基础速度.Value, 配方_下剪口缝纫机修正比例.Value, 缝纫机.当前转速(), 0, 配方_下剪口差修正比例.Value, 配方_下剪口差基本值.Value, _下剪口电机速度上限.Value, _下剪口电机速度下限.Value);
                                             }
@@ -574,46 +582,46 @@ namespace 缝纫机项目
                                             //Task任务.信息输出("第" + 上剪口.剪口计数 + "个剪口的上下差值:" + 差值 + "。此时上剪口电机速度改为:" + vel1 + " ,下剪口电机速度改为:" + vel2);
                                             
                                         }
-                                        if (!二次剪口检测)
-                                        {
-                                            bool dre1 = 二次上剪口.ACT剪口检测((uint)配方_上剪口数量.Value, 二次剪口数);
-                                            bool dre2 = 二次下剪口.ACT剪口检测((uint)配方_下剪口数量.Value, 二次剪口数X);
-                                            if (二次上剪口.剪口计数 == 二次下剪口.剪口计数 && 二次上剪口.剪口计数 > 0)
-                                            {
-                                                if (!二次对剪口运行)
-                                                {
-                                                    二次对剪口运行 = true;
+                                        //if (!二次剪口检测)
+                                        //{
+                                        //    bool dre1 = 二次上剪口.ACT剪口检测((uint)配方_上剪口数量.Value, 二次剪口数);
+                                        //    bool dre2 = 二次下剪口.ACT剪口检测((uint)配方_下剪口数量.Value, 二次剪口数X);
+                                        //    if (二次上剪口.剪口计数 == 二次下剪口.剪口计数 && 二次上剪口.剪口计数 > 0)
+                                        //    {
+                                        //        if (!二次对剪口运行)
+                                        //        {
+                                        //            二次对剪口运行 = true;
 
-                                                    double 差值 = 二次上剪口.ACT剪口位置获取(二次上剪口.剪口计数) - 二次下剪口.ACT剪口位置获取(二次下剪口.剪口计数);
+                                        //            double 差值 = 二次上剪口.ACT剪口位置获取(二次上剪口.剪口计数) - 二次下剪口.ACT剪口位置获取(二次下剪口.剪口计数);
 
-                                                    double t1 = 0;
-                                                    double t2 = 0;
+                                        //            double t1 = 0;
+                                        //            double t2 = 0;
 
-                                                    if (差值 >= 0)
-                                                    {
-
-
-                                                    }
-                                                    else
-                                                    {
-                                                        //t2 = 剪口电机速度.时间计算(缝纫机.当前转速(), -差值, 1);          
-                                                    }
-                                                    Task任务.信息输出("修改后的差值为" + 差值.ToString());
-                                                    //Task任务.信息输出("t2=" + t2.ToString());
-                                                    //单轴位置控制(GLV._下剪口电机, t2);
+                                        //            if (差值 >= 0)
+                                        //            {
 
 
-                                                }
-                                            }
-                                            else
-                                            {
-                                                二次对剪口运行 = false;
-                                            }
-                                        }
+                                        //            }
+                                        //            else
+                                        //            {
+                                        //                //t2 = 剪口电机速度.时间计算(缝纫机.当前转速(), -差值, 1);          
+                                        //            }
+                                        //            Task任务.信息输出("修改后的差值为" + 差值.ToString());
+                                        //            //Task任务.信息输出("t2=" + t2.ToString());
+                                        //            //单轴位置控制(GLV._下剪口电机, t2);
+
+
+                                        //        }
+                                        //    }
+                                        //    else
+                                        //    {
+                                        //        二次对剪口运行 = false;
+                                        //    }
+                                        //}
                                     }                                   
                                     else
                                     {
-                                        double vel1 = 剪口电机速度.速度计算(配方_上剪口电机基础速度.Value, 配方_上剪口缝纫机修正比例.Value, 缝纫机.当前转速(), 0, 配方_上剪口差修正比例.Value, 配方_上剪口差基本值.Value, _上剪口电机速度上限.Value, _上剪口电机速度下限.Value);
+                                        //double vel1 = 剪口电机速度.速度计算(配方_上剪口电机基础速度.Value, 配方_上剪口缝纫机修正比例.Value, 缝纫机.当前转速(), 0, 配方_上剪口差修正比例.Value, 配方_上剪口差基本值.Value, _上剪口电机速度上限.Value, _上剪口电机速度下限.Value);
                                         //double vel2 = 剪口电机速度.速度计算(配方_下剪口电机基础速度.Value, 配方_下剪口缝纫机修正比例.Value, 缝纫机.当前转速(), 0, 配方_下剪口差修正比例.Value, 配方_下剪口差基本值.Value, _下剪口电机速度上限.Value, _下剪口电机速度下限.Value);
                                         //单轴速度控制(GLV._上剪口电机, vel1);
                                         //单轴速度控制(GLV._下剪口电机, vel2);
@@ -633,20 +641,20 @@ namespace 缝纫机项目
                                 if (当前编码器位置 >= _缝纫机编码器细分.Value * 已执行针数)
                                 {
                                     //double pos = 上电机PID.Func(配方_上A.Value, 配方_上B.Value, 配方_上C.Value, 配方_上P.Value, 配方_上I.Value, 配方_上D.Value, 配方_上V.Value - 距离, _上电机速度上限.Value, _上电机速度下限.Value);
-                                    double pos = 0 * 缝纫机.当前转速() + 上电机PID.Func(配方_上A.Value, 配方_上B.Value, 配方_上C.Value, 配方_上P.Value, 配方_上I.Value, 配方_上D.Value, 距离 - 配方_上V.Value, _上电机速度上限.Value, _上电机速度下限.Value);
-                                    double posX = 0 * 缝纫机.当前转速() + 下电机PID.Func(配方_下A.Value, 配方_下B.Value, 配方_下C.Value, 配方_下P.Value, 配方_下I.Value, 配方_下D.Value, 距离X - 配方_下V.Value, _下电机速度上限.Value, _下电机速度下限.Value);
+                                    //double pos = 0 * 缝纫机.当前转速() + 上电机PID.Func(配方_上A.Value, 配方_上B.Value, 配方_上C.Value, 配方_上P.Value, 配方_上I.Value, 配方_上D.Value, 距离 - 配方_上V.Value, _上电机速度上限.Value, _上电机速度下限.Value);
+                                    //double posX = 0 * 缝纫机.当前转速() + 下电机PID.Func(配方_下A.Value, 配方_下B.Value, 配方_下C.Value, 配方_下P.Value, 配方_下I.Value, 配方_下D.Value, 距离X - 配方_下V.Value, _下电机速度上限.Value, _下电机速度下限.Value);
                                     //double pos = 上电机PID.Func(配方_上A.Value, 配方_上B.Value, 配方_上C.Value, 配方_上P.Value, 配方_上I.Value, 配方_上D.Value, 当前电压 - 配方_上V.Value, _上电机速度上限.Value, _上电机速度下限.Value);
                                     //double posX = 下电机PID.Func(配方_下A.Value, 配方_下B.Value, 配方_下C.Value, 配方_下P.Value, 配方_下I.Value, 配方_下D.Value, 当前电压X - 配方_下V.Value, _下电机速度上限.Value, _下电机速度下限.Value);
                                     //Task任务.信息输出("距离为" + 距离X.ToString());
-                                    Task任务.信息输出("当前电机速度为" + posX.ToString());
+                                    //Task任务.信息输出("当前电机速度为" + posX.ToString());
 
                                     //PID控制
-                                    单轴速度控制(GLV._上电机, pos);
-                                    单轴速度控制(GLV._下电机, posX);
+                                    //单轴速度控制(GLV._上电机, pos);
+                                    //单轴速度控制(GLV._下电机, posX);
 
                                     已执行针数++;
 
-                                    _发送功能使能.Value = 1;
+                                    //_发送功能使能.Value = 1;
 
                                     数据采集.采集(已执行针数);//20240201
                                 }
@@ -655,6 +663,7 @@ namespace 缝纫机项目
                             else
                             {
                                 Task任务.信息输出("进入尾针阶段");
+                                sendThread.Stop();
                                 step = (ushort)STEP.缝纫机进入尾针;
 
                                 对剪口运行 = false;
@@ -692,9 +701,9 @@ namespace 缝纫机项目
                             {
                                 工艺测试.上剪口.ACT清除();//20240108
                                 工艺测试.下剪口.ACT清除();//20240108
-                                工艺测试.二次上剪口.ACT清除();//20240108
-                                工艺测试.二次下剪口.ACT清除();//20240108
-
+                                工艺测试.二次上剪口.ACT清除();
+                                工艺测试.二次下剪口.ACT清除();
+                                修改目前针数 = false;
 
                                 运动控制.轴全部停止(0);//20230522
                                 Task任务.信息输出("尾针动作完成");
@@ -781,7 +790,7 @@ namespace 缝纫机项目
                                 }
                                 else
                                 {
-                                    //Task任务.信息输出("检测到回针编码器停下计数"+ 编码器停下后计数);
+                                    Task任务.信息输出("检测到回针编码器停下计数" + 编码器停下后计数);
                                     编码器停下后计数++;
                                     Thread.Sleep(50);
                                 }
@@ -1071,7 +1080,7 @@ namespace 缝纫机项目
             return GLV._整条线动作时间;
         }
 
-        private void 单轴速度控制(ushort 轴号,double 速度)
+        public static void 单轴速度控制(ushort 轴号,double 速度)
         {
             if (运动控制.运动状态(0, 轴号))
             {
@@ -1083,7 +1092,6 @@ namespace 缝纫机项目
                 {
                     运动控制.定速运动(0, 轴号, -速度, 0.02, 0);
                 }
-
             }
             else
             {
@@ -1098,7 +1106,7 @@ namespace 缝纫机项目
             {
                 if(差值 > 1440 || 差值 < -1440)
                 {
-                    运动控制.点位运动(0, 轴号, 8000, 0.02, -1000, 1);
+                    运动控制.点位运动(0, 轴号, 8000, 0.02, -1200, 1);
                     await Task.Delay((int)时间);  // 异步延迟，不阻塞主线程
                     运动控制.点位运动(0, 轴号, 8000, 0.02, 0, 1);
                 }             

@@ -80,6 +80,8 @@
             this.label20 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.numericUpDown1_针数后识别剪口 = new System.Windows.Forms.NumericUpDown();
+            this.label42 = new System.Windows.Forms.Label();
             this.label38 = new System.Windows.Forms.Label();
             this.label37 = new System.Windows.Forms.Label();
             this.numericUpDown_上剪口差基本值 = new System.Windows.Forms.NumericUpDown();
@@ -109,6 +111,9 @@
             this.label25 = new System.Windows.Forms.Label();
             this.label26 = new System.Windows.Forms.Label();
             this.numericUpDown_下剪口数量 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown_识别剪口间隔针数 = new System.Windows.Forms.NumericUpDown();
+            this.label43 = new System.Windows.Forms.Label();
+            this.label44 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown总针数)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown尾针数)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -133,6 +138,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_上剪口电机基础速度)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_上剪口差修正比例)).BeginInit();
             this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1_针数后识别剪口)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_上剪口差基本值)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_上剪口缝纫机修正比例)).BeginInit();
             this.groupBox4.SuspendLayout();
@@ -142,6 +148,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_下剪口差修正比例)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_下剪口后针数)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_下剪口数量)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_识别剪口间隔针数)).BeginInit();
             this.SuspendLayout();
             // 
             // label总针数
@@ -299,14 +306,14 @@
             this.numericUpDown_上V.DecimalPlaces = 3;
             this.numericUpDown_上V.Location = new System.Drawing.Point(260, 160);
             this.numericUpDown_上V.Margin = new System.Windows.Forms.Padding(4);
-            this.numericUpDown_上V.Name = "numericUpDown_上V";
-            this.numericUpDown_上V.Size = new System.Drawing.Size(84, 25);
-            this.numericUpDown_上V.TabIndex = 13;
             this.numericUpDown_上V.Maximum = new decimal(new int[] {
             1000,
             0,
             0,
             0});
+            this.numericUpDown_上V.Name = "numericUpDown_上V";
+            this.numericUpDown_上V.Size = new System.Drawing.Size(84, 25);
+            this.numericUpDown_上V.TabIndex = 13;
             // 
             // label7
             // 
@@ -533,14 +540,14 @@
             this.numericUpDown_下V.DecimalPlaces = 3;
             this.numericUpDown_下V.Location = new System.Drawing.Point(260, 159);
             this.numericUpDown_下V.Margin = new System.Windows.Forms.Padding(4);
-            this.numericUpDown_下V.Name = "numericUpDown_下V";
-            this.numericUpDown_下V.Size = new System.Drawing.Size(84, 25);
-            this.numericUpDown_下V.TabIndex = 15;
             this.numericUpDown_下V.Maximum = new decimal(new int[] {
             1000,
             0,
             0,
             0});
+            this.numericUpDown_下V.Name = "numericUpDown_下V";
+            this.numericUpDown_下V.Size = new System.Drawing.Size(84, 25);
+            this.numericUpDown_下V.TabIndex = 15;
             // 
             // label8
             // 
@@ -775,7 +782,7 @@
             // 
             // numericUpDown_上剪口后针数
             // 
-            this.numericUpDown_上剪口后针数.Location = new System.Drawing.Point(352, 40);
+            this.numericUpDown_上剪口后针数.Location = new System.Drawing.Point(352, 42);
             this.numericUpDown_上剪口后针数.Margin = new System.Windows.Forms.Padding(4);
             this.numericUpDown_上剪口后针数.Maximum = new decimal(new int[] {
             1000,
@@ -846,6 +853,11 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.numericUpDown_识别剪口间隔针数);
+            this.groupBox3.Controls.Add(this.label43);
+            this.groupBox3.Controls.Add(this.label44);
+            this.groupBox3.Controls.Add(this.numericUpDown1_针数后识别剪口);
+            this.groupBox3.Controls.Add(this.label42);
             this.groupBox3.Controls.Add(this.label38);
             this.groupBox3.Controls.Add(this.label37);
             this.groupBox3.Controls.Add(this.numericUpDown_上剪口差基本值);
@@ -872,6 +884,34 @@
             this.groupBox3.TabIndex = 76;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "上剪口";
+            // 
+            // numericUpDown1_针数后识别剪口
+            // 
+            this.numericUpDown1_针数后识别剪口.Location = new System.Drawing.Point(529, 20);
+            this.numericUpDown1_针数后识别剪口.Margin = new System.Windows.Forms.Padding(4);
+            this.numericUpDown1_针数后识别剪口.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.numericUpDown1_针数后识别剪口.Minimum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            -2147483648});
+            this.numericUpDown1_针数后识别剪口.Name = "numericUpDown1_针数后识别剪口";
+            this.numericUpDown1_针数后识别剪口.Size = new System.Drawing.Size(84, 25);
+            this.numericUpDown1_针数后识别剪口.TabIndex = 87;
+            // 
+            // label42
+            // 
+            this.label42.AutoSize = true;
+            this.label42.Location = new System.Drawing.Point(621, 22);
+            this.label42.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label42.Name = "label42";
+            this.label42.Size = new System.Drawing.Size(112, 15);
+            this.label42.TabIndex = 79;
+            this.label42.Text = "针数后识别剪口";
             // 
             // label38
             // 
@@ -1247,6 +1287,38 @@
             this.numericUpDown_下剪口数量.Size = new System.Drawing.Size(84, 25);
             this.numericUpDown_下剪口数量.TabIndex = 0;
             // 
+            // numericUpDown_识别剪口间隔针数
+            // 
+            this.numericUpDown_识别剪口间隔针数.Location = new System.Drawing.Point(671, 69);
+            this.numericUpDown_识别剪口间隔针数.Margin = new System.Windows.Forms.Padding(4);
+            this.numericUpDown_识别剪口间隔针数.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numericUpDown_识别剪口间隔针数.Name = "numericUpDown_识别剪口间隔针数";
+            this.numericUpDown_识别剪口间隔针数.Size = new System.Drawing.Size(84, 25);
+            this.numericUpDown_识别剪口间隔针数.TabIndex = 90;
+            // 
+            // label43
+            // 
+            this.label43.AutoSize = true;
+            this.label43.Location = new System.Drawing.Point(595, 71);
+            this.label43.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label43.Name = "label43";
+            this.label43.Size = new System.Drawing.Size(0, 15);
+            this.label43.TabIndex = 89;
+            // 
+            // label44
+            // 
+            this.label44.AutoSize = true;
+            this.label44.Location = new System.Drawing.Point(526, 71);
+            this.label44.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label44.Name = "label44";
+            this.label44.Size = new System.Drawing.Size(127, 15);
+            this.label44.TabIndex = 88;
+            this.label44.Text = "识别剪口间隔针数";
+            // 
             // Form配方
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -1299,6 +1371,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_上剪口差修正比例)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1_针数后识别剪口)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_上剪口差基本值)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_上剪口缝纫机修正比例)).EndInit();
             this.groupBox4.ResumeLayout(false);
@@ -1309,6 +1382,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_下剪口差修正比例)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_下剪口后针数)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_下剪口数量)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_识别剪口间隔针数)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1396,5 +1470,10 @@
         private System.Windows.Forms.Label label39;
         private System.Windows.Forms.Label label30;
         private System.Windows.Forms.NumericUpDown numericUpDown_下剪口差基本值;
+        private System.Windows.Forms.Label label42;
+        private System.Windows.Forms.NumericUpDown numericUpDown1_针数后识别剪口;
+        private System.Windows.Forms.NumericUpDown numericUpDown_识别剪口间隔针数;
+        private System.Windows.Forms.Label label43;
+        private System.Windows.Forms.Label label44;
     }
 }

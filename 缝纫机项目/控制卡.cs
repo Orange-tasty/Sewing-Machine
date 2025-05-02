@@ -127,7 +127,7 @@ namespace 缝纫机项目
         /// <param name="axis">轴号</param>
         public static void 单轴停止(ushort card, ushort axis)
         {
-            LTSMC.smc_set_dec_stop_time(card, axis, 0.01);
+            LTSMC.smc_set_dec_stop_time(card, axis, 0.1);
             LTSMC.smc_stop(card, axis, 0);
         }
 

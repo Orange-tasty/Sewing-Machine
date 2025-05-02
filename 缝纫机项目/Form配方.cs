@@ -198,7 +198,8 @@ namespace 缝纫机项目
             numericUpDown总针数.Value = Convert.ToDecimal(工艺测试.配方_总针数.Value);
             numericUpDown尾针数.Value = Convert.ToDecimal(工艺测试.配方_尾针数.Value);
 
-
+            numericUpDown1_针数后识别剪口.Value = Convert.ToDecimal(工艺测试.配方_针数后识别剪口.Value);
+            numericUpDown1_针数后识别剪口.Value = Convert.ToDecimal(工艺测试.配方_识别剪口间隔针数.Value);
             try
             {
                 

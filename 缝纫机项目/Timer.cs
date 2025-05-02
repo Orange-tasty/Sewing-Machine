@@ -38,10 +38,10 @@ namespace 缝纫机项目
                 Task任务.信息输出("接收信息错误");
                 data = _lastData;
             }
-            double 距离 = data.平均距离1;
-            double 剪口数 = data.数量1;
-            double 距离X = data.平均距离2;
-            double 剪口数X = data.数量3;
+            工艺测试.距离 = data.距离;
+            工艺测试.剪口数 = data.剪口数;
+            工艺测试.距离X = data.距离X;
+            工艺测试.剪口数X = data.剪口数X;
             //距离 = 测量值.距离(VM通讯.客户端.m_x);
             //剪口数 = 测量值.剪口数(VM通讯.客户端.m_x);
             //距离X = 测量值.距离X(VM通讯.客户端.m_x);
