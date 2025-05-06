@@ -139,12 +139,14 @@ namespace 缝纫机项目
             工艺测试.配方_总针数.Value = Convert.ToDouble(numericUpDown总针数.Value);
             工艺测试.配方_尾针数.Value = Convert.ToDouble(numericUpDown尾针数.Value);
 
-            int i = 0;
+            工艺测试.配方_针数后识别剪口.Value = Convert.ToDouble(numericUpDown1_针数后识别剪口.Value);
+            工艺测试.配方_识别剪口间隔针数.Value = Convert.ToDouble(numericUpDown_识别剪口间隔针数.Value);
             //工艺测试.配方_尾针表.Clear();
             //工艺测试.配方_尾针表X.Clear();
+            int i = 0;  
             for (i = 0; i < dataGridView1.Rows.Count; i++)
             {
-
+                
                 工艺测试.配方_尾针表[i].Value = Convert.ToDouble(dataGridView1.Rows[i].Cells[0].Value);
                 工艺测试.配方_尾针表X[i].Value = Convert.ToDouble(dataGridView1.Rows[i].Cells[1].Value);
                 //工艺测试.配方_尾针表X.Add(new 配方参数P("尾针X" + i.ToString(), Convert.ToDouble(dataGridView1.Rows[i].Cells[1].Value)));
@@ -199,7 +201,7 @@ namespace 缝纫机项目
             numericUpDown尾针数.Value = Convert.ToDecimal(工艺测试.配方_尾针数.Value);
 
             numericUpDown1_针数后识别剪口.Value = Convert.ToDecimal(工艺测试.配方_针数后识别剪口.Value);
-            numericUpDown1_针数后识别剪口.Value = Convert.ToDecimal(工艺测试.配方_识别剪口间隔针数.Value);
+            numericUpDown_识别剪口间隔针数.Value = Convert.ToDecimal(工艺测试.配方_识别剪口间隔针数.Value);
             try
             {
                 

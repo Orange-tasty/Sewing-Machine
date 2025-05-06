@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Reflection;
 using System.Diagnostics;
+using VM.GlobalScript.Methods;
 
 namespace 缝纫机项目
 {
@@ -18,7 +19,7 @@ namespace 缝纫机项目
         // 以及超时机制
         //bool received = false;
         //const int maxRetry = 50;   // 最多等 50 x 1ms = 50ms
-        
+
         //public event Action<string> 输出信息;   // 事件可用于UI绑定，比如输出日志
 
         public static async Task<bool> 等待数据接收(int 超时时间ms)
@@ -53,6 +54,7 @@ namespace 缝纫机项目
         public void Stop()
         {
             _running = false;
+            VM通讯.发送("stop");
             Task任务.信息输出("停止线程请求已发送");
         }
 
@@ -63,21 +65,22 @@ namespace 缝纫机项目
         {
             int num = 0;
             int err_num = 0;
-            //VM通讯.发送("snap");
+            VM通讯.发送("contisnap");
             while (_running)
             {
                 try
                 {
                     // 清空VM通讯数据
                     stopwatch.Start();
-                    VM通讯.客户端.m_x = null;
-                    VM通讯.发送("snap");
+                    //VM通讯.客户端.m_x = null;
+                    //VM通讯.发送("snap");
                     bool 是否收到数据 = await SnapThread.等待数据接收(70);
-                    if (是否收到数据)
+                    if (是否收到数据) 
                     {
                         if (VM通讯.接收信息拆解Try(VM通讯.客户端.m_x, out var data))
                         {                           
-                            _lastData = data;                         
+                            _lastData = data;
+                            VM通讯.客户端.m_x = null;
                         }
                         else
                         {
@@ -91,7 +94,10 @@ namespace 缝纫机项目
                         工艺测试.剪口数 = data.剪口数;
                         工艺测试.距离X = data.距离X;
                         工艺测试.剪口数X = data.剪口数X;
+                        工艺测试.二次剪口数 = data.二次剪口数;
+                        工艺测试.二次剪口数X = data.二次剪口数X;
                         num++;
+                        VM通讯.客户端.m_x = null;
                     }
                     else
                     {
@@ -111,7 +117,7 @@ namespace 缝纫机项目
                     double posX = 0 * 缝纫机.当前转速() + 工艺测试.下电机PID.Func(工艺测试.配方_下A.Value, 工艺测试.配方_下B.Value, 工艺测试.配方_下C.Value, 工艺测试.配方_下P.Value, 工艺测试.配方_下I.Value, 工艺测试.配方_下D.Value, 工艺测试.距离X - 工艺测试.配方_下V.Value, 工艺测试._下电机速度上限.Value, 工艺测试._下电机速度下限.Value);
                     工艺测试.单轴速度控制(GLV._上电机, pos);
                     工艺测试.单轴速度控制(GLV._下电机, posX);
-                    if(num > 300) Task任务.信息输出("上电机速度为: " + pos.ToString());
+                    //if(num > 300) Task任务.信息输出("上电机速度为: " + pos.ToString());
                     stopwatch.Stop();
                     long mSeconds = stopwatch.ElapsedMilliseconds;
                     totaltime += mSeconds;
@@ -163,10 +169,14 @@ namespace 缝纫机项目
             运动控制.单轴停止(0, GLV._上电机);
             运动控制.单轴停止(0, GLV._上电机);
             Task任务.信息输出("线程已停止。 共检测" + num.ToString() + "次");
-            Task任务.信息输出("总耗时为" + (totaltime/1000).ToString() + "s");
+            Task任务.信息输出("总耗时为" + totaltime.ToString() + "ms");
+            //Task任务.信息输出("总耗时为" + (totaltime/1000).ToString() + "s");
             totaltime = 0;
             err_num = 0;
         }
 
     }
 }
+
+
+

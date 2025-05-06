@@ -18,6 +18,7 @@ using NPOI.OpenXmlFormats.Spreadsheet;
 using NPOI.SS.Formula.Functions;
 using System.Drawing.Imaging;
 using System.Diagnostics;
+using NPOI.POIFS.Crypt.Dsig;
 
 namespace 缝纫机项目
 {
@@ -682,9 +683,9 @@ namespace 缝纫机项目
         public double 编码器位置 = 0;
         private async void Send_ClickAsync(object sender, EventArgs e)
         {
-            //var sendStart = DateTime.Now;
+            var sendStart = DateTime.Now;
 
-            //sendThread.Start();
+            工艺测试.sendThread.Start();
 
 
             //TimerDispos.CreateAndStartTimer();
@@ -694,21 +695,21 @@ namespace 缝纫机项目
             //运动控制.反馈位置清零(0, GLV._下剪口电机);
             //stopwatch.Start();
 
-            VM通讯.客户端.m_x = null;
-            VM通讯.发送("snap");
-            bool 是否收到数据 = await SnapThread.等待数据接收(80);
-            if (是否收到数据)
-            {
-                if (VM通讯.接收信息拆解Try(VM通讯.客户端.m_x, out var data))
-                {
-                    工艺测试.距离 = data.距离;
-                    工艺测试.距离X = data.距离X;
-                }
-                else
-                {
-                    Task任务.信息输出("超时");
-                }
-            }
+            //VM通讯.客户端.m_x = null;
+            //VM通讯.发送("snap");
+            //bool 是否收到数据 = await SnapThread.等待数据接收(80);
+            //if (是否收到数据)
+            //{
+            //    if (VM通讯.接收信息拆解Try(VM通讯.客户端.m_x, out var data))
+            //    {
+            //        工艺测试.距离 = data.距离;
+            //        工艺测试.距离X = data.距离X;
+            //    }
+            //    else
+            //    {
+            //        Task任务.信息输出("超时");
+            //    }
+            //}
 
             //运动控制.定速运动(0, GLV._上电机, 1000, 0.02, 1);
             //stopwatch.Stop();
@@ -800,17 +801,17 @@ namespace 缝纫机项目
         private TimerDispos timerdispos = new TimerDispos();
         private void button5_Click(object sender, EventArgs e)
         {
-            //sendThread.Stop();
+            工艺测试.sendThread.Stop();
 
             //var sendEnd = DateTime.Now;
             //Task任务.信息输出("总耗时:" + (sendEnd - sendStart).TotalMilliseconds + "ms");
 
 
 
-            TimerDispos.StopTimer();
-            模拟量.输出(0, GLV._缝纫机控制, 1.9);
-            Thread.Sleep(500);
-            模拟量.输出(0, GLV._缝纫机控制, 0);
+            //TimerDispos.StopTimer();
+            //模拟量.输出(0, GLV._缝纫机控制, 1.9);
+            //Thread.Sleep(500);
+            //模拟量.输出(0, GLV._缝纫机控制, 0);
         }
 
         private void KHDread(string str)//客户端接收委托关联方法

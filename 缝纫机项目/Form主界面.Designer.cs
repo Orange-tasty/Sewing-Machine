@@ -29,14 +29,14 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series7 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series8 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea7 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend7 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series13 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series14 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea8 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend8 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series15 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series16 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.ToolStripMenuItem文件 = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItem配方 = new System.Windows.Forms.ToolStripMenuItem();
@@ -445,27 +445,27 @@
             // 
             // chart1
             // 
-            chartArea3.AxisX.MajorGrid.LineColor = System.Drawing.Color.WhiteSmoke;
-            chartArea3.AxisX.ScaleView.Size = 10D;
-            chartArea3.AxisX.ScaleView.Zoomable = false;
-            chartArea3.AxisY.MajorGrid.LineColor = System.Drawing.Color.WhiteSmoke;
-            chartArea3.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea3);
-            legend3.Name = "Legend1";
-            this.chart1.Legends.Add(legend3);
+            chartArea7.AxisX.MajorGrid.LineColor = System.Drawing.Color.WhiteSmoke;
+            chartArea7.AxisX.ScaleView.Size = 10D;
+            chartArea7.AxisX.ScaleView.Zoomable = false;
+            chartArea7.AxisY.MajorGrid.LineColor = System.Drawing.Color.WhiteSmoke;
+            chartArea7.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea7);
+            legend7.Name = "Legend1";
+            this.chart1.Legends.Add(legend7);
             this.chart1.Location = new System.Drawing.Point(1224, 51);
             this.chart1.Margin = new System.Windows.Forms.Padding(4);
             this.chart1.Name = "chart1";
-            series5.ChartArea = "ChartArea1";
-            series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series5.Legend = "Legend1";
-            series5.Name = "上传感器";
-            series6.ChartArea = "ChartArea1";
-            series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series6.Legend = "Legend1";
-            series6.Name = "下传感器";
-            this.chart1.Series.Add(series5);
-            this.chart1.Series.Add(series6);
+            series13.ChartArea = "ChartArea1";
+            series13.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series13.Legend = "Legend1";
+            series13.Name = "上传感器";
+            series14.ChartArea = "ChartArea1";
+            series14.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series14.Legend = "Legend1";
+            series14.Name = "下传感器";
+            this.chart1.Series.Add(series13);
+            this.chart1.Series.Add(series14);
             this.chart1.Size = new System.Drawing.Size(735, 284);
             this.chart1.TabIndex = 21;
             this.chart1.Text = "chart1";
@@ -473,27 +473,27 @@
             // 
             // chart2
             // 
-            chartArea4.AxisX.MajorGrid.LineColor = System.Drawing.Color.WhiteSmoke;
-            chartArea4.AxisX.ScaleView.Size = 10D;
-            chartArea4.AxisX.ScaleView.Zoomable = false;
-            chartArea4.AxisY.MajorGrid.LineColor = System.Drawing.Color.WhiteSmoke;
-            chartArea4.Name = "ChartArea1";
-            this.chart2.ChartAreas.Add(chartArea4);
-            legend4.Name = "Legend1";
-            this.chart2.Legends.Add(legend4);
+            chartArea8.AxisX.MajorGrid.LineColor = System.Drawing.Color.WhiteSmoke;
+            chartArea8.AxisX.ScaleView.Size = 10D;
+            chartArea8.AxisX.ScaleView.Zoomable = false;
+            chartArea8.AxisY.MajorGrid.LineColor = System.Drawing.Color.WhiteSmoke;
+            chartArea8.Name = "ChartArea1";
+            this.chart2.ChartAreas.Add(chartArea8);
+            legend8.Name = "Legend1";
+            this.chart2.Legends.Add(legend8);
             this.chart2.Location = new System.Drawing.Point(1224, 342);
             this.chart2.Margin = new System.Windows.Forms.Padding(4);
             this.chart2.Name = "chart2";
-            series7.ChartArea = "ChartArea1";
-            series7.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series7.Legend = "Legend1";
-            series7.Name = "上压紧电机";
-            series8.ChartArea = "ChartArea1";
-            series8.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series8.Legend = "Legend1";
-            series8.Name = "下压紧电机";
-            this.chart2.Series.Add(series7);
-            this.chart2.Series.Add(series8);
+            series15.ChartArea = "ChartArea1";
+            series15.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series15.Legend = "Legend1";
+            series15.Name = "上压紧电机";
+            series16.ChartArea = "ChartArea1";
+            series16.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series16.Legend = "Legend1";
+            series16.Name = "下压紧电机";
+            this.chart2.Series.Add(series15);
+            this.chart2.Series.Add(series16);
             this.chart2.Size = new System.Drawing.Size(735, 284);
             this.chart2.TabIndex = 22;
             this.chart2.Text = "chart2";
