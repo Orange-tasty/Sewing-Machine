@@ -130,6 +130,9 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="VM.GlobalScript.Methods">
+      <HintPath>S:\VM\VisionMaster4.3.0\Applications\GlobalScript\VM.GlobalScript.Methods.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Form主界面.cs">

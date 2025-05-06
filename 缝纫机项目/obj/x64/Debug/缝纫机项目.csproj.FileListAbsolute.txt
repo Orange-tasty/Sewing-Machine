@@ -1357,3 +1357,6 @@ C:\Users\YCM\Desktop\雷赛\程序包\代码\sewing_machine\缝纫机项目\obj\
 C:\Users\YCM\Desktop\雷赛\程序包\代码\sewing_machine\缝纫机项目\obj\x64\Debug\缝纫机项目.csproj.Up2Date
 C:\Users\YCM\Desktop\雷赛\程序包\代码\sewing_machine\缝纫机项目\obj\x64\Debug\缝纫机项目.exe
 C:\Users\YCM\Desktop\雷赛\程序包\代码\sewing_machine\缝纫机项目\obj\x64\Debug\缝纫机项目.pdb
+D:\缝纫机项目\缝纫机项目\bin\x64\Debug\VM.GlobalScript.Methods.dll
+D:\缝纫机项目\缝纫机项目\bin\x64\Debug\iMVS-6000PlatformSDKCS.dll
+D:\缝纫机项目\缝纫机项目\bin\x64\Debug\log4net.dll
