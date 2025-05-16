@@ -141,6 +141,7 @@ namespace 缝纫机项目
 
             工艺测试.配方_针数后识别剪口.Value = Convert.ToDouble(numericUpDown1_针数后识别剪口.Value);
             工艺测试.配方_识别剪口间隔针数.Value = Convert.ToDouble(numericUpDown_识别剪口间隔针数.Value);
+            工艺测试.配方_电缸压下脉冲数.Value = Convert.ToDouble(numericUpDown1_电缸压下脉冲数.Value);
             //工艺测试.配方_尾针表.Clear();
             //工艺测试.配方_尾针表X.Clear();
             int i = 0;  
@@ -202,6 +203,7 @@ namespace 缝纫机项目
 
             numericUpDown1_针数后识别剪口.Value = Convert.ToDecimal(工艺测试.配方_针数后识别剪口.Value);
             numericUpDown_识别剪口间隔针数.Value = Convert.ToDecimal(工艺测试.配方_识别剪口间隔针数.Value);
+            numericUpDown1_电缸压下脉冲数.Value = Convert.ToDecimal(工艺测试.配方_电缸压下脉冲数.Value);
             try
             {
                 
@@ -374,6 +376,11 @@ namespace 缝纫机项目
         }
 
         private void numericUpDown总针数_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label45_Click(object sender, EventArgs e)
         {
 
         }

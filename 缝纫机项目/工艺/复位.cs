@@ -121,14 +121,15 @@ namespace 缝纫机项目
 
             }
             运动控制.单轴停止(0, GLV._下剪口电机);
-            Thread.Sleep(50);
+            Thread.Sleep(5);
             while (IO控制.IN(0, GLV._上电机感应1) == true)
             {
                 运动控制.定速运动(0, GLV._下剪口电机, -500, 0.02, 0);
             }
             运动控制.单轴停止(0, GLV._下剪口电机);
-            Thread.Sleep(50);
+            Thread.Sleep(5);
             运动控制.指令位置清零(0, GLV._下剪口电机);
+            Thread.Sleep(50);
         }
         private void ACT气缸回初始位置()
         {

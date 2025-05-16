@@ -455,6 +455,7 @@ namespace 缝纫机项目
             MainProgram._程序状态 = 7;
             MainProgram.停止逻辑step = 1;
             缝纫机.待机();
+            //Task任务.信息输出("停止完成");
         }
 
         private void button_复位_Click(object sender, EventArgs e)
@@ -808,10 +809,10 @@ namespace 缝纫机项目
 
 
 
-            //TimerDispos.StopTimer();
-            //模拟量.输出(0, GLV._缝纫机控制, 1.9);
-            //Thread.Sleep(500);
-            //模拟量.输出(0, GLV._缝纫机控制, 0);
+            TimerDispos.StopTimer();
+            模拟量.输出(0, GLV._缝纫机控制, 1.9);
+            Thread.Sleep(500);
+            模拟量.输出(0, GLV._缝纫机控制, 0);
         }
 
         private void KHDread(string str)//客户端接收委托关联方法

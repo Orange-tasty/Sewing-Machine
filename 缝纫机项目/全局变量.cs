@@ -874,9 +874,10 @@ namespace 缝纫机项目
 
         public double 剪口冷却位置 = 0; // 记录上次剪口编码器位置
         //private double 剪口冷却阈值 = 工艺测试.配方_识别剪口间隔针数.Value * 1440; // 设定冷却距离（根据实际情况调整）
-        private double 剪口冷却阈值 = 20 * 1440;
+        //private double 剪口冷却阈值 = 20 * 1440;
         public bool ACT剪口检测(uint num, double num_new)
         {
+            double 剪口冷却阈值 = 工艺测试.配方_识别剪口间隔针数.Value * 1440;
             数量 = num;
             if (剪口计数 >= 数量)
             {
@@ -892,7 +893,6 @@ namespace 缝纫机项目
                 剪口冷却位置 = 当前位置; // 第一次检测到剪口，记录位置并开始冷却
                 剪口列表.Add(剪口冷却位置);
                 Task任务.信息输出(名称 + $"检测：第 {剪口计数} 个剪口，位置：{剪口冷却位置}");
-
                 return true;
             }
 
