@@ -413,7 +413,9 @@ namespace 缝纫机项目
         public static double 指令位置清零(ushort card, ushort axis)
         {
             double pos = 0;
+            LTSMC.smc_set_encoder_unit(card, axis, pos);
             short re = LTSMC.smc_set_position_unit(card, axis, pos);
+            //Task任务.信息输出(re.ToString());
             return re;
 
         }

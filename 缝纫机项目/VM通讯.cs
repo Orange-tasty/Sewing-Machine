@@ -62,26 +62,34 @@ namespace 缝纫机项目
             
         }
 
-        public static bool 接收信息拆解Try(string message,out (double 距离, int 剪口数, int 二次剪口数, double 距离X, int 剪口数X, int 二次剪口数X) result)
+        public static bool 接收信息拆解Try(string message,out (double 距离, int 剪口数, int 二次剪口数, double 距离X, int 剪口数X, int 二次剪口数X,double 长度, double 长度X) result)
         {
             result = default;
             if (string.IsNullOrWhiteSpace(message))
                 return false;
 
             var parts = message.Split(';');
-            if (parts.Length != 6)
+            if (parts.Length != 8)
+            { 
+                double.TryParse(parts[0], out double D0);
+                double.TryParse(parts[1], out double D1);
+                result = (D0, 0, 0, D1, 0, 0, 0, 0);
                 return false;
+            }
+               
 
             if (!double.TryParse(parts[0], out double d1) ||
                 !int.TryParse(parts[1], out int n1) ||
                 !int.TryParse(parts[2], out int n2) ||
                 !double.TryParse(parts[3], out double d2) ||
                 !int.TryParse(parts[4], out int n3) ||
-                !int.TryParse(parts[5], out int n4))
+                !int.TryParse(parts[5], out int n4) ||
+                !double.TryParse(parts[6], out double d3) ||
+                    !double.TryParse(parts[7], out double d4))
             {
                 return false;
             }
-            result =  (d1, n1, n2, d2, n3, n4);
+            result =  (d1, n1, n2, d2, n3, n4, d3*0.1125 , d4*0.0948);
             return true;
         }
 

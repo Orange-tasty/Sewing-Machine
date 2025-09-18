@@ -28,12 +28,6 @@ namespace 缝纫机项目
 
         private void Form功能验证_Load(object sender, EventArgs e)
         {
-            
-
-
-
-
-
             //chart1.Series[0].Points.AddXY(0, -401.2);
             //chart1.Series[0].Points.AddXY(1, -100.2);
             //chart1.Series[0].Points.AddXY(2, 0);

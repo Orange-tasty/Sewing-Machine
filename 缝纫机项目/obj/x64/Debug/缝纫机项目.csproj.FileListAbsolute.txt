@@ -1383,7 +1383,6 @@ E:\Project\雷赛\程序包\代码\sewing_machine\缝纫机项目\bin\x64\Debug\
 E:\Project\雷赛\程序包\代码\sewing_machine\缝纫机项目\bin\x64\Debug\System.Security.Principal.Windows.dll
 E:\Project\雷赛\程序包\代码\sewing_machine\缝纫机项目\bin\x64\Debug\System.Text.Encoding.CodePages.dll
 E:\Project\雷赛\程序包\代码\sewing_machine\缝纫机项目\bin\x64\Debug\System.ValueTuple.dll
-E:\Project\雷赛\程序包\代码\sewing_machine\缝纫机项目\bin\x64\Debug\iMVS-6000PlatformSDKCS.dll
 E:\Project\雷赛\程序包\代码\sewing_machine\缝纫机项目\bin\x64\Debug\log4net.dll
 E:\Project\雷赛\程序包\代码\sewing_machine\缝纫机项目\bin\x64\Debug\BouncyCastle.Cryptography.xml
 E:\Project\雷赛\程序包\代码\sewing_machine\缝纫机项目\bin\x64\Debug\Enums.NET.pdb

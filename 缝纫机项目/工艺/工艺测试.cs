@@ -29,6 +29,8 @@ namespace 缝纫机项目
         public static double 剪口数X = 0;
         public static double 二次剪口数 = 0;
         public static double 二次剪口数X = 0;
+        public static double 长度 = 0;
+        public static double 长度X = 0;
         public static double 配方_上Dis = 500;
         public static double 配方_下Dis = 500;
 
@@ -198,6 +200,7 @@ namespace 缝纫机项目
         public static int 已执行针数 = 0;
         public static int 目标针数;
         public static bool 修改目前针数 = false;
+       // public int 脉冲数 = (int)配方_电缸压下脉冲数.Value;
 
         public static List<double> 上传感器记录 = new List<double>();
         public static List<double> 下传感器记录 = new List<double>();
@@ -270,7 +273,11 @@ namespace 缝纫机项目
         public bool 对剪口运行 = false;
         public bool 二次对剪口运行 = false;
         public bool 二次剪口检测 = true;
-
+        public bool 上距离 = true;
+        public bool 下距离 = true;
+        int num1 = 0;
+        int num2 = 0;
+        double x1 = 0, x2 = 0;
         //public static async Task<bool> 等待数据接收(int 超时时间ms)
         //{
         //    Stopwatch 计时器 = Stopwatch.StartNew();
@@ -359,13 +366,16 @@ namespace 缝纫机项目
                             break;
 
                         case (ushort)STEP.开始回针动作:
+                            //Task任务.信息输出("开始回针动作");
                             //IO控制.OUT(0, GLV._上拐弯电机气缸, GLV.OFF);
                             //IO控制.OUT(0, GLV._下拐弯电机气缸, GLV.ON);
-                            运动控制.点位运动(0, GLV._下剪口电机, 8000, 0.02, -1500, 1);
+
+                            //运动控制.点位运动(0, GLV._下剪口电机, 8000, 0.02, -2000, 1);
+
                             //缝纫机.控制(缝纫机转速标定.已知转速求电压(_缝纫机初始工作转速.Value));
                             double 当前编码器位置 = 运动控制.反馈位置(0, GLV._缝纫机编码器);
                             //if (当前编码器位置 >= _缝纫机编码器细分.Value * 已执行针数)
-                            //{ 
+                            //{
                             //    已执行针数++;
                             //    //数据采集.采集(已执行针数);   //20240201
                             //}
@@ -400,7 +410,7 @@ namespace 缝纫机项目
 
                             step = (ushort)STEP.缝纫机启动;
                             // 20240723，把缝纫机启动放到这个步骤中
-                            缝纫机.控制(缝纫机转速标定.已知转速求电压(_缝纫机初始工作转速.Value));
+                            //缝纫机.控制(缝纫机转速标定.已知转速求电压(_缝纫机初始工作转速.Value));
 
                             Task任务.信息输出("缝纫机启动,转速:"+ _缝纫机初始工作转速+",电压:"+ 缝纫机转速标定.已知转速求电压(_缝纫机初始工作转速.Value));
 
@@ -540,6 +550,20 @@ namespace 缝纫机项目
                                     //bool re1 = 上剪口.ACT剪口检测((uint)配方_上剪口数量.Value);
                                     //bool re2 = 下剪口.ACT剪口检测((uint)配方_下剪口数量.Value);
 
+                                    if (上剪口.剪口计数 == 1 && 上距离)
+                                    {
+                                        x1 = 工艺测试.长度;
+                                        num1 = 已执行针数;
+                                        上距离 = false;
+                                    }
+
+                                    if (下剪口.剪口计数 == 1 && 下距离)
+                                    {
+                                        x2 = 工艺测试.长度X;
+                                        num2 = 已执行针数;
+                                        下距离 = false;
+                                    }
+
                                     if ((!re1 || !re2) && !修改目前针数)
                                     {
                                         目标针数 = (int)(已执行针数 + 配方_上最后剪口后针数.Value + 配方_尾针数.Value);
@@ -557,6 +581,9 @@ namespace 缝纫机项目
 
                                             //double 差值 = 上剪口.ACT剪口位置计算(上剪口.剪口计数) - 下剪口.ACT剪口位置计算(下剪口.剪口计数);
                                             double 差值 = 上剪口.ACT剪口位置获取(上剪口.剪口计数) - 下剪口.ACT剪口位置获取(下剪口.剪口计数);
+                                            double 距离差 = x1 - x2 + (num2 - num1) * 3;
+                                            Task任务.信息输出("距离差" + 距离差 + "qitashu" + x1 + ","+ x2 + "," + num1 + ","+ num2);
+                                            //x1 = 0 ; x2 = 0; num1 = 0 ; num2 = 0 ;
                                             //double 差值 = (上剪口.剪口冷却位置 - 下剪口.剪口冷却位置);
                                             //Task任务.信息输出("第" + 上剪口.剪口计数 + "个剪口的上下差值:" + 差值);
                                             double vel1 = 0;
@@ -564,11 +591,13 @@ namespace 缝纫机项目
                                             double t1 = 0;
                                             double t2 = 0;
 
-                                            if (差值 >= 0)
+
+
+                                            if (距离差 >= 0)
                                             {
                                                 t2 = 剪口电机速度.时间计算(缝纫机.当前转速(), 差值, 1);
-                                                //单轴位置控制(GLV._下剪口电机, t2, 差值);
-                                                Task任务.信息输出("第" + 上剪口.剪口计数 + "个剪口的上下差值:" + 差值 + "。要压下的时间为:" + (int)t2 + " ms");
+                                                单轴位置控制(GLV._下剪口电机, t2, 差值, (int)配方_电缸压下脉冲数.Value);
+                                                Task任务.信息输出("第" + 上剪口.剪口计数 + "个剪口的上下差值:" + 距离差 + "mm。要压下的时间为:" + (int)t2 + " ms");
                                                 //vel1 = 剪口电机速度.速度计算(配方_上剪口电机基础速度.Value, 配方_上剪口缝纫机修正比例.Value, 缝纫机.当前转速(), 0, 配方_上剪口差修正比例.Value, 配方_上剪口差基本值.Value, _上剪口电机速度上限.Value, _上剪口电机速度下限.Value);
                                                 //vel2 = 剪口电机速度.速度计算(配方_下剪口电机基础速度.Value, 配方_下剪口缝纫机修正比例.Value, 缝纫机.当前转速(), -差值, 配方_下剪口差修正比例.Value, 配方_下剪口差基本值.Value, _下剪口电机速度上限.Value, _下剪口电机速度下限.Value);
 
@@ -1109,15 +1138,15 @@ namespace 缝纫机项目
         }
 
 
-        private async void 单轴位置控制(ushort 轴号, double 时间, double 差值)
+        private async void 单轴位置控制(ushort 轴号, double 时间, double 差值, int 脉冲)
         {
             if (运动控制.运动状态(0, 轴号))
             {
                 if(差值 > 1440 || 差值 < -1440)
                 {
-                    运动控制.点位运动(0, 轴号, 20000, 0.02, -3600, 1);
+                    运动控制.点位运动(0, 轴号, 30000, 0.02, 脉冲, 1);
                     await Task.Delay((int)时间);  // 异步延迟，不阻塞主线程
-                    运动控制.点位运动(0, 轴号, 20000, 0.02, -1500, 1);
+                    运动控制.点位运动(0, 轴号, 30000, 0.02, 0, 1);
                 }             
             }
         }

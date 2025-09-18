@@ -80,6 +80,8 @@
             this.label20 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label46 = new System.Windows.Forms.Label();
+            this.numericUpDown_压下脉冲数 = new System.Windows.Forms.NumericUpDown();
             this.numericUpDown_识别剪口间隔针数 = new System.Windows.Forms.NumericUpDown();
             this.label43 = new System.Windows.Forms.Label();
             this.label44 = new System.Windows.Forms.Label();
@@ -114,8 +116,6 @@
             this.label25 = new System.Windows.Forms.Label();
             this.label26 = new System.Windows.Forms.Label();
             this.numericUpDown_下剪口数量 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown1_电缸压下脉冲数 = new System.Windows.Forms.NumericUpDown();
-            this.label45 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown总针数)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown尾针数)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -140,6 +140,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_上剪口电机基础速度)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_上剪口差修正比例)).BeginInit();
             this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_压下脉冲数)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_识别剪口间隔针数)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1_针数后识别剪口)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_上剪口差基本值)).BeginInit();
@@ -151,7 +152,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_下剪口差修正比例)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_下剪口后针数)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_下剪口数量)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1_电缸压下脉冲数)).BeginInit();
             this.SuspendLayout();
             // 
             // label总针数
@@ -314,11 +314,6 @@
             0,
             0,
             0});
-            this.numericUpDown_上V.Minimum = new decimal(new int[] {
-            0,
-            0,
-            0,
-            -2147483648});
             this.numericUpDown_上V.Name = "numericUpDown_上V";
             this.numericUpDown_上V.Size = new System.Drawing.Size(84, 25);
             this.numericUpDown_上V.TabIndex = 13;
@@ -893,9 +888,38 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "上剪口";
             // 
+            // label46
+            // 
+            this.label46.AutoSize = true;
+            this.label46.Location = new System.Drawing.Point(577, 49);
+            this.label46.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label46.Name = "label46";
+            this.label46.Size = new System.Drawing.Size(112, 15);
+            this.label46.TabIndex = 93;
+            this.label46.Text = "电缸压下脉冲数";
+            this.label46.Click += new System.EventHandler(this.label46_Click);
+            // 
+            // numericUpDown_压下脉冲数
+            // 
+            this.numericUpDown_压下脉冲数.Location = new System.Drawing.Point(697, 40);
+            this.numericUpDown_压下脉冲数.Margin = new System.Windows.Forms.Padding(4);
+            this.numericUpDown_压下脉冲数.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.numericUpDown_压下脉冲数.Minimum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            -2147483648});
+            this.numericUpDown_压下脉冲数.Name = "numericUpDown_压下脉冲数";
+            this.numericUpDown_压下脉冲数.Size = new System.Drawing.Size(84, 25);
+            this.numericUpDown_压下脉冲数.TabIndex = 92;
+            // 
             // numericUpDown_识别剪口间隔针数
             // 
-            this.numericUpDown_识别剪口间隔针数.Location = new System.Drawing.Point(661, 61);
+            this.numericUpDown_识别剪口间隔针数.Location = new System.Drawing.Point(589, 67);
             this.numericUpDown_识别剪口间隔针数.Margin = new System.Windows.Forms.Padding(4);
             this.numericUpDown_识别剪口间隔针数.Maximum = new decimal(new int[] {
             1000,
@@ -921,7 +945,7 @@
             // label44
             // 
             this.label44.AutoSize = true;
-            this.label44.Location = new System.Drawing.Point(526, 71);
+            this.label44.Location = new System.Drawing.Point(454, 77);
             this.label44.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label44.Name = "label44";
             this.label44.Size = new System.Drawing.Size(127, 15);
@@ -930,7 +954,7 @@
             // 
             // numericUpDown1_针数后识别剪口
             // 
-            this.numericUpDown1_针数后识别剪口.Location = new System.Drawing.Point(529, 20);
+            this.numericUpDown1_针数后识别剪口.Location = new System.Drawing.Point(457, 26);
             this.numericUpDown1_针数后识别剪口.Margin = new System.Windows.Forms.Padding(4);
             this.numericUpDown1_针数后识别剪口.Maximum = new decimal(new int[] {
             10000,
@@ -949,12 +973,13 @@
             // label42
             // 
             this.label42.AutoSize = true;
-            this.label42.Location = new System.Drawing.Point(621, 22);
+            this.label42.Location = new System.Drawing.Point(549, 28);
             this.label42.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label42.Name = "label42";
             this.label42.Size = new System.Drawing.Size(112, 15);
             this.label42.TabIndex = 79;
             this.label42.Text = "针数后识别剪口";
+            this.label42.Click += new System.EventHandler(this.label42_Click);
             // 
             // label38
             // 
@@ -1066,9 +1091,9 @@
             // 
             // groupBox4
             // 
-            this.groupBox4.Controls.Add(this.label45);
-            this.groupBox4.Controls.Add(this.numericUpDown1_电缸压下脉冲数);
+            this.groupBox4.Controls.Add(this.label46);
             this.groupBox4.Controls.Add(this.numericUpDown_下剪口差基本值);
+            this.groupBox4.Controls.Add(this.numericUpDown_压下脉冲数);
             this.groupBox4.Controls.Add(this.label41);
             this.groupBox4.Controls.Add(this.label19);
             this.groupBox4.Controls.Add(this.label17);
@@ -1332,35 +1357,6 @@
             this.numericUpDown_下剪口数量.Size = new System.Drawing.Size(84, 25);
             this.numericUpDown_下剪口数量.TabIndex = 0;
             // 
-            // numericUpDown1_电缸压下脉冲数
-            // 
-            this.numericUpDown1_电缸压下脉冲数.Location = new System.Drawing.Point(661, 39);
-            this.numericUpDown1_电缸压下脉冲数.Margin = new System.Windows.Forms.Padding(4);
-            this.numericUpDown1_电缸压下脉冲数.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
-            this.numericUpDown1_电缸压下脉冲数.Minimum = new decimal(new int[] {
-            -10000,
-            0,
-            0,
-            -2147483648});
-            this.numericUpDown1_电缸压下脉冲数.Name = "numericUpDown1_电缸压下脉冲数";
-            this.numericUpDown1_电缸压下脉冲数.Size = new System.Drawing.Size(84, 25);
-            this.numericUpDown1_电缸压下脉冲数.TabIndex = 91;
-            // 
-            // label45
-            // 
-            this.label45.AutoSize = true;
-            this.label45.Location = new System.Drawing.Point(541, 48);
-            this.label45.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label45.Name = "label45";
-            this.label45.Size = new System.Drawing.Size(112, 15);
-            this.label45.TabIndex = 92;
-            this.label45.Text = "电缸压下脉冲数";
-            this.label45.Click += new System.EventHandler(this.label45_Click);
-            // 
             // Form配方
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -1413,6 +1409,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_上剪口差修正比例)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_压下脉冲数)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_识别剪口间隔针数)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1_针数后识别剪口)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_上剪口差基本值)).EndInit();
@@ -1425,7 +1422,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_下剪口差修正比例)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_下剪口后针数)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_下剪口数量)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1_电缸压下脉冲数)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1518,7 +1514,7 @@
         private System.Windows.Forms.NumericUpDown numericUpDown_识别剪口间隔针数;
         private System.Windows.Forms.Label label43;
         private System.Windows.Forms.Label label44;
-        private System.Windows.Forms.Label label45;
-        private System.Windows.Forms.NumericUpDown numericUpDown1_电缸压下脉冲数;
+        private System.Windows.Forms.NumericUpDown numericUpDown_压下脉冲数;
+        private System.Windows.Forms.Label label46;
     }
 }

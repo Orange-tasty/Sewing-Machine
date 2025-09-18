@@ -16,10 +16,10 @@ namespace 缝纫机项目
         public enum STEP
         {
             默认,
-            复位启动,
-            压脚回零,
+            复位启动,          
             气缸回初始位置,
             等待气缸动作完成,
+            压脚回零,
             复位结束
 
         }
@@ -38,14 +38,8 @@ namespace 缝纫机项目
 
 
                             Task任务.信息输出("复位动作" + step);
-                            step = (ushort)STEP.压脚回零;
-                            break;
-
-                        case (ushort)STEP.压脚回零:
-                            Task任务.信息输出("复位动作" + step);
-                            ACT压脚回零();
                             step = (ushort)STEP.气缸回初始位置;
-                            break;
+                            break;                    
 
 
                         case (ushort)STEP.气缸回初始位置:
@@ -60,9 +54,14 @@ namespace 缝纫机项目
                             Task任务.信息输出("复位动作" + step);
                             ACT等待气缸动作完成();
 
-                            step = (ushort)STEP.复位结束;
+                            step = (ushort)STEP.压脚回零;
                             break;
 
+                        case (ushort)STEP.压脚回零:
+                            Task任务.信息输出("复位动作" + step);
+                            ACT压脚回零();
+                            step = (ushort)STEP.复位结束;
+                            break;
 
                         case (ushort)STEP.复位结束:
                             Task任务.信息输出("复位动作" + step);
@@ -74,7 +73,7 @@ namespace 缝纫机项目
 
                             工艺测试.上剪口.ACT清除();//20240108
                             工艺测试.下剪口.ACT清除();//20240108
-
+                            工艺测试.修改目前针数 = false;
                             运动控制.反馈位置清零(0, GLV._缝纫机编码器);//20231229清除编码器
 
                             
@@ -115,21 +114,21 @@ namespace 缝纫机项目
         public static void ACT压脚回零()
         {
             缝纫机.待机();
+            //while (IO控制.IN(0, GLV._上电机感应1) == false)
+            //{
+            //    运动控制.定速运动(0, GLV._下剪口电机, 1500, 0.02, 1);
+
+            //}
+            //运动控制.单轴停止(0, GLV._下剪口电机);
+            //Thread.Sleep(5);
             while (IO控制.IN(0, GLV._上电机感应1) == false)
             {
-                运动控制.定速运动(0, GLV._下剪口电机, 500, 0.02, 1);
-
+                运动控制.定速运动(0, GLV._下剪口电机, -1500, 0.02, 0);
             }
             运动控制.单轴停止(0, GLV._下剪口电机);
-            Thread.Sleep(5);
-            while (IO控制.IN(0, GLV._上电机感应1) == true)
-            {
-                运动控制.定速运动(0, GLV._下剪口电机, -500, 0.02, 0);
-            }
-            运动控制.单轴停止(0, GLV._下剪口电机);
-            Thread.Sleep(5);
+            Thread.Sleep(100);
             运动控制.指令位置清零(0, GLV._下剪口电机);
-            Thread.Sleep(50);
+            //Thread.Sleep(50);
         }
         private void ACT气缸回初始位置()
         {

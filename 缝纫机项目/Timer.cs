@@ -12,7 +12,7 @@ namespace 缝纫机项目
         static Timer timer = null;
         static ManualResetEvent timerDisposed = null;//ManualResetEvent继承WaitHandle
         static int timeCount = 0;
-        public static (double 平均距离1, int 数量1, int 数量2, double 平均距离2, int 数量3, int 数量4) _lastData = (0, 0, 0, 0, 0, 0);
+        public static (double 平均距离1, int 数量1, int 数量2, double 平均距离2, int 数量3, int 数量4,double 长度, double 长度X) _lastData = (0, 0, 0, 0, 0, 0, 0, 0);
         public static void CreateAndStartTimer()
         {
             //初始化Timer，设置触发间隔为2000毫秒，设置dueTime参数为Timeout.Infinite表示不启动Timer

@@ -3,52 +3,39 @@
   "WorkspaceRootPath": "E:\\Project\\\u96F7\u8D5B\\\u7A0B\u5E8F\u5305\\\u4EE3\u7801\\sewing_machine\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{93CD8539-E510-4970-8EA7-39B6AA257C95}|\u7F1D\u7EAB\u673A\u9879\u76EE\\\u7F1D\u7EAB\u673A\u9879\u76EE.csproj|e:\\project\\\u96F7\u8D5B\\\u7A0B\u5E8F\u5305\\\u4EE3\u7801\\sewing_machine\\\u7F1D\u7EAB\u673A\u9879\u76EE\\\u5DE5\u827A\\\u5DE5\u827A\u6D4B\u8BD5.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{93CD8539-E510-4970-8EA7-39B6AA257C95}|\u7F1D\u7EAB\u673A\u9879\u76EE\\\u7F1D\u7EAB\u673A\u9879\u76EE.csproj|E:\\Project\\\u96F7\u8D5B\\\u7A0B\u5E8F\u5305\\\u4EE3\u7801\\sewing_machine\\\u7F1D\u7EAB\u673A\u9879\u76EE\\\u5DE5\u827A\\\u5DE5\u827A\u6D4B\u8BD5.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{93CD8539-E510-4970-8EA7-39B6AA257C95}|\u7F1D\u7EAB\u673A\u9879\u76EE\\\u7F1D\u7EAB\u673A\u9879\u76EE.csproj|solutionrelative:\u7F1D\u7EAB\u673A\u9879\u76EE\\\u5DE5\u827A\\\u5DE5\u827A\u6D4B\u8BD5.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{93CD8539-E510-4970-8EA7-39B6AA257C95}|\u7F1D\u7EAB\u673A\u9879\u76EE\\\u7F1D\u7EAB\u673A\u9879\u76EE.csproj|E:\\Project\\\u96F7\u8D5B\\\u7A0B\u5E8F\u5305\\\u4EE3\u7801\\sewing_machine\\\u7F1D\u7EAB\u673A\u9879\u76EE\\form\u914D\u65B9.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{93CD8539-E510-4970-8EA7-39B6AA257C95}|\u7F1D\u7EAB\u673A\u9879\u76EE\\\u7F1D\u7EAB\u673A\u9879\u76EE.csproj|solutionrelative:\u7F1D\u7EAB\u673A\u9879\u76EE\\form\u914D\u65B9.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{93CD8539-E510-4970-8EA7-39B6AA257C95}|\u7F1D\u7EAB\u673A\u9879\u76EE\\\u7F1D\u7EAB\u673A\u9879\u76EE.csproj|E:\\Project\\\u96F7\u8D5B\\\u7A0B\u5E8F\u5305\\\u4EE3\u7801\\sewing_machine\\\u7F1D\u7EAB\u673A\u9879\u76EE\\form\u914D\u65B9.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{93CD8539-E510-4970-8EA7-39B6AA257C95}|\u7F1D\u7EAB\u673A\u9879\u76EE\\\u7F1D\u7EAB\u673A\u9879\u76EE.csproj|solutionrelative:\u7F1D\u7EAB\u673A\u9879\u76EE\\form\u914D\u65B9.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{93CD8539-E510-4970-8EA7-39B6AA257C95}|\u7F1D\u7EAB\u673A\u9879\u76EE\\\u7F1D\u7EAB\u673A\u9879\u76EE.csproj|E:\\Project\\\u96F7\u8D5B\\\u7A0B\u5E8F\u5305\\\u4EE3\u7801\\sewing_machine\\\u7F1D\u7EAB\u673A\u9879\u76EE\\form\u914D\u65B9.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{93CD8539-E510-4970-8EA7-39B6AA257C95}|\u7F1D\u7EAB\u673A\u9879\u76EE\\\u7F1D\u7EAB\u673A\u9879\u76EE.csproj|solutionrelative:\u7F1D\u7EAB\u673A\u9879\u76EE\\form\u914D\u65B9.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{93CD8539-E510-4970-8EA7-39B6AA257C95}|\u7F1D\u7EAB\u673A\u9879\u76EE\\\u7F1D\u7EAB\u673A\u9879\u76EE.csproj|E:\\Project\\\u96F7\u8D5B\\\u7A0B\u5E8F\u5305\\\u4EE3\u7801\\sewing_machine\\\u7F1D\u7EAB\u673A\u9879\u76EE\\\u5168\u5C40\u53D8\u91CF.cs||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{93CD8539-E510-4970-8EA7-39B6AA257C95}|\u7F1D\u7EAB\u673A\u9879\u76EE\\\u7F1D\u7EAB\u673A\u9879\u76EE.csproj|solutionrelative:\u7F1D\u7EAB\u673A\u9879\u76EE\\\u5168\u5C40\u53D8\u91CF.cs||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{93CD8539-E510-4970-8EA7-39B6AA257C95}|\u7F1D\u7EAB\u673A\u9879\u76EE\\\u7F1D\u7EAB\u673A\u9879\u76EE.csproj|E:\\Project\\\u96F7\u8D5B\\\u7A0B\u5E8F\u5305\\\u4EE3\u7801\\sewing_machine\\\u7F1D\u7EAB\u673A\u9879\u76EE\\\u63A7\u5236\u5361.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{93CD8539-E510-4970-8EA7-39B6AA257C95}|\u7F1D\u7EAB\u673A\u9879\u76EE\\\u7F1D\u7EAB\u673A\u9879\u76EE.csproj|solutionrelative:\u7F1D\u7EAB\u673A\u9879\u76EE\\\u63A7\u5236\u5361.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{93CD8539-E510-4970-8EA7-39B6AA257C95}|\u7F1D\u7EAB\u673A\u9879\u76EE\\\u7F1D\u7EAB\u673A\u9879\u76EE.csproj|E:\\Project\\\u96F7\u8D5B\\\u7A0B\u5E8F\u5305\\\u4EE3\u7801\\sewing_machine\\\u7F1D\u7EAB\u673A\u9879\u76EE\\form\u4E3B\u754C\u9762.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{93CD8539-E510-4970-8EA7-39B6AA257C95}|\u7F1D\u7EAB\u673A\u9879\u76EE\\\u7F1D\u7EAB\u673A\u9879\u76EE.csproj|solutionrelative:\u7F1D\u7EAB\u673A\u9879\u76EE\\form\u4E3B\u754C\u9762.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{93CD8539-E510-4970-8EA7-39B6AA257C95}|\u7F1D\u7EAB\u673A\u9879\u76EE\\\u7F1D\u7EAB\u673A\u9879\u76EE.csproj|E:\\Project\\\u96F7\u8D5B\\\u7A0B\u5E8F\u5305\\\u4EE3\u7801\\sewing_machine\\\u7F1D\u7EAB\u673A\u9879\u76EE\\form\u4E3B\u754C\u9762.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{93CD8539-E510-4970-8EA7-39B6AA257C95}|\u7F1D\u7EAB\u673A\u9879\u76EE\\\u7F1D\u7EAB\u673A\u9879\u76EE.csproj|solutionrelative:\u7F1D\u7EAB\u673A\u9879\u76EE\\form\u4E3B\u754C\u9762.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{93CD8539-E510-4970-8EA7-39B6AA257C95}|\u7F1D\u7EAB\u673A\u9879\u76EE\\\u7F1D\u7EAB\u673A\u9879\u76EE.csproj|E:\\Project\\\u96F7\u8D5B\\\u7A0B\u5E8F\u5305\\\u4EE3\u7801\\sewing_machine\\\u7F1D\u7EAB\u673A\u9879\u76EE\\\u5DE5\u827A\\\u590D\u4F4D.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{93CD8539-E510-4970-8EA7-39B6AA257C95}|\u7F1D\u7EAB\u673A\u9879\u76EE\\\u7F1D\u7EAB\u673A\u9879\u76EE.csproj|solutionrelative:\u7F1D\u7EAB\u673A\u9879\u76EE\\\u5DE5\u827A\\\u590D\u4F4D.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{93CD8539-E510-4970-8EA7-39B6AA257C95}|\u7F1D\u7EAB\u673A\u9879\u76EE\\\u7F1D\u7EAB\u673A\u9879\u76EE.csproj|E:\\Project\\\u96F7\u8D5B\\\u7A0B\u5E8F\u5305\\\u4EE3\u7801\\sewing_machine\\\u7F1D\u7EAB\u673A\u9879\u76EE\\vm\u901A\u8BAF.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{93CD8539-E510-4970-8EA7-39B6AA257C95}|\u7F1D\u7EAB\u673A\u9879\u76EE\\\u7F1D\u7EAB\u673A\u9879\u76EE.csproj|solutionrelative:\u7F1D\u7EAB\u673A\u9879\u76EE\\vm\u901A\u8BAF.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{93CD8539-E510-4970-8EA7-39B6AA257C95}|\u7F1D\u7EAB\u673A\u9879\u76EE\\\u7F1D\u7EAB\u673A\u9879\u76EE.csproj|E:\\Project\\\u96F7\u8D5B\\\u7A0B\u5E8F\u5305\\\u4EE3\u7801\\sewing_machine\\\u7F1D\u7EAB\u673A\u9879\u76EE\\snapthread.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{93CD8539-E510-4970-8EA7-39B6AA257C95}|\u7F1D\u7EAB\u673A\u9879\u76EE\\\u7F1D\u7EAB\u673A\u9879\u76EE.csproj|solutionrelative:\u7F1D\u7EAB\u673A\u9879\u76EE\\snapthread.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{93CD8539-E510-4970-8EA7-39B6AA257C95}|\u7F1D\u7EAB\u673A\u9879\u76EE\\\u7F1D\u7EAB\u673A\u9879\u76EE.csproj|E:\\Project\\\u96F7\u8D5B\\\u7A0B\u5E8F\u5305\\\u4EE3\u7801\\sewing_machine\\\u7F1D\u7EAB\u673A\u9879\u76EE\\\u5DE5\u827A\\pidcontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{93CD8539-E510-4970-8EA7-39B6AA257C95}|\u7F1D\u7EAB\u673A\u9879\u76EE\\\u7F1D\u7EAB\u673A\u9879\u76EE.csproj|solutionrelative:\u7F1D\u7EAB\u673A\u9879\u76EE\\\u5DE5\u827A\\pidcontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\software\\vm_master\\VisionMaster4.3.0\\Applications\\GlobalScript\\Samples\\CH\\3.x\\\u5168\u5C40\u811A\u672C_\u5168\u5C40\u901A\u4FE1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{93CD8539-E510-4970-8EA7-39B6AA257C95}|\u7F1D\u7EAB\u673A\u9879\u76EE\\\u7F1D\u7EAB\u673A\u9879\u76EE.csproj|E:\\Project\\\u96F7\u8D5B\\\u7A0B\u5E8F\u5305\\\u4EE3\u7801\\sewing_machine\\\u7F1D\u7EAB\u673A\u9879\u76EE\\form\u914D\u65B9.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{93CD8539-E510-4970-8EA7-39B6AA257C95}|\u7F1D\u7EAB\u673A\u9879\u76EE\\\u7F1D\u7EAB\u673A\u9879\u76EE.csproj|solutionrelative:\u7F1D\u7EAB\u673A\u9879\u76EE\\form\u914D\u65B9.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{93CD8539-E510-4970-8EA7-39B6AA257C95}|\u7F1D\u7EAB\u673A\u9879\u76EE\\\u7F1D\u7EAB\u673A\u9879\u76EE.csproj|E:\\Project\\\u96F7\u8D5B\\\u7A0B\u5E8F\u5305\\\u4EE3\u7801\\sewing_machine\\\u7F1D\u7EAB\u673A\u9879\u76EE\\timer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{93CD8539-E510-4970-8EA7-39B6AA257C95}|\u7F1D\u7EAB\u673A\u9879\u76EE\\\u7F1D\u7EAB\u673A\u9879\u76EE.csproj|solutionrelative:\u7F1D\u7EAB\u673A\u9879\u76EE\\timer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{93CD8539-E510-4970-8EA7-39B6AA257C95}|\u7F1D\u7EAB\u673A\u9879\u76EE\\\u7F1D\u7EAB\u673A\u9879\u76EE.csproj|e:\\project\\\u96F7\u8D5B\\\u7A0B\u5E8F\u5305\\\u4EE3\u7801\\sewing_machine\\\u7F1D\u7EAB\u673A\u9879\u76EE\\form\u914D\u65B9.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{93CD8539-E510-4970-8EA7-39B6AA257C95}|\u7F1D\u7EAB\u673A\u9879\u76EE\\\u7F1D\u7EAB\u673A\u9879\u76EE.csproj|solutionrelative:\u7F1D\u7EAB\u673A\u9879\u76EE\\form\u914D\u65B9.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{93CD8539-E510-4970-8EA7-39B6AA257C95}|\u7F1D\u7EAB\u673A\u9879\u76EE\\\u7F1D\u7EAB\u673A\u9879\u76EE.csproj|e:\\project\\\u96F7\u8D5B\\\u7A0B\u5E8F\u5305\\\u4EE3\u7801\\sewing_machine\\\u7F1D\u7EAB\u673A\u9879\u76EE\\form\u4E3B\u754C\u9762.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{93CD8539-E510-4970-8EA7-39B6AA257C95}|\u7F1D\u7EAB\u673A\u9879\u76EE\\\u7F1D\u7EAB\u673A\u9879\u76EE.csproj|solutionrelative:\u7F1D\u7EAB\u673A\u9879\u76EE\\form\u4E3B\u754C\u9762.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{93CD8539-E510-4970-8EA7-39B6AA257C95}|\u7F1D\u7EAB\u673A\u9879\u76EE\\\u7F1D\u7EAB\u673A\u9879\u76EE.csproj|E:\\Project\\\u96F7\u8D5B\\\u7A0B\u5E8F\u5305\\\u4EE3\u7801\\sewing_machine\\\u7F1D\u7EAB\u673A\u9879\u76EE\\form\u4E3B\u754C\u9762.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{93CD8539-E510-4970-8EA7-39B6AA257C95}|\u7F1D\u7EAB\u673A\u9879\u76EE\\\u7F1D\u7EAB\u673A\u9879\u76EE.csproj|solutionrelative:\u7F1D\u7EAB\u673A\u9879\u76EE\\form\u4E3B\u754C\u9762.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -58,33 +45,78 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 8,
               "Title": "Form\u4E3B\u754C\u9762.cs",
               "DocumentMoniker": "E:\\Project\\\u96F7\u8D5B\\\u7A0B\u5E8F\u5305\\\u4EE3\u7801\\sewing_machine\\\u7F1D\u7EAB\u673A\u9879\u76EE\\Form\u4E3B\u754C\u9762.cs",
               "RelativeDocumentMoniker": "\u7F1D\u7EAB\u673A\u9879\u76EE\\Form\u4E3B\u754C\u9762.cs",
               "ToolTip": "E:\\Project\\\u96F7\u8D5B\\\u7A0B\u5E8F\u5305\\\u4EE3\u7801\\sewing_machine\\\u7F1D\u7EAB\u673A\u9879\u76EE\\Form\u4E3B\u754C\u9762.cs",
               "RelativeToolTip": "\u7F1D\u7EAB\u673A\u9879\u76EE\\Form\u4E3B\u754C\u9762.cs",
-              "ViewState": "AQIAACUCAAAAAAAAAIBTwCgCAAATAAAA",
+              "ViewState": "AQIAALwBAAAAAAAAAAAcwMcBAAAeAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-10T04:11:07.351Z",
-              "IsPinned": true
+              "IsPinned": true,
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 2,
               "Title": "SnapThread.cs",
               "DocumentMoniker": "E:\\Project\\\u96F7\u8D5B\\\u7A0B\u5E8F\u5305\\\u4EE3\u7801\\sewing_machine\\\u7F1D\u7EAB\u673A\u9879\u76EE\\SnapThread.cs",
               "RelativeDocumentMoniker": "\u7F1D\u7EAB\u673A\u9879\u76EE\\SnapThread.cs",
               "ToolTip": "E:\\Project\\\u96F7\u8D5B\\\u7A0B\u5E8F\u5305\\\u4EE3\u7801\\sewing_machine\\\u7F1D\u7EAB\u673A\u9879\u76EE\\SnapThread.cs",
               "RelativeToolTip": "\u7F1D\u7EAB\u673A\u9879\u76EE\\SnapThread.cs",
-              "ViewState": "AQIAAEkAAAAAAAAAAAAmwFQAAAAcAAAA",
+              "ViewState": "AQIAAJUAAAAAAAAAAAAowE8AAAAqAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-25T01:47:40.262Z",
-              "IsPinned": true
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "\u5DE5\u827A\u6D4B\u8BD5.cs",
+              "DocumentMoniker": "E:\\Project\\\u96F7\u8D5B\\\u7A0B\u5E8F\u5305\\\u4EE3\u7801\\sewing_machine\\\u7F1D\u7EAB\u673A\u9879\u76EE\\\u5DE5\u827A\\\u5DE5\u827A\u6D4B\u8BD5.cs",
+              "RelativeDocumentMoniker": "\u7F1D\u7EAB\u673A\u9879\u76EE\\\u5DE5\u827A\\\u5DE5\u827A\u6D4B\u8BD5.cs",
+              "ToolTip": "E:\\Project\\\u96F7\u8D5B\\\u7A0B\u5E8F\u5305\\\u4EE3\u7801\\sewing_machine\\\u7F1D\u7EAB\u673A\u9879\u76EE\\\u5DE5\u827A\\\u5DE5\u827A\u6D4B\u8BD5.cs",
+              "RelativeToolTip": "\u7F1D\u7EAB\u673A\u9879\u76EE\\\u5DE5\u827A\\\u5DE5\u827A\u6D4B\u8BD5.cs",
+              "ViewState": "AQIAADkCAAAAAAAAAAAhwEkCAABUAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-04T13:56:27.698Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "VM\u901A\u8BAF.cs",
+              "DocumentMoniker": "E:\\Project\\\u96F7\u8D5B\\\u7A0B\u5E8F\u5305\\\u4EE3\u7801\\sewing_machine\\\u7F1D\u7EAB\u673A\u9879\u76EE\\VM\u901A\u8BAF.cs",
+              "RelativeDocumentMoniker": "\u7F1D\u7EAB\u673A\u9879\u76EE\\VM\u901A\u8BAF.cs",
+              "ToolTip": "E:\\Project\\\u96F7\u8D5B\\\u7A0B\u5E8F\u5305\\\u4EE3\u7801\\sewing_machine\\\u7F1D\u7EAB\u673A\u9879\u76EE\\VM\u901A\u8BAF.cs",
+              "RelativeToolTip": "\u7F1D\u7EAB\u673A\u9879\u76EE\\VM\u901A\u8BAF.cs",
+              "ViewState": "AQIAAEMAAAAAAAAAAAAAAFIAAAA2AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-23T08:46:47.9Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "\u5168\u5C40\u811A\u672C_\u5168\u5C40\u901A\u4FE1.cs",
+              "DocumentMoniker": "D:\\software\\vm_master\\VisionMaster4.3.0\\Applications\\GlobalScript\\Samples\\CH\\3.x\\\u5168\u5C40\u811A\u672C_\u5168\u5C40\u901A\u4FE1.cs",
+              "ToolTip": "D:\\software\\vm_master\\VisionMaster4.3.0\\Applications\\GlobalScript\\Samples\\CH\\3.x\\\u5168\u5C40\u811A\u672C_\u5168\u5C40\u901A\u4FE1.cs",
+              "ViewState": "AQIAADAAAAAAAAAAAADwvz4AAAAOAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-18T08:01:55.945Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -95,120 +127,47 @@
               "ToolTip": "E:\\Project\\\u96F7\u8D5B\\\u7A0B\u5E8F\u5305\\\u4EE3\u7801\\sewing_machine\\\u7F1D\u7EAB\u673A\u9879\u76EE\\Form\u4E3B\u754C\u9762.cs [\u8BBE\u8BA1]",
               "RelativeToolTip": "\u7F1D\u7EAB\u673A\u9879\u76EE\\Form\u4E3B\u754C\u9762.cs [\u8BBE\u8BA1]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-02T06:31:15.755Z",
-              "IsPinned": true
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
+              "WhenOpened": "2025-09-18T03:15:20.204Z",
+              "EditorCaption": " [\u8BBE\u8BA1]"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "\u5DE5\u827A\u6D4B\u8BD5.cs",
-              "DocumentMoniker": "E:\\Project\\\u96F7\u8D5B\\\u7A0B\u5E8F\u5305\\\u4EE3\u7801\\sewing_machine\\\u7F1D\u7EAB\u673A\u9879\u76EE\\\u5DE5\u827A\\\u5DE5\u827A\u6D4B\u8BD5.cs",
-              "RelativeDocumentMoniker": "\u7F1D\u7EAB\u673A\u9879\u76EE\\\u5DE5\u827A\\\u5DE5\u827A\u6D4B\u8BD5.cs",
-              "ToolTip": "E:\\Project\\\u96F7\u8D5B\\\u7A0B\u5E8F\u5305\\\u4EE3\u7801\\sewing_machine\\\u7F1D\u7EAB\u673A\u9879\u76EE\\\u5DE5\u827A\\\u5DE5\u827A\u6D4B\u8BD5.cs",
-              "RelativeToolTip": "\u7F1D\u7EAB\u673A\u9879\u76EE\\\u5DE5\u827A\\\u5DE5\u827A\u6D4B\u8BD5.cs",
-              "ViewState": "AQIAACkBAAAAAAAAAAAkwDcBAAAJAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-04T13:56:27.698Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "\u5168\u5C40\u53D8\u91CF.cs",
-              "DocumentMoniker": "E:\\Project\\\u96F7\u8D5B\\\u7A0B\u5E8F\u5305\\\u4EE3\u7801\\sewing_machine\\\u7F1D\u7EAB\u673A\u9879\u76EE\\\u5168\u5C40\u53D8\u91CF.cs",
-              "RelativeDocumentMoniker": "\u7F1D\u7EAB\u673A\u9879\u76EE\\\u5168\u5C40\u53D8\u91CF.cs",
-              "ToolTip": "E:\\Project\\\u96F7\u8D5B\\\u7A0B\u5E8F\u5305\\\u4EE3\u7801\\sewing_machine\\\u7F1D\u7EAB\u673A\u9879\u76EE\\\u5168\u5C40\u53D8\u91CF.cs",
-              "RelativeToolTip": "\u7F1D\u7EAB\u673A\u9879\u76EE\\\u5168\u5C40\u53D8\u91CF.cs",
-              "ViewState": "AQIAAJsAAAAAAAAAAAAgwK4AAAA7AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-07T06:57:26.042Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Form\u914D\u65B9.Designer.cs",
-              "DocumentMoniker": "E:\\Project\\\u96F7\u8D5B\\\u7A0B\u5E8F\u5305\\\u4EE3\u7801\\sewing_machine\\\u7F1D\u7EAB\u673A\u9879\u76EE\\Form\u914D\u65B9.Designer.cs",
-              "RelativeDocumentMoniker": "\u7F1D\u7EAB\u673A\u9879\u76EE\\Form\u914D\u65B9.Designer.cs",
-              "ToolTip": "E:\\Project\\\u96F7\u8D5B\\\u7A0B\u5E8F\u5305\\\u4EE3\u7801\\sewing_machine\\\u7F1D\u7EAB\u673A\u9879\u76EE\\Form\u914D\u65B9.Designer.cs",
-              "RelativeToolTip": "\u7F1D\u7EAB\u673A\u9879\u76EE\\Form\u914D\u65B9.Designer.cs",
-              "ViewState": "AQIAAC4BAAAAAAAAAAAswDsBAAACAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-07T06:47:03.046Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "Timer.cs",
-              "DocumentMoniker": "E:\\Project\\\u96F7\u8D5B\\\u7A0B\u5E8F\u5305\\\u4EE3\u7801\\sewing_machine\\\u7F1D\u7EAB\u673A\u9879\u76EE\\Timer.cs",
-              "RelativeDocumentMoniker": "\u7F1D\u7EAB\u673A\u9879\u76EE\\Timer.cs",
-              "ToolTip": "E:\\Project\\\u96F7\u8D5B\\\u7A0B\u5E8F\u5305\\\u4EE3\u7801\\sewing_machine\\\u7F1D\u7EAB\u673A\u9879\u76EE\\Timer.cs",
-              "RelativeToolTip": "\u7F1D\u7EAB\u673A\u9879\u76EE\\Timer.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAADwvwAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-28T06:54:35.796Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Form\u914D\u65B9.cs [\u8BBE\u8BA1]",
-              "DocumentMoniker": "E:\\Project\\\u96F7\u8D5B\\\u7A0B\u5E8F\u5305\\\u4EE3\u7801\\sewing_machine\\\u7F1D\u7EAB\u673A\u9879\u76EE\\Form\u914D\u65B9.cs",
-              "RelativeDocumentMoniker": "\u7F1D\u7EAB\u673A\u9879\u76EE\\Form\u914D\u65B9.cs",
-              "ToolTip": "E:\\Project\\\u96F7\u8D5B\\\u7A0B\u5E8F\u5305\\\u4EE3\u7801\\sewing_machine\\\u7F1D\u7EAB\u673A\u9879\u76EE\\Form\u914D\u65B9.cs [\u8BBE\u8BA1]",
-              "RelativeToolTip": "\u7F1D\u7EAB\u673A\u9879\u76EE\\Form\u914D\u65B9.cs [\u8BBE\u8BA1]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-11T05:19:22.465Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 6,
               "Title": "Form\u914D\u65B9.cs",
               "DocumentMoniker": "E:\\Project\\\u96F7\u8D5B\\\u7A0B\u5E8F\u5305\\\u4EE3\u7801\\sewing_machine\\\u7F1D\u7EAB\u673A\u9879\u76EE\\Form\u914D\u65B9.cs",
               "RelativeDocumentMoniker": "\u7F1D\u7EAB\u673A\u9879\u76EE\\Form\u914D\u65B9.cs",
               "ToolTip": "E:\\Project\\\u96F7\u8D5B\\\u7A0B\u5E8F\u5305\\\u4EE3\u7801\\sewing_machine\\\u7F1D\u7EAB\u673A\u9879\u76EE\\Form\u914D\u65B9.cs",
               "RelativeToolTip": "\u7F1D\u7EAB\u673A\u9879\u76EE\\Form\u914D\u65B9.cs",
-              "ViewState": "AQIAAGMAAAAAAAAAAAAowG0AAABGAAAA",
+              "ViewState": "AQIAALIAAAAAAAAAAAAcwLsAAABAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-11T05:19:25.955Z"
+              "WhenOpened": "2025-06-25T09:04:29.629Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "\u590D\u4F4D.cs",
-              "DocumentMoniker": "E:\\Project\\\u96F7\u8D5B\\\u7A0B\u5E8F\u5305\\\u4EE3\u7801\\sewing_machine\\\u7F1D\u7EAB\u673A\u9879\u76EE\\\u5DE5\u827A\\\u590D\u4F4D.cs",
-              "RelativeDocumentMoniker": "\u7F1D\u7EAB\u673A\u9879\u76EE\\\u5DE5\u827A\\\u590D\u4F4D.cs",
-              "ToolTip": "E:\\Project\\\u96F7\u8D5B\\\u7A0B\u5E8F\u5305\\\u4EE3\u7801\\sewing_machine\\\u7F1D\u7EAB\u673A\u9879\u76EE\\\u5DE5\u827A\\\u590D\u4F4D.cs",
-              "RelativeToolTip": "\u7F1D\u7EAB\u673A\u9879\u76EE\\\u5DE5\u827A\\\u590D\u4F4D.cs",
-              "ViewState": "AQIAACAAAAAAAAAAAAAewC0AAAAmAAAA",
+              "DocumentIndex": 4,
+              "Title": "Form\u914D\u65B9.Designer.cs",
+              "DocumentMoniker": "E:\\Project\\\u96F7\u8D5B\\\u7A0B\u5E8F\u5305\\\u4EE3\u7801\\sewing_machine\\\u7F1D\u7EAB\u673A\u9879\u76EE\\Form\u914D\u65B9.Designer.cs",
+              "RelativeDocumentMoniker": "\u7F1D\u7EAB\u673A\u9879\u76EE\\Form\u914D\u65B9.Designer.cs",
+              "ToolTip": "E:\\Project\\\u96F7\u8D5B\\\u7A0B\u5E8F\u5305\\\u4EE3\u7801\\sewing_machine\\\u7F1D\u7EAB\u673A\u9879\u76EE\\Form\u914D\u65B9.Designer.cs",
+              "RelativeToolTip": "\u7F1D\u7EAB\u673A\u9879\u76EE\\Form\u914D\u65B9.Designer.cs",
+              "ViewState": "AQIAAH4AAAAAAAAAAADgv44AAABQAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-02T06:33:35.829Z"
+              "WhenOpened": "2025-05-07T06:47:03.046Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
-              "Title": "\u63A7\u5236\u5361.cs",
-              "DocumentMoniker": "E:\\Project\\\u96F7\u8D5B\\\u7A0B\u5E8F\u5305\\\u4EE3\u7801\\sewing_machine\\\u7F1D\u7EAB\u673A\u9879\u76EE\\\u63A7\u5236\u5361.cs",
-              "RelativeDocumentMoniker": "\u7F1D\u7EAB\u673A\u9879\u76EE\\\u63A7\u5236\u5361.cs",
-              "ToolTip": "E:\\Project\\\u96F7\u8D5B\\\u7A0B\u5E8F\u5305\\\u4EE3\u7801\\sewing_machine\\\u7F1D\u7EAB\u673A\u9879\u76EE\\\u63A7\u5236\u5361.cs",
-              "RelativeToolTip": "\u7F1D\u7EAB\u673A\u9879\u76EE\\\u63A7\u5236\u5361.cs",
-              "ViewState": "AQIAAOECAAAAAAAAAAAcwOMCAAANAAAA",
+              "Title": "Timer.cs",
+              "DocumentMoniker": "E:\\Project\\\u96F7\u8D5B\\\u7A0B\u5E8F\u5305\\\u4EE3\u7801\\sewing_machine\\\u7F1D\u7EAB\u673A\u9879\u76EE\\Timer.cs",
+              "RelativeDocumentMoniker": "\u7F1D\u7EAB\u673A\u9879\u76EE\\Timer.cs",
+              "ToolTip": "E:\\Project\\\u96F7\u8D5B\\\u7A0B\u5E8F\u5305\\\u4EE3\u7801\\sewing_machine\\\u7F1D\u7EAB\u673A\u9879\u76EE\\Timer.cs",
+              "RelativeToolTip": "\u7F1D\u7EAB\u673A\u9879\u76EE\\Timer.cs",
+              "ViewState": "AQIAACQAAAAAAAAAAAAIwCYAAAAgAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-02T07:22:48.379Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "PIDcontrol.cs",
-              "DocumentMoniker": "E:\\Project\\\u96F7\u8D5B\\\u7A0B\u5E8F\u5305\\\u4EE3\u7801\\sewing_machine\\\u7F1D\u7EAB\u673A\u9879\u76EE\\\u5DE5\u827A\\PIDcontrol.cs",
-              "RelativeDocumentMoniker": "\u7F1D\u7EAB\u673A\u9879\u76EE\\\u5DE5\u827A\\PIDcontrol.cs",
-              "ToolTip": "E:\\Project\\\u96F7\u8D5B\\\u7A0B\u5E8F\u5305\\\u4EE3\u7801\\sewing_machine\\\u7F1D\u7EAB\u673A\u9879\u76EE\\\u5DE5\u827A\\PIDcontrol.cs",
-              "RelativeToolTip": "\u7F1D\u7EAB\u673A\u9879\u76EE\\\u5DE5\u827A\\PIDcontrol.cs",
-              "ViewState": "AQIAAFYAAAAAAAAAAAAYwGEAAAAqAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-31T08:55:56.064Z"
+              "WhenOpened": "2025-04-28T06:54:35.796Z",
+              "EditorCaption": ""
             }
           ]
         }
