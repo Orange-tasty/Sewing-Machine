@@ -278,6 +278,8 @@ namespace 缝纫机项目
         int num1 = 0;
         int num2 = 0;
         double x1 = 0, x2 = 0;
+        uint lastUpCount = 0;
+        uint lastDownCount = 0;
         //public static async Task<bool> 等待数据接收(int 超时时间ms)
         //{
         //    Stopwatch 计时器 = Stopwatch.StartNew();
@@ -546,22 +548,25 @@ namespace 缝纫机项目
                                 {
                                     bool re1 = 上剪口.ACT剪口检测((uint)配方_上剪口数量.Value, 剪口数);
                                     bool re2 = 下剪口.ACT剪口检测((uint)配方_下剪口数量.Value, 剪口数X);
-                                    
+
                                     //bool re1 = 上剪口.ACT剪口检测((uint)配方_上剪口数量.Value);
                                     //bool re2 = 下剪口.ACT剪口检测((uint)配方_下剪口数量.Value);
-
-                                    if (上剪口.剪口计数 == 1 && 上距离)
+                                    uint upCount = 上剪口.剪口计数;
+                                    uint downCount = 下剪口.剪口计数;
+                                    if (upCount > lastUpCount)
                                     {
                                         x1 = 工艺测试.长度;
                                         num1 = 已执行针数;
-                                        上距离 = false;
+                                        lastUpCount = upCount;
+                                        Task任务.信息输出("长度和针数为" + x1 + "和" + num1);
                                     }
 
-                                    if (下剪口.剪口计数 == 1 && 下距离)
+                                    if (downCount > lastDownCount)
                                     {
                                         x2 = 工艺测试.长度X;
                                         num2 = 已执行针数;
-                                        下距离 = false;
+                                        lastDownCount = downCount;
+                                        Task任务.信息输出("长度和针数为" + x2 + "和" + num2);
                                     }
 
                                     if ((!re1 || !re2) && !修改目前针数)
@@ -582,7 +587,7 @@ namespace 缝纫机项目
                                             //double 差值 = 上剪口.ACT剪口位置计算(上剪口.剪口计数) - 下剪口.ACT剪口位置计算(下剪口.剪口计数);
                                             double 差值 = 上剪口.ACT剪口位置获取(上剪口.剪口计数) - 下剪口.ACT剪口位置获取(下剪口.剪口计数);
                                             double 距离差 = x1 - x2 + (num2 - num1) * 3;
-                                            Task任务.信息输出("距离差" + 距离差 + "qitashu" + x1 + ","+ x2 + "," + num1 + ","+ num2);
+                                            Task任务.信息输出("距离差为" + 距离差);
                                             //x1 = 0 ; x2 = 0; num1 = 0 ; num2 = 0 ;
                                             //double 差值 = (上剪口.剪口冷却位置 - 下剪口.剪口冷却位置);
                                             //Task任务.信息输出("第" + 上剪口.剪口计数 + "个剪口的上下差值:" + 差值);
@@ -595,7 +600,7 @@ namespace 缝纫机项目
 
                                             if (距离差 >= 0)
                                             {
-                                                t2 = 剪口电机速度.时间计算(缝纫机.当前转速(), 差值, 1);
+                                                t2 = 剪口电机速度.时间计算(缝纫机.当前转速(), 距离差, 1);
                                                 单轴位置控制(GLV._下剪口电机, t2, 差值, (int)配方_电缸压下脉冲数.Value);
                                                 Task任务.信息输出("第" + 上剪口.剪口计数 + "个剪口的上下差值:" + 距离差 + "mm。要压下的时间为:" + (int)t2 + " ms");
                                                 //vel1 = 剪口电机速度.速度计算(配方_上剪口电机基础速度.Value, 配方_上剪口缝纫机修正比例.Value, 缝纫机.当前转速(), 0, 配方_上剪口差修正比例.Value, 配方_上剪口差基本值.Value, _上剪口电机速度上限.Value, _上剪口电机速度下限.Value);
@@ -742,6 +747,8 @@ namespace 缝纫机项目
                                 工艺测试.二次上剪口.ACT清除();
                                 工艺测试.二次下剪口.ACT清除();
                                 修改目前针数 = false;
+                                lastUpCount = 0;
+                                lastDownCount = 0;
 
                                 运动控制.轴全部停止(0);//20230522
                                 Task任务.信息输出("尾针动作完成");

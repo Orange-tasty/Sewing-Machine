@@ -813,6 +813,7 @@ namespace 缝纫机项目
         private List<double> 剪口有列表 = new List<double>();
         private List<double> 剪口无列表 = new List<double>();
         private List<double> 剪口列表 = new List<double>();
+
         public uint 剪口计数 = 0;
         public bool 剪口有信号 = false;
 
@@ -886,25 +887,16 @@ namespace 缝纫机项目
             
             double 当前位置 = 运动控制.反馈位置(0, 剪口检测编码器编号);
 
-            if (剪口计数 == 0 && num_new > 0)
+            if ((剪口计数 == 0 && num_new > 0) ||
+        (当前位置 - 剪口冷却位置 > 剪口冷却阈值 && num_new > 0))
             {
-              
                 剪口计数++;
-                剪口冷却位置 = 当前位置; // 第一次检测到剪口，记录位置并开始冷却
+                剪口冷却位置 = 当前位置;
                 剪口列表.Add(剪口冷却位置);
                 Task任务.信息输出(名称 + $"检测：第 {剪口计数} 个剪口，位置：{剪口冷却位置}");
-                return true;
+                return  true;
             }
 
-            if (当前位置 - 剪口冷却位置 > 剪口冷却阈值 && num_new > 0)
-            {
-
-                剪口计数++;
-                剪口冷却位置 = 当前位置; // 记录本次剪口位置
-                剪口列表.Add(剪口冷却位置);
-                Task任务.信息输出(名称 + $"检测：第 {剪口计数} 个剪口，位置：{剪口冷却位置}");
-  
-            }
 
             return true;                      
         }
